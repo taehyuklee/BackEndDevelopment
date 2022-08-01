@@ -1,4 +1,6 @@
-Reference
+It would be useful if you wanted to update your schedule in runtime.
+
+References
 1. https://blog.outsider.ne.kr/1066
 2. https://rhr0916.tistory.com/219
 3. https://www.baeldung.com/spring-task-scheduler (task-concept)
@@ -7,3 +9,4 @@ Reference
 6. https://myhappyman.tistory.com/235
 7. https://hyeonyeee.tistory.com/73
 8. https://www.tutorialspoint.com/how-can-we-stop-a-thread-in-java
+
