@@ -15,9 +15,14 @@ public interface RepositoryApi extends MongoRepository<AdmApi, String>{
 
     //boolean existsBySpecReqHndlrHndlr(String hndlrId);
 
-    boolean existsBySpecReqHndlrHndlrTrtSect(String hndlrId);
+    //요청핸들러 
+    boolean existsBySpecReqHndlrHndlr(String objectId);
 
-    boolean existsBySpecReqHndlrHndlr(String hndlrId);
+    //응답핸들러
+    boolean existsBySpecResHndlrHndlr(String objectId);
+
+    //에러 핸들러
+    boolean existsBySpecErrHndlrId(String objectId);
 
     List<AdmHndlr> findBySpecReqHndlrHndlr(String hndlrId);
     

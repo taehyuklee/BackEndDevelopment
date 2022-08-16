@@ -7,5 +7,7 @@ import com.mongoDB.domain.entity.AdmHndlrGrp;
 
 @Repository
 public interface RepositoryHndlrGrp extends MongoRepository<AdmHndlrGrp, String>{
+
+    boolean existsByHndlr(String hndlrId);
     
 }

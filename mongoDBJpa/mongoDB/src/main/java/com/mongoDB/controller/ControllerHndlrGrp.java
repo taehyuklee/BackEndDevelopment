@@ -21,13 +21,14 @@ public class ControllerHndlrGrp {
     private final ServiceHndlrGrp serviceHndlrGrp;
 
     @PostMapping("/ApiHndlrGrp")
-    public void createApiHnldrGrp(@Valid @RequestBody AdmHndlrGrpDto admHndlrGrpDto){
+    public String createApiHnldrGrp(@Valid @RequestBody AdmHndlrGrpDto admHndlrGrpDto){
 
-        System.out.println("//////////////////");
-        System.out.println(admHndlrGrpDto);
+        // System.out.println("//////////////////");
+        // System.out.println(admHndlrGrpDto);
 
         serviceHndlrGrp.createApiHndlrGrp(admHndlrGrpDto);
 
+        return "잘 된 것 같음";
     }
     
 }
