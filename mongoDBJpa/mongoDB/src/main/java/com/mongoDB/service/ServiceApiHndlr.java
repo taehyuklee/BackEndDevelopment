@@ -39,6 +39,10 @@ public class ServiceApiHndlr {
 
     public void deleteApiHndlr(String hndlrId){
 
+        var A = repositoryApi.findBySpecReqHndlrHndlr(hndlrId);
+
+        System.out.println(A);
+
         AdmHndlr admHndlrEntity = repositoryHndlr.findByHndlrId(hndlrId).get();
         
         String objectId = admHndlrEntity.getId();

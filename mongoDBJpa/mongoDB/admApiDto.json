@@ -1,0 +1,17 @@
+{
+    "apiId": "JiPangE5",
+    "sysId": "HRSYSTEM",
+    "apiNm": "HRSYSTEM.JiPangE",
+    "ifNo": "",
+    "spec" : [{  "ver": "v1",
+                "meth":["GET","POST"],
+                "in": "/Hrsystem/v1/JiPangE5",
+                "out": "/Spring/v1/JiPangEOutput",
+                "reqHndlr": {"hndlr":[{"id": "62bc1055ac7af17380ed6e11"}, {"id":"62bc1082ac7af17380ed6e12"}, {"id":"62fb26891a266265fe1069a7"}]},
+                "resHndlr": {"hndlrGrp": {"id": "62bd6a8228186b74301b8c9b"}},
+                "errHndlr":{},
+                "timeOut": 2800,
+                "sttus": "WAIT_REG",
+                "desc": "Spring 가입자 getCustInfo 정보 제공_test"
+            }]
+}
