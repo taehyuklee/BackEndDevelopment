@@ -10,6 +10,7 @@ import com.mongoDB.domain.entity.AdmApi;
 import com.mongoDB.domain.entity.AdmHndlr;
 import com.mongoDB.domain.repository.RepositoryApi;
 import com.mongoDB.domain.repository.RepositoryHndlr;
+import com.mongoDB.domain.repository.RepositoryHndlrGrp;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ public class ServiceApiHndlr {
     
     private final RepositoryHndlr repositoryHndlr;
     private final RepositoryApi repositoryApi;
+    private final RepositoryHndlrGrp repositoryHndlrGrp;
 
     public void createApiHndlr(AdmHndlrDto admHndlrDto){
 
@@ -37,124 +39,68 @@ public class ServiceApiHndlr {
 
     public void deleteApiHndlr(String hndlrId){
 
-        String objectId = repositoryHndlr.findByHndlrId(hndlrId).get().getId();
+        var A = repositoryApi.findBySpecReqHndlrHndlr(hndlrId);
+
+        System.out.println(A);
+
+        AdmHndlr admHndlrEntity = repositoryHndlr.findByHndlrId(hndlrId).get();
+        
+        String objectId = admHndlrEntity.getId();
+        String trtSect = admHndlrEntity.getTrtSect();
+
+        Boolean apiBool = false;
+        Boolean hndlrGrpBool = false;
 
         System.out.println(objectId);
 
         //우선 있는지 hndlrId가 API 아래 HndlrId로 존재하는지 확인하기
        // Boolean trueFalse= repositoryApi.existsBySpecReqHndlrHndlrTrtSect(hndlrId);
 
-        Boolean trueFalse11 = repositoryApi.existsBySpecReqHndlrHndlr(hndlrId);
+        if(trtSect.equals("REQ")){
+            System.out.println("Request입니다");
+            apiBool = repositoryApi.existsBySpecReqHndlrHndlr(objectId);
+            hndlrGrpBool = repositoryHndlrGrp.existsByHndlr(objectId);
+            
+            System.out.println("API 등록 여부");
+            System.out.println(apiBool);
+            System.out.println("핸들러 그룹 등록 여부");
+            System.out.println(hndlrGrpBool);
 
-        List<AdmHndlr> listAdm = repositoryApi.findBySpecReqHndlrHndlr(objectId);
+            if(apiBool == true || hndlrGrpBool == true){
+                log.info("지울수 없습니다");
+            }
 
-        System.out.println(trueFalse11);
+        }else if(trtSect.equals("RES")){
+            System.out.println("Response입니다");
+            apiBool = repositoryApi.existsBySpecResHndlrHndlr(objectId);
+            hndlrGrpBool = repositoryHndlrGrp.existsByHndlr(objectId);
 
-        System.out.println(listAdm.toString()); 
+            System.out.println("API 등록 여부");
+            System.out.println(apiBool);
+            System.out.println("핸들러 그룹 등록 여부");
+            System.out.println(hndlrGrpBool);
 
+            if(apiBool ==true || hndlrGrpBool == true){
+                log.info("지울수 없습니다");
+            }
 
-        //만약 있으면 error처리
-
-        //만약 없으면 다 지워주는거 TB서버에 있는 DPLY있는거
-
-
-        System.out.println("여기는 이제 완전탐색");
-
-        List<AdmApi> allApi = repositoryApi.findAll();
-        System.out.println("check1");
-
-        AdmHndlr admHndlr = repositoryHndlr.findByHndlrId(hndlrId).get();
-        System.out.println("check2");
-
-        String trtSect = admHndlr.getTrtSect();
-        System.out.println("check3");
-
-        System.out.println(allApi.toString());
-        System.out.println(admHndlr.toString());
-        System.out.println(trtSect.toString());
-        
-        if(allApi.size() != 0){
-            if(trtSect.equals("REQ")){
-                //요청 핸들러일때
-
-                //모든 api들 다 돌면서 
-                for (int i=0 ; i<allApi.size(); i++){
-
-                    System.out.println("1");
-
-                    //그 api안의 모든 버전들을 돌면서
-                    for(int j=0; j<allApi.get(i).getSpec().size(); j++){
-
-                        System.out.println("2");
-
-                        //핸들러 그룹 아이디
-                        List<AdmHndlr> admHndlrList= allApi.get(i).getSpec().get(j).getReqHndlr().getHndlr();
-                        List<AdmHndlr> admHndlrGrpList = allApi.get(i).getSpec().get(j).getReqHndlr().getHndlrGrp().getHndlr();
-
-                        for(AdmHndlr admHndlrob : admHndlrList){
-                            if(hndlrId.equals(admHndlrob.getHndlrId())){
-                                log.info("지울수 없습니다");//throw new AdminRuntimeException(StatusEnum.REGED_HNDLR);
-                            }
-                        }
-
-                        for(AdmHndlr admHndlrob : admHndlrGrpList){
-                            if(hndlrId.equals(admHndlrob.getHndlrId())){
-                                log.info("지울수 없습니다");//throw new AdminRuntimeException(StatusEnum.REGED_HNDLR);
-                            }
-                        }
-                    }
-                }
-
-
-            }else if(trtSect.equals("RES")){
-                //응답 핸들러일때
-
-                System.out.println("RES입니다");
-
-                //모든 api들 다 돌면서 
-                for (int i=0 ; i<allApi.size(); i++){
-
-                    //그 api안의 모든 버전들을 돌면서
-                    for(int j=0; j<allApi.get(i).getSpec().size(); j++){
-
-                        //핸들러 그룹 아이디
-                        List<AdmHndlr> admHndlrList= allApi.get(i).getSpec().get(j).getResHndlr().getHndlr();
-                        List<AdmHndlr> admHndlrGrpList = allApi.get(i).getSpec().get(j).getResHndlr().getHndlrGrp().getHndlr();
-
-                        for(AdmHndlr admHndlrob : admHndlrList){
-                            if(hndlrId.equals(admHndlrob.getHndlrId())){
-                                log.info("지울수 없습니다");//throw new AdminRuntimeException(StatusEnum.REGED_HNDLR);
-                            }
-                        }
-
-                        for(AdmHndlr admHndlrob : admHndlrGrpList){
-                            if(hndlrId.equals(admHndlrob.getHndlrId())){
-                                log.info("지울수 없습니다");//throw new AdminRuntimeException(StatusEnum.REGED_HNDLR);
-                            }
-                        }
-                    }
-                }
-
-            }else if(trtSect.equals("ERR")){
-                //에러 핸들러일때
-
-                for (int i=0 ; i<allApi.size(); i++){
-
-                    //그 api안의 모든 버전들을 돌면서
-                    for(int j=0; j<allApi.get(i).getSpec().size(); j++){
-
-                        //핸들러 그룹 아이디
-                        if(hndlrId.equals(allApi.get(i).getSpec().get(j).getErrHndlr().getHndlrId())){
-                            log.info("지울수 없습니다");//throw new AdminRuntimeException(StatusEnum.REGED_HNDLR);
-                        } 
-                    }
-                }
+        }else if(trtSect.equals("ERR")){
+            System.out.println("Error입니다");
+            apiBool = repositoryApi.existsBySpecErrHndlrId(objectId);
+            
+            System.out.println("API 등록 여부");
+            System.out.println(apiBool);
+            
+            if(apiBool ==true){
+                log.info("지울수 없습니다");
             }
         }
 
-        // TODO: 사용하는게 없을 경우 배포테이블 TB에서 상태(dplyType) DEL로 변경
-
-
+        //위의 3개 조건을 모두 통과하면, 어디에도 등록된 핸들러가 아니므로 삭제할수 있다.
+        if(apiBool==false && hndlrGrpBool==false){
+            System.out.println("지울수 있는 상태입니다");
+            repositoryHndlr.deleteById(objectId);
+        }
 
 
     }

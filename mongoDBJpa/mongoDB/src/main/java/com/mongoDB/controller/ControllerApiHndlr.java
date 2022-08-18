@@ -41,8 +41,8 @@ public class ControllerApiHndlr {
     
     @DeleteMapping("/ApiHndlr")
     public void deleteApiHndlr(@Valid @RequestParam("hndlrId") String hndlrId){
-        System.out.println(hndlrId);
-        System.out.println("/////////////////////////////////");
+        // System.out.println(hndlrId);
+        // System.out.println("/////////////////////////////////");
 
         serviceApiHndlr.deleteApiHndlr(hndlrId);
     }

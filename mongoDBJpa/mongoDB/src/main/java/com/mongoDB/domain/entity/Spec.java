@@ -1,10 +1,12 @@
 package com.mongoDB.domain.entity;
 
+import java.io.File;
 import java.util.List;
 
 import javax.validation.constraints.Size;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,7 +40,7 @@ public class Spec extends CommonEntity{
 
     private AdmHndlr errHndlr;
 
-    private String swaggerSpec;
+    private MultipartFile swaggerSpec;
     
     private long timeOut;
     @Size(max = 1000)
