@@ -1,0 +1,16 @@
+{
+    "apiId": "getUserInfo4",
+    "sysId": "HRSYSTEM",
+    "apiNm": "HRSYSTEM.getUserInfo5",
+    "ifNo": "",
+    "spec" : [{  "ver": "v1",
+                "meth":["GET","POST"],
+                "in": "/Hrsystem/v1/getPetStore5",
+                "out": "/Spring/v1/getCustInfo_test2",
+                "reqHndlrGrp": {"id": "62bd658828186b74301b8c9a"},
+                "resHndlrGrp": {"id": "62bd6a8228186b74301b8c9b"},
+                "timeOut": 2800,
+                "sttus": "WAIT_REG",
+                "desc": "Spring 가입자 getCustInfo 정보 제공_test"
+            }]
+}
