@@ -52,6 +52,13 @@ public class SwaggerController {
     public AdmApiDto getSwaggerConfigString(@RequestParam("apiId") String apiId, @RequestParam("sysId") String sysId){
         return swaggerService.getSwaggerConfigFile(apiId, sysId);
     }
+
+    //파일 upload기능
+    @PostMapping(value = "/uploadFile", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public void uploadFile(@RequestPart("jsonFile") MultipartFile swaggerSpec) throws IllegalStateException, IOException{
+        System.out.println("Hi");
+        swaggerService.uploadFile(swaggerSpec);
+    }
     
 }
 

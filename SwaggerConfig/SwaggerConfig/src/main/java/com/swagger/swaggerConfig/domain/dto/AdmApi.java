@@ -19,6 +19,6 @@ public class AdmApi {
     private String id;
     private String apiId;
     private String sysId;
-    private byte[] swaggerSpec;
+    private SwaggerSpec swaggerSpec;
     
 }
