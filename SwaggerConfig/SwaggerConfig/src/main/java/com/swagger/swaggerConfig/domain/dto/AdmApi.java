@@ -1,10 +1,7 @@
 package com.swagger.swaggerConfig.domain.dto;
 
-import javax.websocket.Encoder.Binary;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 

@@ -1,0 +1,17 @@
+server:
+    port: 9003
+    shutdown: graceful
+
+spring:
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: bulletinBoard
+
+    servelet:
+        multipart:
+            max-file-size: 16MB
+            max-request-size: 16MB
+            enabled: true
+
