@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import bulletinBoard.notice.domain.dto.NoticeDto;
 import bulletinBoard.notice.domain.dto.NoticeQueryParameter;
 import bulletinBoard.notice.domain.entity.NoticeMultipartFile;
-import bulletinBoard.notice.domain.repository.BulletinMultipartRepository;
 import bulletinBoard.notice.service.BulletinService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,18 +25,6 @@ import lombok.RequiredArgsConstructor;
 public class BulletinController {
 
     private final BulletinService bulletinService;
-
-    //Create MultipartFile
-    @PostMapping(value ="/createMulti", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String createMultipartBulletin(@RequestPart("notice") NoticeDto noticeDto, @RequestPart("imgFile") List<MultipartFile> imgFile){
-        return bulletinService.createMultipartFile(noticeDto, imgFile);
-    }
-
-    //Read MultipartFile
-    @GetMapping(value ="/readMulti")
-    public NoticeMultipartFile readMultipartBulletin(String title){
-        return bulletinService.readMultipartFile(title);
-    }
 
     //Create
     @PostMapping(value ="/createBulletin", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -48,10 +35,10 @@ public class BulletinController {
 
     //Read
     //전체조회
-    // @GetMapping(value = "/getAllNotice")
-    // public List<NoticeDto> getAllBulletinList(Pageable pageable, NoticeQueryParameter noticeQueryParameter){
-    //     return bulletinService.getAllBulletinList(pageable, noticeQueryParameter);
-    // }
+    @GetMapping(value = "/getAllNotice")
+    public List<NoticeDto> getAllBulletinList(Pageable pageable, NoticeQueryParameter noticeQueryParameter){
+        return bulletinService.getAllBulletinList(pageable, noticeQueryParameter);
+    }
 
 
     //상세조회

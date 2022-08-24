@@ -16,7 +16,7 @@ public class MultiPartResoloverConfig {
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(-1); 
-        multipartResolver.setMaxInMemorySize(200000000); //memoery size가 문제였네 40960
+        multipartResolver.setMaxInMemorySize(160000000); //memoery size가 문제였네 40960
         return multipartResolver;
     }
     

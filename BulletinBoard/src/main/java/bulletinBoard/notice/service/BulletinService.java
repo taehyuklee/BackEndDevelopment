@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,6 @@ import bulletinBoard.notice.domain.dto.NoticeDto;
 import bulletinBoard.notice.domain.dto.NoticeQueryParameter;
 import bulletinBoard.notice.domain.entity.Notice;
 import bulletinBoard.notice.domain.entity.NoticeMultipartFile;
-import bulletinBoard.notice.domain.repository.BulletinMultipartRepository;
 import bulletinBoard.notice.domain.repository.BulletinRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -27,30 +25,6 @@ import lombok.RequiredArgsConstructor;
 public class BulletinService {
 
     private final BulletinRepository bulletinRepository;
-    private final BulletinMultipartRepository bulletinMultipartRepository;
-    //private final NoticeQueryParameter noticequeryParameter;
-
-
-    public String createMultipartFile(NoticeDto noticeDto, List<MultipartFile> imgFileList){
-
-        NoticeMultipartFile notice = new NoticeMultipartFile();
-
-        BeanUtils.copyProperties(noticeDto, notice, "imgFile");
-
-        notice.setImgFile(imgFileList);
-
-        bulletinMultipartRepository.save(notice);
-
-        return "저장되었습니다.";
-
-    }
-
-    public NoticeMultipartFile readMultipartFile(String title){
-
-        NoticeMultipartFile noticeEntity = bulletinMultipartRepository.findByTitle(title);
-
-        return noticeEntity;
-    }
 
 
     public String createBulletin(NoticeDto noticeDto, List<MultipartFile> imgFileList) throws IOException{
@@ -83,26 +57,26 @@ public class BulletinService {
     }
 
     //전체조회
-        // API 정보 전체조회 및 검색
-        // public List<NoticeDto> getAllBulletinList(Pageable pageable, NoticeQueryParameter noticeQueryParameter) {
+    //API 정보 전체조회 및 검색
+    public List<NoticeDto> getAllBulletinList(Pageable pageable, NoticeQueryParameter noticeQueryParameter) {
 
-        //     if (noticeQueryParameter.getTitle() != null || noticeQueryParameter.getContent() != null) {
-        //         if (noticeQueryParameter.getTitle() != null) {
-        //             var pageNotice = (Page) bulletinRepository.findByTitleIgnoreCaseContaining(noticeQueryParameter.getTitle(), pageable);
-        //             List<NoticeDto> entityList = pageNotice.getContent();
-        //             return entityList;
-        //         }
-        //         if (noticeQueryParameter.getContent() != null) {
-        //             var pageNotice = (Page) bulletinRepository.findByTitleIgnoreCaseContaining(noticeQueryParameter.getContent(), pageable);
-        //             List<NoticeDto> entityList = pageNotice.getContent();
-        //             return entityList;
-        //         }
-        //     }
+        if (noticeQueryParameter.getTitle() != null || noticeQueryParameter.getContent() != null) {
+            if (noticeQueryParameter.getTitle() != null) {
+                var pageNotice = (Page) bulletinRepository.findByTitleIgnoreCaseContaining(noticeQueryParameter.getTitle(), pageable);
+                List<NoticeDto> entityList = pageNotice.getContent();
+                return entityList;
+            }
+            if (noticeQueryParameter.getContent() != null) {
+                var pageNotice = (Page) bulletinRepository.findByTitleIgnoreCaseContaining(noticeQueryParameter.getContent(), pageable);
+                List<NoticeDto> entityList = pageNotice.getContent();
+                return entityList;
+            }
+        }
 
-        //     var pageNotice = (Page) bulletinRepository.findAll(pageable);
-        //     List<NoticeDto> entityList = pageNotice.getContent();
-        //     return entityList;
-        // }
+        var pageNotice = (Page) bulletinRepository.findAll(pageable);
+        List<NoticeDto> entityList = pageNotice.getContent();
+        return entityList;
+    }
 
 
 
