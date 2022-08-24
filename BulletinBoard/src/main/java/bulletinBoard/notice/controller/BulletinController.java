@@ -7,6 +7,7 @@ import javax.print.attribute.standard.Media;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import bulletinBoard.notice.domain.dto.NoticeDto;
 import bulletinBoard.notice.domain.dto.NoticeQueryParameter;
-import bulletinBoard.notice.domain.entity.NoticeMultipartFile;
 import bulletinBoard.notice.service.BulletinService;
 import lombok.RequiredArgsConstructor;
 
@@ -55,15 +55,13 @@ public class BulletinController {
 
 
     //Delete
-    @GetMapping(value ="/delete")
+    @DeleteMapping(value ="/delete")
     public void deleteBulletin(@RequestParam("title") String objectId){
         bulletinService.deleteBulletin(objectId);
     }
 
     //DownLoad File
     public void downloadBulletin(){
-
-
     }
 
 
