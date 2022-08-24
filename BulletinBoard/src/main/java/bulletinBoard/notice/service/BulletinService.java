@@ -16,7 +16,6 @@ import bulletinBoard.notice.domain.dto.ImgFileDto;
 import bulletinBoard.notice.domain.dto.NoticeDto;
 import bulletinBoard.notice.domain.dto.NoticeQueryParameter;
 import bulletinBoard.notice.domain.entity.Notice;
-import bulletinBoard.notice.domain.entity.NoticeMultipartFile;
 import bulletinBoard.notice.domain.repository.BulletinRepository;
 import lombok.RequiredArgsConstructor;
 
