@@ -59,6 +59,13 @@ public class SwaggerController {
         System.out.println("Hi");
         swaggerService.uploadFile(swaggerSpec);
     }
+
+    //Swagger규격서 바꾸기 (내부에 있는걸로 바꿔주기)
+    @GetMapping(value="/changeSwagger")
+    public void changeSwaggerJson() throws IOException, ParseException {
+        swaggerService.changeSwaggerJson();
+    }
+    
     
 }
 

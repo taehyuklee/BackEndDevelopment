@@ -3,17 +3,14 @@ package com.swagger.swaggerConfig.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +18,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.swagger.swaggerConfig.domain.dto.AdmApi;
@@ -30,8 +26,8 @@ import com.swagger.swaggerConfig.domain.dto.SwaggerDto;
 import com.swagger.swaggerConfig.domain.dto.SwaggerSpec;
 import com.swagger.swaggerConfig.domain.repository.SwaggerRepository;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -41,22 +37,87 @@ public class SwaggerService {
 
     private final SwaggerRepository swaggerRepository;
 
+    StringBuilder stringBuilder = new StringBuilder();
+
+    public void changeInfo(){
+
+    }
+
+    public void changePath(){
+
+    }
+
+    public void slash(String string){
+
+        for(int i=0; i<string.length(); i++){
+            if(string.charAt(i) == '/'){
+
+            }
+        }
+    }
+
+    public void changeSwaggerJson() throws IOException, ParseException{
+        JSONParser parser = new JSONParser();
+        Reader reader = new FileReader("/Users/thlee/BackEnd/BackEndDevelopment/SwaggerConfig/SwaggerConfig/sample.json");
+
+        JSONObject jsonObject = (JSONObject) parser.parse(reader); //object로 만들었다.
+        Map<String, Object> map1 = (HashMap<String, Object>) jsonObject;
+        System.out.println(map1);
+
+        System.out.println("//////////");
+
+        map1.replace("host", jsonObject.get("host"), "apiGatewayURL Write Something");
+        map1.replace("basePath", jsonObject.get("basePath"), "/apiGatewayV");
+
+        System.out.println(map1.get("host"));
+        System.out.println(map1.get("basePath"));
+
+        SwaggerDto swaggerDto = new SwaggerDto();
+
+        // System.out.println(jsonObject.toJSONString());
+        // System.out.println(jsonObject.entrySet());
+
+        //Entry<Object, Object> = jsonObject.entrySet();
+        jsonObject.replace("host", jsonObject.get("host"), "apiGatewayURL");
+        jsonObject.replace("basePath", jsonObject.get("basePath"), "/apiGatewayV");
+
+        System.out.println();
+        for(Object key: jsonObject.keySet()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            Object value = jsonObject.get(key);
+            //System.out.println(value);
+            //System.out.println();
+
+            map.put((String) key, value);
+            //System.out.println(map);
+
+        }
+
+        System.out.println(jsonObject.get("host"));
+        System.out.println(jsonObject.get("basePath"));
+    
+    }
+
+    public Map<String, Object> recursiveOb(){
+
+        return new HashMap<String, Object>();
+    }
+
+
+
+    //Object Mapper가 잘 작동하는지 확인하기 위함
     public String getJson() throws IOException, ParseException{
 
         JSONParser parser = new JSONParser();
-        Reader reader = new FileReader("C:\\Users\\thlee\\Desktop\\BackEnd\\swaggerConfig\\src\\main\\json\\sample.json");
+        Reader reader = new FileReader("/Users/thlee/BackEnd/BackEndDevelopment/SwaggerConfig/SwaggerConfig/sample.json");
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
-
-        // System.out.println(jsonObject.toString());
-        // System.out.println("////////////////////");
-
-        // System.out.println(jsonObject.get("swagger"));
 
         String targetString = jsonObject.toString();
         JSONObject targetObject = (JSONObject) parser.parse(targetString);
 
         // System.out.println(targetString);
-        // System.out.println(targetObject.toString());
+        System.out.println(targetObject.toString());
+
 
         if(targetObject.equals(jsonObject)){
             System.out.println("True");
@@ -66,13 +127,8 @@ public class SwaggerService {
 
         SwaggerDto swaggerDto = new SwaggerDto();
 
-        //System.out.println(jsonObject.get("paths"));
-
         swaggerDto.setBasePath((String) jsonObject.get("basePath")).setSecurityDefinitions(jsonObject.get("securityDefinitions"))
                 .setSchemes(jsonObject.get("schemes"));
-
-        // System.out.println("////////////////////");
-        // System.out.println(swaggerDto.getSecurityDefinitions().toString());
 
         return jsonObject.toString();
     }
@@ -85,16 +141,13 @@ public class SwaggerService {
 
 
     public void uploadFile(MultipartFile file) throws IllegalStateException, IOException{
-
         //MultiPartFile을 Java의 File객체로 바꿀수 있다.
         File convFile = new File(file.getOriginalFilename());
         file.transferTo(convFile);
 
         System.out.println(convFile.getPath());
-        
 
     }
-
 
 
     public void regSwaggerJson(AdmApiDto admApiDto, MultipartFile swaggerSpec) throws IOException{
@@ -147,7 +200,7 @@ public class SwaggerService {
         // 직접 파일 정보를 변수에 저장해 놨지만, 이 부분이 db에서 읽어왔다고 가정한다.
 		String fileName = "picture.jpg";
 		String saveFileName = "c:/tmp/picture.jpg";
-		String contentType = "image/jpg";
+		String contentType = "application/json";
                 File file = new File(saveFileName);
                 long fileLength = file.length();
                 //파일의 크기와 같지 않을 경우 프로그램이 멈추지 않고 계속 실행되거나, 잘못된 정보가 다운로드 될 수 있다.
