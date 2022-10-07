@@ -1,0 +1,6 @@
+server:
+    port: 8080
+    shutdown: graceful
+    servlet:
+      session:
+        timeout: 10
