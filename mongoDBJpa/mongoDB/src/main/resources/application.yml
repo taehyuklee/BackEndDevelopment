@@ -13,7 +13,7 @@ spring:
         port: 27017
         database: admin
         # username: act_user
-        # password: sksmsahffk1!
+        # password: hihihihihihi
 
         # spring.data.mongodb.uri=mongodb://[ip 정보]:[port 정보]
         # spring.data.mongodb.database=[데이터베이스 이름]
