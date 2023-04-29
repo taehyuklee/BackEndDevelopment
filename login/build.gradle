@@ -30,6 +30,9 @@ dependencies {
 	//mongo DB 설정
 	implementation group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	//spring security 관련
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.7.6'
 }
 
 tasks.named('test') {
