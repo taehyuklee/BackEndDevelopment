@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swagger.swaggerConfig.domain.dto.AdmApi;
 import com.swagger.swaggerConfig.domain.dto.AdmApiDto;
 import com.swagger.swaggerConfig.domain.dto.SwaggerDto;
@@ -226,6 +227,14 @@ public class SwaggerService {
                     throw new RuntimeException("file Save Error");
                 }
 	}
+
+    public void convertSwagger(){
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        
+    }
 
     
 }

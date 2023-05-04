@@ -13,10 +13,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain=true)
 public class SwaggerDto {
     
-    private String swagger;
-    private Info info;
-    private String host;
-    private String basePath;
+    private Object swagger;
+    private Object info;
+    private Object host;
+    private Object basePath;
     private Object tags;
     private Object schemes;
     private Paths paths;

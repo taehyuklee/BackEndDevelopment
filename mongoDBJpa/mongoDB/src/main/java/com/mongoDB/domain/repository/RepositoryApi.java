@@ -22,7 +22,8 @@ public interface RepositoryApi extends MongoRepository<AdmApi, String>{
     boolean existsBySpecResHndlrHndlr(String objectId);
 
     //에러 핸들러
-    boolean existsBySpecErrHndlrId(String objectId);
+    //boolean existsBySpecErrHndlrId(String objectId);
+
 
     List<AdmHndlr> findBySpecReqHndlrHndlr(String hndlrId);
     

@@ -1,6 +1,7 @@
 package com.mongoDB.service;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,17 @@ import lombok.RequiredArgsConstructor;
 public class ServiceApi {
 
     private final RepositoryApi repositoryApi;
+
+    public List<AdmApi> getApis(){
+
+        long beforeTime = System.currentTimeMillis();
+        List<AdmApi> apiList = repositoryApi.findAll();
+        long afterTime = System.currentTimeMillis(); 
+        long secDiffTime = (afterTime - beforeTime);
+        System.out.println("시간차이(milliSec) : "+secDiffTime);
+
+        return apiList;
+    }
 
     public void createApi(AdmApiDto admApiDto){
 

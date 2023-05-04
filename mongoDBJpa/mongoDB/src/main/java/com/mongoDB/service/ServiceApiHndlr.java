@@ -86,7 +86,7 @@ public class ServiceApiHndlr {
 
         }else if(trtSect.equals("ERR")){
             System.out.println("Error입니다");
-            apiBool = repositoryApi.existsBySpecErrHndlrId(objectId);
+            //apiBool = repositoryApi.existsBySpecErrHndlrId(objectId);
             
             System.out.println("API 등록 여부");
             System.out.println(apiBool);

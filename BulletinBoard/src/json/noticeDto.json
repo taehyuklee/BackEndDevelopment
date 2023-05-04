@@ -1,9 +1,11 @@
 {
-
-    "title": "금방",
-    "stTime": "2022-04-22T00:00:00",
-    "endTime": "2022-09-22T00:00:00",
-    "type": "img",
-    "content": null
+    "id": "63a3eaddbd3bb818ac0afa47",
+    "title": "굿공지사항임5",
+    "showYn": false,
+    "stShowTime": "2022-04-22",
+    "endShowTime": "2022-12-22",
+    "type": "CONTENT",
+    "thumbNail": null,
+    "sbst": "공문입니다11"
 
 }

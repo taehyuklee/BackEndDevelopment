@@ -14,7 +14,7 @@ import com.mongoDB.domain.dto.AdmHndlrDto;
 
 @Data
 @Document
-//@NoArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper=false) 
 public class AdmHndlr extends CommonEntity {
 

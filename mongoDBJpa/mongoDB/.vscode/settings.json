@@ -1,6 +1,6 @@
 {
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -javaagent:\"/Users/thlee/.vscode/extensions/vscjava.vscode-lombok-1.0.1/server/lombok.jar\"",
-    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.0.2.jdk/Contents/Home",
+    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home",
     "bracket-pair-colorizer-2.depreciation-notice": false,
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

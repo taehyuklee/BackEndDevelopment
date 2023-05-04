@@ -1,5 +1,7 @@
 package com.mongoDB.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongoDB.domain.dto.AdmApiDto;
+import com.mongoDB.domain.entity.AdmApi;
 import com.mongoDB.service.ServiceApi;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,11 @@ import lombok.RequiredArgsConstructor;
 public class Controller {
 
     private final ServiceApi serviceApi;
+
+    @GetMapping("/getApi")
+    public List<AdmApi> getApis(){
+        return serviceApi.getApis();
+    }
 
     //Api CRUD
     @PostMapping("/Api")
