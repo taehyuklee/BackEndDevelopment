@@ -1,0 +1,12 @@
+spring :
+    # application:
+    #     name: api-admin
+    # config:
+    #     activate:
+    #       on-profile: dev
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/admin
+        # username: act_user
+        # password: sksmsahffk1!
+        # uri: mongodb://127.0.0.1:27017/

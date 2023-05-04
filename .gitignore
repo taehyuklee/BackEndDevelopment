@@ -26,6 +26,8 @@ bin/
 *.jpg
 *.jpeg
 *.png
+*.DS_Store
+*.class
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/

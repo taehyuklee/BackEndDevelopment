@@ -1,0 +1,3416 @@
+{
+	"info": {
+		"_postman_id": "ac8c7fff-6703-434a-b5c8-e9eef6efebf1",
+		"name": "admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20360626"
+	},
+	"item": [
+		{
+			"name": "메인 및 마이페이지",
+			"item": [
+				{
+					"name": "회원가입",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"wwkang94@naver.com\",\r\n    \"pwd\" : \"ktds1234!\",\r\n    \"userNm\" : \"테스트\",\r\n    \"pos\" : \"Agile Core Team\",\r\n    \"tel\" : \"01072528376\",\r\n    \"stplt\" : {\r\n        \"id\" : \"62bd177f93baa25f6a25afe9\"\r\n    },\r\n    \"desc\" : \"설명\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/createUser",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "로그인",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"beast@kt.com\",\n    \"pwd\": \"ktds1234!\",\n    \"capchaCode\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/user/signIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "토큰 갱신",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiJmcm9udEBrdC5jb20iLCJzdWIiOiJ1c2VyIiwiZXhwIjoxNjU3MjM5MzI1LCJpYXQiOjE2NTcxNTI5MjV9.FrX0tl7R4SLwcnALdKlMBAm9-imMnOC_cHgjx10W9xlkAxbL849HLr94u0uPik3pYsr0OcOO36oB9eWe3b6EzTBQxwHFguZWflBBMuzM20Nrs-v0soW4-0HKSnOw6ORYzhHMEaWlerLZzOak7tMzyzRoMUEShrLpA8IEoCwcvt1sit1wHxJKR427okSVleKyI6kIS6QYRjJY7OrMOHBxBEHjJrO3opnrWgfKfq7PNQqTkSduun5ICw_L8tvwJncUNSPVBGzHk9Vu_0mqJjc6A7hwd1xLaQIY4uD94eg5K5uctEROOt3esWF9R2xAWpAHx48r34jWimUU-u6FBfbE4g",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/refreshToken",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "로그아웃",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/signOut",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"signOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 정보 수정",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"jerry_choi@naver.com\",\r\n    \"userNm\": \"이진솔\",\r\n    \"pos\": \"Agile Core Team\",\r\n    \"tel\": \"01023450002\",\r\n    \"desc\": \"회원정보 변경 성공이다!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/user",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "비밀번호 변경",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"lee@kt.com\",\n    \"pwd\" : \"ktds1234!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/pwdChange",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"pwdChange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "약관 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/getStpltList?stpltId=stpltId1",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"getStpltList"
+							],
+							"query": [
+								{
+									"key": "stpltId",
+									"value": "stpltId1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 탈퇴",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userWithDrawal?userId=ktds0003",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userWithDrawal"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "ktds0003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 ID 중복체크",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/userCheckById?userId=backend",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"userCheckById"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "backend"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "약관 생성",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stpltId\" : \"stpltId1\",\n    \"stpltType\" : \"회원가입\",\n    \"stpltSbst\" : [{\n        \"title\" : \"Beast 이용약관 동의\",\n        \"conts\" : \"여러분을 환영합니다.네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.\"\n    }, {\n        \"title\" : \"개인정보 수집 및 이용 동의\",\n        \"conts\" : \"1. 수집하는 개인정보 \\n이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.\"\n    }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/createStplt",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"createStplt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "사용자 권한 상세조회",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/getUserAuthById?userId=lee@kt.com",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"getUserAuthById"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "lee@kt.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "인증번호 이메일 요청",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/sendAthnNo?userId=jerry_choi@naver.com",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"sendAthnNo"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "jerry_choi@naver.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "인증번호 확인",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\" : \"jerry_choi@naver.com\",\n    \"athnNo\" : \"346425\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/user/checkAthnNo",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"user",
+								"checkAthnNo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "서비스 관리",
+			"item": [
+				{
+					"name": "서비스 등록",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"svcId\": \"KTDS0719\",\r\n    \"tkcgrNm\": \"감팡이0719\",\r\n    \"tkcgrPos\": \"KTDS 시스템서비스본부 Digico개발센터 Agile Core팀\",\r\n    \"tkcgrEml\": \"jaewonpark@kt.com\",\r\n    \"sla\": {\r\n        \"sec\": 60,\r\n        \"min\": 15,\r\n        \"hr\": 20,\r\n        \"day\": 50,\r\n        \"mon\": 50\r\n    },\r\n    \"svcStDt\": \"2022-04-22 00:00:00\",\r\n    \"svcEndDt\": \"9999-12-31 00:00:00\",\r\n    \"athnType\": \"apiKey\",\r\n    \"athn\": {\r\n        \"basic\": {\r\n            \"id\": null,\r\n            \"pw\": null\r\n        },\r\n        \"jwt\": {\r\n            \"alg\": null,\r\n            \"iss\": null,\r\n            \"aud\": null,\r\n            \"pubKey\": null\r\n        },\r\n        \"apiKey\": {\r\n            \"headNm\": \"X-API-GET\",\r\n            \"key\": \"K7f45c552889fa367e7f\"\r\n        }\r\n    },\r\n    \"apiAut\": [\r\n        {\r\n            \"sysId\": \"SpringBoot\",\r\n            \"apiId\": [\r\n                \"postApiInfo\",\r\n                \"getApiInfo\",\r\n                \"getApiInfoDetail\"\r\n            ]\r\n        },\r\n        {\r\n            \"sysId\": \"Spring\",\r\n            \"apiId\": [\r\n                \"getApiInfoDetail\",\r\n                \"getApiInfo\"\r\n            ]\r\n        }\r\n    ],\r\n    \"ipAcesAut\": {\r\n        \"alwdIp\": [\r\n            \"127.0.0.1\",\r\n            \"127.0.0.2\"\r\n        ],\r\n        \"blckIp\": [\r\n            \"127.0.0.3\",\r\n            \"127.0.0.4\"\r\n        ]\r\n    },\r\n    \"desc\": \"ApiGateway Project\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/createService",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"createService"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getServiceList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getServiceList"
+							],
+							"query": [
+								{
+									"key": "athnType",
+									"value": "basic",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getServiceById?svcId=KTDS20",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getServiceById"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "KTDS20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 수정",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"svcId\": \"KTDS0719\",\r\n    \"tkcgrNm\": \"감팡이0719\",\r\n    \"tkcgrPos\": \"KTDS 시스템서비스본부 Digico개발센터 Agile Core팀\",\r\n    \"tkcgrEml\": \"test@kt.com\",\r\n    \"sla\": {\r\n        \"sec\": 60,\r\n        \"min\": 15,\r\n        \"hr\": 20,\r\n        \"day\": 50,\r\n        \"mon\": 50\r\n    },\r\n    \"svcStDt\": \"2022-04-22 00:00:00\",\r\n    \"svcEndDt\": \"9999-12-31 00:00:00\",\r\n    \"athnType\": \"apiKey\",\r\n    \"athn\": {\r\n        \"basic\": {\r\n            \"id\": null,\r\n            \"pw\": null\r\n        },\r\n        \"jwt\": {\r\n            \"alg\": null,\r\n            \"iss\": null,\r\n            \"aud\": null,\r\n            \"pubKey\": null\r\n        },\r\n        \"apiKey\": {\r\n            \"headNm\": \"X-API-GET\",\r\n            \"key\": \"K7f45c552889fa367e7f\"\r\n        }\r\n    },\r\n    \"apiAut\": [\r\n        {\r\n            \"sysId\": \"SpringBoot\",\r\n            \"apiId\": [\r\n                \"postApiInfo\",\r\n                \"getApiInfo\",\r\n                \"getApiInfoDetail\"\r\n            ]\r\n        },\r\n        {\r\n            \"sysId\": \"Spring\",\r\n            \"apiId\": [\r\n                \"getApiInfoDetail\",\r\n                \"getApiInfo\"\r\n            ]\r\n        }\r\n    ],\r\n    \"ipAcesAut\": {\r\n        \"alwdIp\": [\r\n            \"127.0.0.5\",\r\n            \"127.0.0.6\"\r\n        ],\r\n        \"blckIp\": [\r\n            \"127.0.0.7\",\r\n            \"127.0.0.8\"\r\n        ]\r\n    },\r\n    \"desc\": \"ApiGateway Project - test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/service",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/service?svcId=KTDS0719",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"service"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "KTDS0719"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 ID 중복체크",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/serviceCheckById?svcId=API1",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"serviceCheckById"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "API1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 Basic 인증정보 생성",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/createAuthIdAndPwd?svcId=API8",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"createAuthIdAndPwd"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "API8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 API Key 인증정보 생성",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/createAuthApiKey?svcId=KTDS0712&headNm=X-API-GET",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"createAuthApiKey"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "KTDS0712"
+								},
+								{
+									"key": "headNm",
+									"value": "X-API-GET"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 인증 전체 조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getApiAuthList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getApiAuthList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "서비스 알고리즘 조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/service",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getAlgList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getAlgList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API 관리",
+			"item": [
+				{
+					"name": "API 등록",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sysId\": \"BeastSys\",\r\n    \"apiId\": \"GamPaneE\",\r\n    \"apiComt\": \"배포합니다\",\r\n    \"spec\": [\r\n        {\r\n            \"ver\": \"v1\",\r\n            \"meth\": [\r\n                \"PUT\",\r\n                \"DELETE\"\r\n            ],\r\n            \"in\": \"/BeastSys/goodV1/GomPangE2\",\r\n            \"out\": \"/BeastSys/goodV1/GomPangE2\",\r\n            \"sttus\": \"WAIT_REG\",\r\n            \"reqHndlr\": {\r\n                \"hndlr\": [\r\n                    {\r\n                        \"id\": \"62bc1055ac7af17380ed6e11\",\r\n                        \"hndlrId\": \"REQ.CUSTOM_PARAM_FILTER\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"TMP\",\r\n                        \"type\": \"PRECSTM\",\r\n                        \"order\": 0,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.custom.ParamFilter\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.custom;  import java.util.Map;  import org.springframework.stereotype.Component;  import com.ktds.act.apigw.filter.handler.RouteHandler; import com.ktds.act.apigw.filter.vo.Transaction;  import lombok.extern.slf4j.Slf4j;  @Slf4j @Component(value = \\\"REQ.CUSTOM-1\\\") public class RequestCustomHandler1 implements RouteHandler { @Override public boolean init(Map<String, Object> configMap) { log.info(\\\"REQ.CUSTOM-1 - Init\\\"); return true; }  @Override public boolean process(Transaction transaction) { log.info(\\\"REQ.CUSTOM-1 - Start\\\"); log.info(\\\"REQ.CUSTOM-1 - End\\\"); return true; } }\",\r\n                        \"cstmClassNm\": \"ParamFilter\",\r\n                        \"desc\": \"요청 커스텀 파라미터 필터링 처리\",\r\n                        \"cretDt\": \"2022-06-29T17:41:57.948\",\r\n                        \"updDt\": \"2022-06-29T17:41:57.948\",\r\n                        \"cretId\": \"api-admin\",\r\n                        \"updId\": \"api-admin\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26691a266265fe1069a3\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER4\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 66,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26511a266265fe1069a1\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER1\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 68,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb265f1a266265fe1069a2\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER3\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 67,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62f5d7f20950e010e55db9bb\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 69,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26701a266265fe1069a4\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER5\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 70,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26771a266265fe1069a5\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER6\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 70,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb267f1a266265fe1069a6\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER7\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 70,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    }\r\n                ],\r\n                \"hndlrGrp\": null\r\n            },\r\n            \"resHndlr\": {\r\n                \"hndlr\": null,\r\n                \"hndlrGrp\": {\r\n                    \"cretDt\": \"2022-06-30T18:18:58.211\",\r\n                    \"updDt\": \"2022-06-30T18:18:58.211\",\r\n                    \"cretId\": \"api-admin\",\r\n                    \"updId\": \"api-admin\",\r\n                    \"version\": 0,\r\n                    \"id\": \"62bd6a8228186b74301b8c9b\",\r\n                    \"hndlrGrpId\": \"RES.DEFAULT\",\r\n                    \"trtSect\": \"RES\",\r\n                    \"hndlr\": [\r\n                        {\r\n                            \"cretDt\": \"2022-06-30T10:48:24.996\",\r\n                            \"updDt\": \"2022-06-30T10:48:24.996\",\r\n                            \"cretId\": \"api-admin\",\r\n                            \"updId\": \"api-admin\",\r\n                            \"version\": 0,\r\n                            \"id\": \"62bd00e9dc37c3047c036e95\",\r\n                            \"hndlrId\": \"RES.BASIC_AUTH\",\r\n                            \"trtSect\": \"RES\",\r\n                            \"sttus\": \"CMPLT\",\r\n                            \"type\": \"POSTCSTM\",\r\n                            \"upldYn\": false,\r\n                            \"order\": 0,\r\n                            \"bodyRfrn\": false,\r\n                            \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.custom.ParamFilter\",\r\n                            \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.custom;  import java.util.Map;  import org.springframework.stereotype.Component;  import com.ktds.act.apigw.filter.handler.RouteHandler; import com.ktds.act.apigw.filter.vo.Transaction;  import lombok.extern.slf4j.Slf4j;  @Slf4j @Component(value = \\\"REQ.CUSTOM-1\\\") public class RequestCustomHandler1 implements RouteHandler { @Override public boolean init(Map<String, Object> configMap) { log.info(\\\"REQ.CUSTOM-1 - Init\\\"); return true; }  @Override public boolean process(Transaction transaction) { log.info(\\\"REQ.CUSTOM-1 - Start\\\"); log.info(\\\"REQ.CUSTOM-1 - End\\\"); return true; } }\",\r\n                            \"cstmClassNm\": null,\r\n                            \"desc\": \"응답 파라미터 필터링 처리\"\r\n                        }\r\n                    ],\r\n                    \"desc\": \"기본 핸들러 그룹 : 인증 > 파라미터 필터 > 전문 변환\"\r\n                }\r\n            },\r\n            \"errHndlr\": null,\r\n            \"swaggerSpec\": \"\",\r\n            \"timeOut\": 15001,\r\n            \"desc\": \"desc\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/reqCreateApi?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"reqCreateApi"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/getApiList?sort=sysId,desc&size=2&page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"getApiList"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "sysId,desc"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "monkey",
+									"value": "getApiInfo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getApiByIdAndSysId?apiId=getApiInfo&sysId=Spring",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getApiByIdAndSysId"
+							],
+							"query": [
+								{
+									"key": "apiId",
+									"value": "getApiInfo"
+								},
+								{
+									"key": "sysId",
+									"value": "Spring"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 버전 정보 수정",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"62fdde6aa048551a80b6e80a\",\r\n    \"sysId\": \"BeastSys\",\r\n    \"apiId\": \"GamPaneEPang!\",\r\n    \"apiComt\": \"배포합니다\",\r\n    \"spec\": [\r\n        {\r\n            \"ver\": \"v1\",\r\n            \"meth\": [\r\n                \"PUT\",\r\n                \"DELETE\"\r\n            ],\r\n            \"in\": \"/BeastSys/goodV1/GomPangEPang2\",\r\n            \"out\": \"/BeastSys/goodV1/GomPangEPang2\",\r\n            \"sttus\": \"WAIT_REG\",\r\n            \"reqHndlr\": {\r\n                \"hndlr\": [\r\n                    {\r\n                        \"id\": \"62bc1055ac7af17380ed6e11\",\r\n                        \"hndlrId\": \"REQ.CUSTOM_PARAM_FILTER\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"TMP\",\r\n                        \"type\": \"PRECSTM\",\r\n                        \"order\": 0,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.custom.ParamFilter\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.custom;  import java.util.Map;  import org.springframework.stereotype.Component;  import com.ktds.act.apigw.filter.handler.RouteHandler; import com.ktds.act.apigw.filter.vo.Transaction;  import lombok.extern.slf4j.Slf4j;  @Slf4j @Component(value = \\\"REQ.CUSTOM-1\\\") public class RequestCustomHandler1 implements RouteHandler { @Override public boolean init(Map<String, Object> configMap) { log.info(\\\"REQ.CUSTOM-1 - Init\\\"); return true; }  @Override public boolean process(Transaction transaction) { log.info(\\\"REQ.CUSTOM-1 - Start\\\"); log.info(\\\"REQ.CUSTOM-1 - End\\\"); return true; } }\",\r\n                        \"cstmClassNm\": \"ParamFilter\",\r\n                        \"desc\": \"요청 커스텀 파라미터 필터링 처리\",\r\n                        \"cretDt\": \"2022-06-29T17:41:57.948\",\r\n                        \"updDt\": \"2022-06-29T17:41:57.948\",\r\n                        \"cretId\": \"api-admin\",\r\n                        \"updId\": \"api-admin\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26691a266265fe1069a3\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER4\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 66,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26511a266265fe1069a1\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER1\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 68,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb265f1a266265fe1069a2\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER3\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 67,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62f5d7f20950e010e55db9bb\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 69,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26701a266265fe1069a4\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER5\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 70,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb26771a266265fe1069a5\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER6\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 70,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    },\r\n                    {\r\n                        \"id\": \"62fb267f1a266265fe1069a6\",\r\n                        \"hndlrId\": \"SYSTEM_PARAM_FILTER7\",\r\n                        \"trtSect\": \"REQ\",\r\n                        \"sttus\": \"CMPLT\",\r\n                        \"type\": \"SYS\",\r\n                        \"order\": 70,\r\n                        \"bodyRfrn\": false,\r\n                        \"upldYn\": false,\r\n                        \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.system.ads\",\r\n                        \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.system;\",\r\n                        \"cstmClassNm\": \"SystemParamFilter\",\r\n                        \"desc\": \"요청 시스템 파라미터 필터링 처리 설명 \",\r\n                        \"cretDt\": null,\r\n                        \"updDt\": \"2022-08-12T23:40:53.798\",\r\n                        \"cretId\": \"beast@kt.com\",\r\n                        \"updId\": \"beast@kt.com\"\r\n                    }\r\n                ],\r\n                \"hndlrGrp\": null\r\n            },\r\n            \"resHndlr\": {\r\n                \"hndlr\": null,\r\n                \"hndlrGrp\": {\r\n                    \"cretDt\": \"2022-06-30T18:18:58.211\",\r\n                    \"updDt\": \"2022-06-30T18:18:58.211\",\r\n                    \"cretId\": \"api-admin\",\r\n                    \"updId\": \"api-admin\",\r\n                    \"version\": 0,\r\n                    \"id\": \"62bd6a8228186b74301b8c9b\",\r\n                    \"hndlrGrpId\": \"RES.DEFAULT\",\r\n                    \"trtSect\": \"RES\",\r\n                    \"hndlr\": [\r\n                        {\r\n                            \"cretDt\": \"2022-06-30T10:48:24.996\",\r\n                            \"updDt\": \"2022-06-30T10:48:24.996\",\r\n                            \"cretId\": \"api-admin\",\r\n                            \"updId\": \"api-admin\",\r\n                            \"version\": 0,\r\n                            \"id\": \"62bd00e9dc37c3047c036e95\",\r\n                            \"hndlrId\": \"RES.BASIC_AUTH\",\r\n                            \"trtSect\": \"RES\",\r\n                            \"sttus\": \"CMPLT\",\r\n                            \"type\": \"POSTCSTM\",\r\n                            \"upldYn\": false,\r\n                            \"order\": 0,\r\n                            \"bodyRfrn\": false,\r\n                            \"cstmClassAdr\": \"com.ktds.act.apigw.filter.handler.custom.ParamFilter\",\r\n                            \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.custom;  import java.util.Map;  import org.springframework.stereotype.Component;  import com.ktds.act.apigw.filter.handler.RouteHandler; import com.ktds.act.apigw.filter.vo.Transaction;  import lombok.extern.slf4j.Slf4j;  @Slf4j @Component(value = \\\"REQ.CUSTOM-1\\\") public class RequestCustomHandler1 implements RouteHandler { @Override public boolean init(Map<String, Object> configMap) { log.info(\\\"REQ.CUSTOM-1 - Init\\\"); return true; }  @Override public boolean process(Transaction transaction) { log.info(\\\"REQ.CUSTOM-1 - Start\\\"); log.info(\\\"REQ.CUSTOM-1 - End\\\"); return true; } }\",\r\n                            \"cstmClassNm\": null,\r\n                            \"desc\": \"응답 파라미터 필터링 처리\"\r\n                        }\r\n                    ],\r\n                    \"desc\": \"기본 핸들러 그룹 : 인증 > 파라미터 필터 > 전문 변환\"\r\n                }\r\n            },\r\n            \"errHndlr\": null,\r\n            \"swaggerSpec\": \"\",\r\n            \"timeOut\": 15001,\r\n            \"desc\": \"desc\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/reqAmdApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"reqAmdApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 정보 삭제",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apiId\": \"HanSeokBongBoot\",\r\n    \"sysId\": \"HRSYSTEM\",\r\n    \"spec\" : [{ \"ver\": \"ver4\",\r\n                \"meth\":[\"GET\",\"POST\"],\r\n                \"in\": \"GampangEE\",\r\n                \"out\": \"/Spring_boot/GamPang2E\",\r\n                \"reqHndlrGrp\": {\"id\": \"62bd658828186b74301b8c9a\"},\r\n                \"resHndlrGrp\": {\"id\": \"62d606075bbad33388898389\"},\r\n                \"timeOut\": 9500,\r\n                \"sttus\": \"WAIT_AMD\",\r\n                \"desc\": \"Spring_boot 가입자 GamPangE 정보 제공_test\"\r\n            }],\r\n    \"apiComt\": \"고라니곰탕\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/reqDelApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"reqDelApi"
+							],
+							"query": [
+								{
+									"key": "apiId",
+									"value": "HanSeokBong1",
+									"disabled": true
+								},
+								{
+									"key": "sysId",
+									"value": "HRSYSTEM",
+									"disabled": true
+								},
+								{
+									"key": "ver",
+									"value": "v1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 중복체크",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/apiCheckByIdAndSysId?apiId=getApiInfo&admSysId=Bapri",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"apiCheckByIdAndSysId"
+							],
+							"query": [
+								{
+									"key": "apiId",
+									"value": "getApiInfo"
+								},
+								{
+									"key": "admSysId",
+									"value": "Bapri"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API URI 중복 검색",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "요청 핸들러 그룹 조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getRequestHandlerGroupList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getRequestHandlerGroupList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "응답 핸들러 그룹 조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getResponseHandlerGroupList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getResponseHandlerGroupList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "핸들러 등록(tmp)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hndlrId\": \"RES.BASIC_AUTH\",\n    \"trtSect\":\"RES\",\n    \"type\": \"CSTM\",\n    \"dpdncHndlr\":null,\n    \"bodyRfrn\": false,\n    \"cstmClassAdr\":\"com.ktds.act.apigw.filter.handler.custom.ParamFilter\",\n    \"cstmClassSrc\": \"package com.ktds.act.apigw.filter.handler.custom;  import java.util.Map;  import org.springframework.stereotype.Component;  import com.ktds.act.apigw.filter.handler.RouteHandler; import com.ktds.act.apigw.filter.vo.Transaction;  import lombok.extern.slf4j.Slf4j;  @Slf4j @Component(value = \\\"REQ.CUSTOM-1\\\") public class RequestCustomHandler1 implements RouteHandler { @Override public boolean init(Map<String, Object> configMap) { log.info(\\\"REQ.CUSTOM-1 - Init\\\"); return true; }  @Override public boolean process(Transaction transaction) { log.info(\\\"REQ.CUSTOM-1 - Start\\\"); log.info(\\\"REQ.CUSTOM-1 - End\\\"); return true; } }\",\n    \"optn\":\"{\\\"custId\\\": {\\\"required\\\": true,\\\"length\\\": \\\"10\\\",\\\"type\\\": \\\"STRING\\\"}}\",\n    \"desc\": \"응답 파라미터 필터링 처리\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/mngt/v1/hndlr",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"hndlr"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "핸들러 그룹 등록(tmp)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hndlrGrpId\":\"REQ.DEFAULT\",\n    \"trtSect\":\"REQ\",\n    \"hndlr\":[\n                {\n                    \"id\":\"62bc1055ac7af17380ed6e11\"\n                },\n                {\n                    \"id\":\"62bc1082ac7af17380ed6e12\"\n                }\n    ],\n    \"desc\":\"기본 핸들러 그룹 : 인증 > 파라미터 필터 > 전문 변환\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/mngt/v1/hndlrGrp",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"hndlrGrp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "핸들러 삭제(tmp)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/mngt/v1/hndlr?hndlrId=REQ.CUSTOM_PARAM_FILTER",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"hndlr"
+							],
+							"query": [
+								{
+									"key": "hndlrId",
+									"value": "REQ.CUSTOM_PARAM_FILTER"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UriIn 중복체크",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/api",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/mngt/v1/uriInCheck?in=/Spring_boot8/v2/getCustInfo_test8",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"uriInCheck"
+							],
+							"query": [
+								{
+									"key": "in",
+									"value": "/Spring_boot8/v2/getCustInfo_test8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHndlr",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/handler",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/hndlr?hndlrId=\"hi\"",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"hndlr"
+							],
+							"query": [
+								{
+									"key": "hndlrId",
+									"value": "\"hi\""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "시스템 관리",
+			"item": [
+				{
+					"name": "시스템 등록",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sysId\": \"testtest\",\n    \"tkcgrNm\": \"test\",\n    \"tkcgrPos\": \"KTDS 시스템서비스본부 Digico개발센터 Agile Core팀\",\n    \"tkcgrEml\": \"helloworld@naver.com\",\n    \"edpt\": [\n        \"http://127.0.0.1:8084\",\n        \"https://capri.com:8080\",\n        \"https://capri.com:8081\"\n    ],\n    \"circtBrkr\": {\n        \"resCd\": 450,\n        \"failRate\": 15,\n        \"minBaseCnt\": 15,\n        \"baseReachTm\": 15,\n        \"blckDuratTm\": 10\n    },\n    \"desc\": \"ApiGateway\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/createSystem",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"createSystem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "시스템 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getSystemList?tkcgrNm=&size=2&page=1",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getSystemList"
+							],
+							"query": [
+								{
+									"key": "sysId",
+									"value": "Spring",
+									"disabled": true
+								},
+								{
+									"key": "tkcgrNm",
+									"value": ""
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "시스템 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getSystemById?sysId=SpringBoot",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getSystemById"
+							],
+							"query": [
+								{
+									"key": "sysId",
+									"value": "SpringBoot"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "시스템 수정",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sysId\": \"testtest\",\n    \"tkcgrNm\": \"test\",\n    \"tkcgrPos\": \"KTDS 시스템서비스본부 Digico개발센터 Agile Core팀\",\n    \"tkcgrEml\": \"helloworld@naver.com\",\n    \"edpt\": [\n        \"http://127.0.0.1:8084\",\n        \"https://capri.com:8080\",\n        \"https://capri.com:8081\"\n    ],\n    \"circtBrkr\": {\n        \"resCd\": 450,\n        \"failRate\": 15,\n        \"minBaseCnt\": 15,\n        \"baseReachTm\": 15,\n        \"blckDuratTm\": 10\n    },\n    \"desc\": \"ApiGateway\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/system",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"system"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "시스템 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/system?sysId=testtest",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"system"
+							],
+							"query": [
+								{
+									"key": "sysId",
+									"value": "testtest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "시스템 ID 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getSystemIdList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getSystemIdList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "시스템 ID 중복체크",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/management/system",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/systemCheckById?sysId=SpringBoot",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"systemCheckById"
+							],
+							"query": [
+								{
+									"key": "sysId",
+									"value": "SpringBoot"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "사용자 관리",
+			"item": [
+				{
+					"name": "사용자 전체조회 및 검색",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userMngt/getUserList?size=15&page=2",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userMngt",
+								"getUserList"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "사용자 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userMngt/getUserById?userId=wwkang94@naver.com",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userMngt",
+								"getUserById"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "wwkang94@naver.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "사용자 승인 및 권한 변경",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userMngt/userSttusAndAut?userId=kang1@kt.com&autNm=OP",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userMngt",
+								"userSttusAndAut"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "kang1@kt.com"
+								},
+								{
+									"key": "autNm",
+									"value": "OP"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "사용자 반려",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userMngt/rcessUser?userId=test4@kt.com",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userMngt",
+								"rcessUser"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "test4@kt.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "사용자 탈퇴",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userMngt/user?userId=test1@kt.com",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userMngt",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "test1@kt.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "사용자 비밀번호 초기화",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/userMngt/initPwd?userId=test@kt.com",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"userMngt",
+								"initPwd"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "test@kt.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "권한 관리",
+			"item": [
+				{
+					"name": "권한 등록",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/permission-mngt",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"autNm\": \"test권한\",\r\n    \"admr\": false,\r\n    \"autDtl\": [\r\n        {\r\n            \"menuId\": \"000001\",\r\n            \"show\": true,\r\n            \"edit\": false,\r\n            \"subMenu\": null\r\n        },\r\n        {\r\n            \"menuId\": \"000002\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000003\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000004\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"menuId\": \"000005\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": null\r\n        },\r\n        {\r\n            \"menuId\": \"000006\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": null\r\n        },\r\n        {\r\n            \"menuId\": \"000007\",\r\n            \"show\": true,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000008\",\r\n                    \"show\": true,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000009\",\r\n                    \"show\": true,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000010\",\r\n                    \"show\": true,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"menuId\": \"000011\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000012\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000013\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000014\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"menuId\": \"000015\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000016\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000017\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"desc\": \"test 권한입니다.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/createAut",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"createAut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "권한 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/permission-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/getAutList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"getAutList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "권한 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/permission-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/getAutById?autId=0004",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"getAutById"
+							],
+							"query": [
+								{
+									"key": "autId",
+									"value": "0004"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "권한 수정",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/permission-mngt",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"autId\" : \"0005\",\r\n    \"autNm\": \"test권한\",\r\n    \"admr\": false,\r\n    \"autDtl\": [\r\n        {\r\n            \"menuId\": \"000001\",\r\n            \"show\": true,\r\n            \"edit\": false,\r\n            \"subMenu\": null\r\n        },\r\n        {\r\n            \"menuId\": \"000002\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000003\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000004\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"menuId\": \"000005\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": null\r\n        },\r\n        {\r\n            \"menuId\": \"000006\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": null\r\n        },\r\n        {\r\n            \"menuId\": \"000007\",\r\n            \"show\": true,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000008\",\r\n                    \"show\": true,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000009\",\r\n                    \"show\": true,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000010\",\r\n                    \"show\": true,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"menuId\": \"000011\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000012\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000013\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000014\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"menuId\": \"000015\",\r\n            \"show\": false,\r\n            \"edit\": false,\r\n            \"subMenu\": [\r\n                {\r\n                    \"menuId\": \"000016\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                },\r\n                {\r\n                    \"menuId\": \"000017\",\r\n                    \"show\": false,\r\n                    \"edit\": false,\r\n                    \"subMenu\": null\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"desc\": \"test 권한 수정 테스트입니다.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/aut",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"aut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "권한 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/permission-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/aut?autId=0005",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"aut"
+							],
+							"query": [
+								{
+									"key": "autId",
+									"value": "0005"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "권한명 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/member-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/getAutNmList",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"getAutNmList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "권한명 중복체크",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/setting/permission-mngt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/autMngt/autCheckByNm?autNm=관리자",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"autMngt",
+								"autCheckByNm"
+							],
+							"query": [
+								{
+									"key": "autNm",
+									"value": "관리자"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "배포 관리",
+			"item": [
+				{
+					"name": "API 배포 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/deploy/api-deploy",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/mngt/v1/dply/getApiHstList?size=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"dply",
+								"getApiHstList"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 배포 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/deploy/api-deploy",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/dply/getApiHstById?id=62d9fab058f5de46ed58f132",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"dply",
+								"getApiHstById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "62d9fab058f5de46ed58f132"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API 배포 승인/반려",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/deploy/api-deploy",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sysId\" : \"HRSYSTEM\",\n    \"apiId\" : \"HanSeokBongBoot\",\n    \"ver\" : \"ver1\",\n    \"dply\" : true,\n    \"dplyComt\" : \"배포 승인했습니다.\",\n    \"pwd\" : \"ktds1234!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/dply/apiMngt",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"dply",
+								"apiMngt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "대시보드",
+			"item": [
+				{
+					"name": "1. 대시보드 트래픽 통계",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getDashboardTrafficStat?statPerd=1440&statBaseUnit=MI",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getDashboardTrafficStat"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. 대시보드 트래픽 통계 상세",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getDashboardTrafficStatDetail?statPerd=1440&statBaseTm=2022-06-27 16:12&statBaseUnit=MI",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getDashboardTrafficStatDetail"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "statBaseTm",
+									"value": "2022-06-27 16:12"
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. 대시보드 에러 통계",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getDashboardErrorStat?statPerd=1440&statBaseUnit=MI",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getDashboardErrorStat"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. 대시보드 에러 통계 상세",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getDashboardErrorStatDetail?statPerd=1440&statBaseTm=2022-06-27 12:10&statBaseUnit=MI",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getDashboardErrorStatDetail"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "statBaseTm",
+									"value": "2022-06-27 12:10"
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. 대시보드 트래픽 현황",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getDashboardTrafficStus",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getDashboardTrafficStus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. 대시보드 트래픽 현황 상세(test)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getDashboardTrafficStusDetail?statPerd=1440&statBaseTm=2022-06-27 18:00&statBaseUnit=MI",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getDashboardTrafficStusDetail"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "statBaseTm",
+									"value": "2022-06-27 18:00"
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. 대시보드 트래픽 건수 추이",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getTrafficCount",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getTrafficCount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. 대시보드 트래픽 응답시간 추이",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/dashboard",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/getTrafficResTime",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"getTrafficResTime"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. 실시간 서비스 통계",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/control",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/realtimeServiceStat?statPerd=1440&sortBase=totCnt",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"realtimeServiceStat"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "sortBase",
+									"value": "totCnt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. 실시간 서비스 통계 상세",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/control",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/realtimeServiceStatDetail?svcId=KTSVC&statBaseTm=2022-05-25 18:50&statPerd=1440&dayTrafcComprCnt=7",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"realtimeServiceStatDetail"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "KTSVC"
+								},
+								{
+									"key": "statBaseTm",
+									"value": "2022-05-25 18:50"
+								},
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "dayTrafcComprCnt",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11. 실시간 API 통계",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/control",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/realtimeApiStat?statPerd=1440&sortBase=totCnt",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"realtimeApiStat"
+							],
+							"query": [
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "sortBase",
+									"value": "totCnt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12. 실시간 API 통계 상세",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/control",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/realtimeApiStatDetail?sysId=sys1&apiId=api1&statBaseTm=2022-05-25 18:50&statPerd=1440&dayTrafcComprCnt=7",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"realtimeApiStatDetail"
+							],
+							"query": [
+								{
+									"key": "sysId",
+									"value": "sys1"
+								},
+								{
+									"key": "apiId",
+									"value": "api1"
+								},
+								{
+									"key": "statBaseTm",
+									"value": "2022-05-25 18:50"
+								},
+								{
+									"key": "statPerd",
+									"value": "1440"
+								},
+								{
+									"key": "dayTrafcComprCnt",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13. 서비스 통계",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/statistic",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/stat/services?statStTm=2022-07-14 14:00&statEndTm=2022-07-14 18:00",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"stat",
+								"services"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "KAKAO",
+									"disabled": true
+								},
+								{
+									"key": "svcId",
+									"value": "NAVER",
+									"disabled": true
+								},
+								{
+									"key": "statStTm",
+									"value": "2022-07-14 14:00"
+								},
+								{
+									"key": "statEndTm",
+									"value": "2022-07-14 18:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "14. API 통계",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/statistic",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/stat/apis?statStTm=2022-07-22 00:00&statEndTm=2022-07-22 18:00",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"stat",
+								"apis"
+							],
+							"query": [
+								{
+									"key": "apiNm",
+									"value": "EHub.getCustInfo",
+									"disabled": true
+								},
+								{
+									"key": "statStTm",
+									"value": "2022-07-22 00:00"
+								},
+								{
+									"key": "statEndTm",
+									"value": "2022-07-22 18:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "15. 서비스 트래픽 추이",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/traffic",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/trafc/services?statBaseUnit=MI&statStTm=2022-07-14 16:00&statEndTm=2022-07-14 16:15",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"trafc",
+								"services"
+							],
+							"query": [
+								{
+									"key": "svcId",
+									"value": "NAVER",
+									"disabled": true
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								},
+								{
+									"key": "statStTm",
+									"value": "2022-07-14 16:00"
+								},
+								{
+									"key": "statEndTm",
+									"value": "2022-07-14 16:15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "16. API 트래픽 추이",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/traffic",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/trafc/apis?apiNm=springBoot.getApiInfo&statBaseUnit=MI&statStTm=2022-07-14 16:00&statEndTm=2022-07-14 16:15",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"trafc",
+								"apis"
+							],
+							"query": [
+								{
+									"key": "apiNm",
+									"value": "springBoot.getApiInfo"
+								},
+								{
+									"key": "statBaseUnit",
+									"value": "MI"
+								},
+								{
+									"key": "statStTm",
+									"value": "2022-07-14 16:00"
+								},
+								{
+									"key": "statEndTm",
+									"value": "2022-07-14 16:15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "17. 서비스 ID 검색",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/traffic",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/stat/getServiceId?keyword=ds",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"stat",
+								"getServiceId"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "ds"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "18. 시스템 ID, API ID 검색",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/monitoring/traffic",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/mngt/v1/stat/getSysIdAndApiId?keyword=e",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"mngt",
+								"v1",
+								"stat",
+								"getSysIdAndApiId"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "예제",
+			"item": [
+				{
+					"name": "oneToMany",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sqpl join",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "수집/집계",
+			"item": [
+				{
+					"name": "collect/success",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"host\": \"ip-10-225-9-9\",\n    \"applId\": \"Seast\",\n    \"svcId\": \"KTSS\",\n    \"apiId\": \"getApiInfo\",\n    \"sysId\" : \"HRSYSTEM\",\n    \"sumYn\": \"N\",\n    \"ver\": \"ver1\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/totalization/collect/succes",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"totalization",
+								"collect",
+								"succes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "collect/fail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"host\": \"ip-10-225-3-3\",\n    \"applId\": \"deast\",\n    \"svcId\": \"KT\",\n    \"apiId\": \"getApiInfo\",\n    \"sysId\" : \"HRSYSTEM\",\n    \"sumYn\": \"N\",\n    \"errCd\": \"AGW-E403\",\n    \"errMsg\":\"7ISc67mE7IqkIOyduOqwgCDsi6TtjKg=\",\n    \"ver\":\"v3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/totalization/collect/fail",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"totalization",
+								"collect",
+								"fail"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "공지사항 관리",
+			"item": [
+				{
+					"name": "공지사항 등록",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/community/notice",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "notice",
+									"type": "file",
+									"src": "/Users/thlee/BackEnd/BackEndDevelopment/BulletinBoard/src/json/noticeDto.json"
+								},
+								{
+									"key": "imgFile",
+									"type": "file",
+									"src": "/Users/thlee/BackEnd/BackEndDevelopment/BulletinBoard/src/json/imgFile.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/createNotice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"createNotice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "공지사항 수정",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "JwtAuthorization",
+									"value": "{{JwtAuthorization}}",
+									"type": "text"
+								},
+								{
+									"key": "baseUrl",
+									"value": "/community/notice",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/updateNotice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"updateNotice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "공지사항 상세조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/community/notice",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/getNoticeById?objectId=630704677533853c7ed938ad",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"getNoticeById"
+							],
+							"query": [
+								{
+									"key": "objectId",
+									"value": "630704677533853c7ed938ad"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "공지사항 전체조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/community/notice",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/getNoticeList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"getNoticeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "공지사항 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "JwtAuthorization",
+								"value": "{{JwtAuthorization}}",
+								"type": "text"
+							},
+							{
+								"key": "baseUrl",
+								"value": "/community/notice",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/mngt/v1/delNotice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mngt",
+								"v1",
+								"delNotice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

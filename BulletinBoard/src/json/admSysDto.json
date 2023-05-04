@@ -1,0 +1,20 @@
+{
+    "sysId": "EndPointError",
+    "tkcgrNm": "오픈테스트",
+    "tkcgrPos": "KTDS 시스템서비스본부 Digico개발센터 Agile Core팀",
+    "tkcgrEml": "helloworld@naver.com",
+    "openYn": true,
+    "edpt": [
+        "http://127.0.0.1:8084",
+        "http://",
+        "https://capri.com:8081"
+    ],
+    "circtBrkr": {
+        "resCd": ["450"],
+        "failRate": 15,
+        "minBaseCnt": 15,
+        "baseReachTm": 15,
+        "blckDuratTm": 10
+    },
+    "desc": "된다"
+}
