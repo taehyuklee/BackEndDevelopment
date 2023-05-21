@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import spring.logtracing.version1.orderApp.service.OrderService;
 
-@RestController
+@RestController("orderController1")
 @RequiredArgsConstructor
 public class OrderController {
 

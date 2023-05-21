@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import spring.logtracing.version2.trace.TraceStatus;
 import spring.logtracing.version2.trace.TraceService.TraceService;
 
-@Repository
+@Repository("orderRepositoryV2")
 @RequiredArgsConstructor
 public class OrderRepository {
 

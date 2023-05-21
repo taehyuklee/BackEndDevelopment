@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import spring.logtracing.version2.orderApp.service.OrderService;
 
 
-@RestController
+@RestController("orderController2")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("/v1/request")
+    @GetMapping("/v2/request")
     public String request(String itemId){
         orderService.orderItem(itemId);
         return "ok";

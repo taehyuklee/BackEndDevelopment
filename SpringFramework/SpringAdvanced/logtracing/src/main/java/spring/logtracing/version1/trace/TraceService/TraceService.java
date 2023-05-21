@@ -7,7 +7,7 @@ import spring.logtracing.version1.trace.TraceId;
 import spring.logtracing.version1.trace.TraceStatus;
 
 @Slf4j
-@Component //TraceV1은 singleton으로 관리할거야 (Tracing service이니까)
+@Component("traceServiceV1") //TraceService는 singleton으로 관리할거야 (Tracing service이니까)
 public class TraceService {
 
     private static final String START_PREFIX = "-->";

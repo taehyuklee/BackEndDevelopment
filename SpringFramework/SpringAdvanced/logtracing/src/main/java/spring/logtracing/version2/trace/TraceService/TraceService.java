@@ -8,7 +8,7 @@ import spring.logtracing.version2.trace.TraceStatus;
 
 
 @Slf4j
-@Component //TraceV1은 singleton으로 관리할거야 (Tracing service이니까)
+@Component("traceServiceV2")
 public class TraceService {
 
     private static final String START_PREFIX = "-->";
@@ -29,6 +29,19 @@ public class TraceService {
 
         //로그 출력
         return new TraceStatus(traceId, startTimeMs, message);
+    }
+
+    //두번째 level부터는 beginSync로 호출한다.
+    public TraceStatus beginSync(TraceId beforeTraceId, String message){
+
+        //level만 이전 TraceId에서 createNextId를 함으로써 depth를 1증가시킨 (id는 유지) TraceId를 가져온다. (domain에서 해당 객체관련 method를 같이 넣어둔다)
+        TraceId nextId = beforeTraceId.createNextId(); 
+        Long startTimeMs = System.currentTimeMillis();
+
+        log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()), message);
+
+        //로그 출력
+        return new TraceStatus(nextId, startTimeMs, message);
     }
 
     //log가 종료될때는 end method를 호출해주면 된다. 결과: [796bccd9] OrderController.request() time=1016ms //로그 종료
