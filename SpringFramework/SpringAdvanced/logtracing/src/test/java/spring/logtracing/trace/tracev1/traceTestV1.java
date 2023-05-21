@@ -11,15 +11,15 @@ public class TraceTestV1 {
     
     @Test
     void begin_end() {
-        TraceService trace = new TraceService();
-        TraceStatus status = trace.begin("hello");
-        trace.end(status);
+        TraceService traceService = new TraceService();
+        TraceStatus status = traceService.begin("hello");
+        traceService.end(status);
     }
 
     @Test
     void begin_exception(){
-        TraceService trace = new TraceService();
-        TraceStatus status = trace.begin("hello");
-        trace.exception(status, new IllegalAccessException());
+        TraceService traceService = new TraceService();
+        TraceStatus status = traceService.begin("hello");
+        traceService.exception(status, new IllegalAccessException());
     }
 }

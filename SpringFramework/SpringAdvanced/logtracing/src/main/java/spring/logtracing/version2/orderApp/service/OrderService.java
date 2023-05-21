@@ -12,7 +12,7 @@ import spring.logtracing.version2.trace.TraceService.TraceService;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final TraceService trace;
+    private final TraceService traceService;
 
     public void orderItem(String itemId){
 
@@ -23,12 +23,12 @@ public class OrderService {
 
         TraceStatus status = null;
         try{
-            status = trace.begin("OrderController.request()");
+            status = traceService.begin("OrderController.request()");
             orderRepository.save(itemId);
-            trace.end(status);
+            traceService.end(status);
             
         }catch(Exception e){
-            trace.exception(status, e); //여기까지하면, 예외를 처리해버리고 interrupt를 터뜨리지 않는다 (정상작동함)
+            traceService.exception(status, e); //여기까지하면, 예외를 처리해버리고 interrupt를 터뜨리지 않는다 (정상작동함)
             throw e; //throw를 해줌으로써 interrupt를 터뜨려준다.
         }
 

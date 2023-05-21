@@ -9,20 +9,20 @@ public class TraceTestV2 {
 
     @Test
     void begin_end(){
-        TraceService trace = new TraceService();
-        TraceStatus status1 = trace.begin("hello1");
-        TraceStatus status2 = trace.beginSync(status1.getTraceId(), "hello2");
-        trace.end(status2);
-        trace.end(status1);
+        TraceService traceService = new TraceService();
+        TraceStatus status1 = traceService.begin("hello1");
+        TraceStatus status2 = traceService.beginSync(status1.getTraceId(), "hello2");
+        traceService.end(status2);
+        traceService.end(status1);
     }
 
     @Test
     void begin_exception(){
-        TraceService trace = new TraceService();
-        TraceStatus status1 = trace.begin("hello1");
-        TraceStatus status2 = trace.beginSync(status1.getTraceId(), "hello2");
-        trace.exception(status2, new IllegalAccessException());
-        trace.exception(status1, new IllegalAccessException());
+        TraceService traceService = new TraceService();
+        TraceStatus status1 = traceService.begin("hello1");
+        TraceStatus status2 = traceService.beginSync(status1.getTraceId(), "hello2");
+        traceService.exception(status2, new IllegalAccessException());
+        traceService.exception(status1, new IllegalAccessException());
     }
     
 }
