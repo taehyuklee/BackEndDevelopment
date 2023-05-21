@@ -1,5 +1,6 @@
-package spring.advanced.trace;
+package spring.logtracing.trace;
 
+//log의 상태정보를 나타낸다. (시작할때의 상태 정보)
 public class TraceStatus {
 
     private TraceId traceId;

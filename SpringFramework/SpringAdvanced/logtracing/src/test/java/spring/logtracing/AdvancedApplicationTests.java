@@ -1,4 +1,4 @@
-package spring.advanced;
+package spring.logtracing;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
