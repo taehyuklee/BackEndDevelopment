@@ -1,14 +1,15 @@
-package spring.logtracing.trace.TraceService;
+package spring.logtracing.version2.trace.TraceService;
 
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import spring.logtracing.trace.TraceId;
-import spring.logtracing.trace.TraceStatus;
+import spring.logtracing.version2.trace.TraceId;
+import spring.logtracing.version2.trace.TraceStatus;
+
 
 @Slf4j
 @Component //TraceV1은 singleton으로 관리할거야 (Tracing service이니까)
-public class TraceV1 {
+public class TraceService {
 
     private static final String START_PREFIX = "-->";
     private static final String COMPLETE_PREFIX = "<--";

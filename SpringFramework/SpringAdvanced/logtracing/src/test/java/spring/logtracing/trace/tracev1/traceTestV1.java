@@ -2,21 +2,23 @@ package spring.logtracing.trace.tracev1;
 
 import org.junit.jupiter.api.Test;
 
-import spring.logtracing.trace.TraceStatus;
-import spring.logtracing.trace.TraceService.TraceV1;
+import spring.logtracing.version1.trace.TraceStatus;
+import spring.logtracing.version1.trace.TraceService.TraceService;
 
-public class traceTestV1 {
+
+
+public class TraceTestV1 {
     
     @Test
     void begin_end() {
-        TraceV1 trace = new TraceV1();
+        TraceService trace = new TraceService();
         TraceStatus status = trace.begin("hello");
         trace.end(status);
     }
 
     @Test
     void begin_exception(){
-        TraceV1 trace = new TraceV1();
+        TraceService trace = new TraceService();
         TraceStatus status = trace.begin("hello");
         trace.exception(status, new IllegalAccessException());
     }

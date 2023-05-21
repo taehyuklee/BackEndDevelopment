@@ -1,4 +1,4 @@
-package spring.logtracing.trace;
+package spring.logtracing.version2.trace;
 
 import java.util.UUID;
 
