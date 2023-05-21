@@ -3,6 +3,7 @@ package spring.logtracing.version2.orderApp.domain.repository;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
+import spring.logtracing.version2.trace.TraceId;
 import spring.logtracing.version2.trace.TraceStatus;
 import spring.logtracing.version2.trace.TraceService.TraceService;
 
@@ -12,12 +13,12 @@ public class OrderRepository {
 
     private final TraceService tracesService;
 
-    public void save(String itemId){
+    public void save(TraceId traceId, String itemId){
         //저장 로직
         TraceStatus status = null;
         try{
             //TraceStatus로 logging시작
-            status = tracesService.begin("OrderRepository.save()");
+            status = tracesService.beginSync(traceId, "OrderRepository.save()");
 
             //save core logic
             if (itemId.equals("ex")){

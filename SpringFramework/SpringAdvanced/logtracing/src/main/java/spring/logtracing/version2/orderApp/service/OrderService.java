@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import spring.logtracing.version2.orderApp.domain.repository.OrderRepository;
+import spring.logtracing.version2.trace.TraceId;
 import spring.logtracing.version2.trace.TraceStatus;
 import spring.logtracing.version2.trace.TraceService.TraceService;
 
@@ -14,17 +15,14 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final TraceService traceService;
 
-    public void orderItem(String itemId){
-
-        //아래 세줄이면 참 간단하겠는데, 실상은 예외처리 try catch때문에 그렇지 않다.
-        /* TraceStatus status = trace.begin("OrderController.request()");
-        *  orderRepository.save(itemId);
-        *  trace.end(status); */
+    //Controller단에서 생성한 TraceId를 받아와야 한다.
+    public void orderItem(TraceId traceId, String itemId){
 
         TraceStatus status = null;
         try{
-            status = traceService.begin("OrderController.request()");
-            orderRepository.save(itemId);
+            //앞서 받아온 traceId에 transaction ID는 그대로 하고 LEVEL만 1을 더해서 새로 객체를 생성해서 반환해준다.
+            status = traceService.beginSync(traceId, "OrderController.request()");
+            orderRepository.save(status.getTraceId(), itemId);
             traceService.end(status);
             
         }catch(Exception e){

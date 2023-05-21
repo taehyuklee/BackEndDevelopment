@@ -16,7 +16,7 @@ public class OrderController {
     private final OrderService orderService;
     private final TraceService traceService;
 
-    @GetMapping("/v1/request")
+    @GetMapping("/v2/request")
     public String request(String itemId){
         //logging logic with controller
         TraceStatus status = null;
@@ -24,7 +24,8 @@ public class OrderController {
             //TraceStatus로 logging시작.
             status = traceService.begin("OrderController.request()");
 
-            orderService.orderItem(itemId);
+            //동기화를 위해 생성된 Controller단에서 생성된 traceId를 뒤로 넘겨준다.
+            orderService.orderItem(status.getTraceId(), itemId);
 
             //TraceStatus로 logging 마무리.
             traceService.end(status);
