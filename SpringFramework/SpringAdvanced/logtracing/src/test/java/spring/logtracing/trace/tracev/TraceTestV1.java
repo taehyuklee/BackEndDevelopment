@@ -1,4 +1,4 @@
-package spring.logtracing.trace.tracev1;
+package spring.logtracing.trace.tracev;
 
 import org.junit.jupiter.api.Test;
 
