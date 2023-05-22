@@ -3,13 +3,13 @@ package spring.logtracing.trace.threadlocal;
 import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
-import spring.logtracing.trace.threadlocal.code.FieldService;
+import spring.logtracing.trace.threadlocal.code.ThreadLocalService;
 
 @Slf4j
-public class FieldServiceTest {
-
+public class ThreadLocalServiceTest {
+    
     //동시성 문제 test
-    private FieldService fieldService = new FieldService();
+    private ThreadLocalService threadLocalService = new ThreadLocalService();
 
     @Test
     void field(){
@@ -17,12 +17,12 @@ public class FieldServiceTest {
 
         //ThreadA class 정의
         Runnable userA = () -> {
-            fieldService.logic("userA");
+            threadLocalService.logic("userA");
         };
 
         //ThreadB class 정의
         Runnable userB = () -> {
-            fieldService.logic("userB");
+            threadLocalService.logic("userB");
         };
 
         Thread threadA = new Thread(userA);
@@ -45,5 +45,4 @@ public class FieldServiceTest {
             e.printStackTrace();
         }
     }
-    
 }
