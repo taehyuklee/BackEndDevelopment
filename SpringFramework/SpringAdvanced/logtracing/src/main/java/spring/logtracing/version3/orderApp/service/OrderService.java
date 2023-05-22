@@ -4,24 +4,23 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import spring.logtracing.version3.orderApp.domain.repository.OrderRepository;
-import spring.logtracing.version3.trace.TraceId;
 import spring.logtracing.version3.trace.TraceStatus;
-import spring.logtracing.version3.trace.TraceService.TraceService;
+import spring.logtracing.version3.trace.logtrace.LogTrace;
 
 @Service("orderServiceV3")
 @RequiredArgsConstructor
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final TraceService traceService;
+    private final LogTrace traceService;
 
     //Controller단에서 생성한 TraceId를 받아와야 한다.
-    public void orderItem(TraceId traceId, String itemId){
+    public void orderItem(String itemId){
 
         TraceStatus status = null;
         try{
             //앞서 받아온 traceId에 transaction ID는 그대로 하고 LEVEL만 1을 더해서 새로 객체를 생성해서 반환해준다.
-            status = traceService.beginSync(traceId, "OrderController.request()");
+            status = traceService.begin("OrderController.request()");
             orderRepository.save(status.getTraceId(), itemId);
             traceService.end(status);
             

@@ -5,20 +5,20 @@ import org.springframework.stereotype.Repository;
 import lombok.RequiredArgsConstructor;
 import spring.logtracing.version3.trace.TraceId;
 import spring.logtracing.version3.trace.TraceStatus;
-import spring.logtracing.version3.trace.TraceService.TraceService;
+import spring.logtracing.version3.trace.logtrace.LogTrace;
 
 @Repository("orderRepositoryV3")
 @RequiredArgsConstructor
 public class OrderRepository {
 
-    private final TraceService tracesService;
+    private final LogTrace tracesService;
 
     public void save(TraceId traceId, String itemId){
         //저장 로직
         TraceStatus status = null;
         try{
             //TraceStatus로 logging시작
-            status = tracesService.beginSync(traceId, "OrderRepository.save()");
+            status = tracesService.begin("OrderRepository.save()");
 
             //save core logic
             if (itemId.equals("ex")){

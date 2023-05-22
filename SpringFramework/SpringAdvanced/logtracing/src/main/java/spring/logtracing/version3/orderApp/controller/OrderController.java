@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import spring.logtracing.version2.orderApp.service.OrderService;
-import spring.logtracing.version2.trace.TraceStatus;
-import spring.logtracing.version2.trace.TraceService.TraceService;
+import spring.logtracing.version3.orderApp.service.OrderService;
+import spring.logtracing.version3.trace.TraceStatus;
+import spring.logtracing.version3.trace.logtrace.LogTrace;
 
 
 @RestController("orderController3")
@@ -14,7 +14,7 @@ import spring.logtracing.version2.trace.TraceService.TraceService;
 public class OrderController {
 
     private final OrderService orderService;
-    private final TraceService traceService;
+    private final LogTrace traceService;
 
     @GetMapping("/v3/request")
     public String request(String itemId){
@@ -24,8 +24,8 @@ public class OrderController {
             //TraceStatus로 logging시작.
             status = traceService.begin("OrderController.request()");
 
-            //동기화를 위해 생성된 Controller단에서 생성된 traceId를 뒤로 넘겨준다.
-            orderService.orderItem(status.getTraceId(), itemId);
+            //파라미터 다 없애준다. 어차피 Singleton으로 관리되니까
+            orderService.orderItem(itemId);
 
             //TraceStatus로 logging 마무리.
             traceService.end(status);
