@@ -21,7 +21,7 @@ public class OrderService {
         try{
             //앞서 받아온 traceId에 transaction ID는 그대로 하고 LEVEL만 1을 더해서 새로 객체를 생성해서 반환해준다.
             status = traceService.begin("OrderController.request()");
-            orderRepository.save(status.getTraceId(), itemId);
+            orderRepository.save(itemId);
             traceService.end(status);
             
         }catch(Exception e){

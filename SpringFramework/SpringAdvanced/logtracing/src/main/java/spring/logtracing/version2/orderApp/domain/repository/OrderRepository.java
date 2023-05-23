@@ -11,14 +11,14 @@ import spring.logtracing.version2.trace.TraceService.TraceService;
 @RequiredArgsConstructor
 public class OrderRepository {
 
-    private final TraceService tracesService;
+    private final TraceService traceService;
 
     public void save(TraceId traceId, String itemId){
         //저장 로직
         TraceStatus status = null;
         try{
             //TraceStatus로 logging시작
-            status = tracesService.beginSync(traceId, "OrderRepository.save()");
+            status = traceService.beginSync(traceId, "OrderRepository.save()");
 
             //save core logic
             if (itemId.equals("ex")){
@@ -27,11 +27,11 @@ public class OrderRepository {
             sleep(1000);
 
             //시작된 TraceStatus로 logging 마무리
-            tracesService.end(status);
+            traceService.end(status);
 
         }catch (Exception e){
             //logging시 예외처리
-            tracesService.exception(status, e);
+            traceService.exception(status, e);
             throw e;
         }
 
