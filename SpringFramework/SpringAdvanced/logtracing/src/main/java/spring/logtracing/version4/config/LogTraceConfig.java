@@ -7,10 +7,10 @@ import spring.logtracing.version4.trace.logtrace.LogTrace;
 import spring.logtracing.version4.trace.logtrace.ThreadLocalLogTrace;
 
 
-@Configuration
+@Configuration("logTraceConfig4")
 public class LogTraceConfig {
 
-    @Bean
+    @Bean(name="logTrace4")
     public LogTrace logTrace(){
         //singleton으로 등록함.
         return new ThreadLocalLogTrace();

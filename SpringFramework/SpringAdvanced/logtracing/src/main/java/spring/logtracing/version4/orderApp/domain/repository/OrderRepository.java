@@ -7,7 +7,7 @@ import spring.logtracing.version4.trace.TraceId;
 import spring.logtracing.version4.trace.TraceStatus;
 import spring.logtracing.version4.trace.logtrace.LogTrace;
 
-@Repository("orderRepositoryV3")
+@Repository("orderRepositoryV4")
 @RequiredArgsConstructor
 public class OrderRepository {
 

@@ -9,14 +9,14 @@ import spring.logtracing.version4.trace.TraceStatus;
 import spring.logtracing.version4.trace.logtrace.LogTrace;
 
 
-@RestController("orderController3")
+@RestController("orderController4")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
     private final LogTrace traceService;
 
-    @GetMapping("/v3/request")
+    @GetMapping("/v4/request")
     public String request(String itemId){
         //logging logic with controller
         TraceStatus status = null;
