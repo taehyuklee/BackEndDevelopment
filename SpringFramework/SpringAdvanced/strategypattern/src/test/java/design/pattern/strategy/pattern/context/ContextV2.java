@@ -1,6 +1,6 @@
 package design.pattern.strategy.pattern.context;
 
-import design.pattern.strategy.pattern.Strategy;
+import design.pattern.strategy.pattern.strategy.Strategy;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

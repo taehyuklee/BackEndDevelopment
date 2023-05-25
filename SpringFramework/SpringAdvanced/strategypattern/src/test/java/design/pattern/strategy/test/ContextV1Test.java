@@ -2,10 +2,10 @@ package design.pattern.strategy.test;
 
 import org.junit.jupiter.api.Test;
 
-import design.pattern.strategy.pattern.Strategy;
-import design.pattern.strategy.pattern.StrategyLogic1;
-import design.pattern.strategy.pattern.StrategyLogic2;
 import design.pattern.strategy.pattern.context.ContextV1;
+import design.pattern.strategy.pattern.strategy.Strategy;
+import design.pattern.strategy.pattern.strategy.StrategyLogic1;
+import design.pattern.strategy.pattern.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
