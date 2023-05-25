@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import design.pattern.strategy.pattern.context.ContextV2;
 import design.pattern.strategy.pattern.strategy.StrategyLogic1;
 import design.pattern.strategy.pattern.strategy.StrategyLogic2;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 public class ContextV2Test {
 
     /*
