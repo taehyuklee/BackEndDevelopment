@@ -1,7 +1,7 @@
-package design.pattern.proxy.version5.trace.template;
+package design.pattern.proxy.trace.template;
 
-import design.pattern.proxy.version5.trace.TraceStatus;
-import design.pattern.proxy.version5.trace.logtrace.LogTrace;
+import design.pattern.proxy.trace.TraceStatus;
+import design.pattern.proxy.trace.logtrace.LogTrace;
 
 
 //여기에 앞선 try catch로 logging 부분 넣었던 것에 대해 Template을 만든다.

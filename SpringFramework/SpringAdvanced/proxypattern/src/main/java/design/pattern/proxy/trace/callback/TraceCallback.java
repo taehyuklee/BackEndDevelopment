@@ -1,4 +1,4 @@
-package design.pattern.proxy.version5.trace.callback;
+package design.pattern.proxy.trace.callback;
 
 public interface TraceCallback<T> {
 

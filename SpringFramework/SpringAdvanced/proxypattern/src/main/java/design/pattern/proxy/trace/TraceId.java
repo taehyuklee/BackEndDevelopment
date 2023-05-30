@@ -1,4 +1,4 @@
-package design.pattern.proxy.version5.trace;
+package design.pattern.proxy.trace;
 
 import java.util.UUID;
 

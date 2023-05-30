@@ -1,7 +1,7 @@
-package design.pattern.proxy.version5.trace.logtrace;
+package design.pattern.proxy.trace.logtrace;
 
-import design.pattern.proxy.version5.trace.TraceId;
-import design.pattern.proxy.version5.trace.TraceStatus;
+import design.pattern.proxy.trace.TraceId;
+import design.pattern.proxy.trace.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
 
 

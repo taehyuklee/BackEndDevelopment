@@ -1,8 +1,8 @@
-package design.pattern.proxy.version5.trace.template;
+package design.pattern.proxy.trace.template;
 
-import design.pattern.proxy.version5.trace.TraceStatus;
-import design.pattern.proxy.version5.trace.callback.TraceCallback;
-import design.pattern.proxy.version5.trace.logtrace.LogTrace;
+import design.pattern.proxy.trace.TraceStatus;
+import design.pattern.proxy.trace.callback.TraceCallback;
+import design.pattern.proxy.trace.logtrace.LogTrace;
 
 public class TraceTemplate {
 
