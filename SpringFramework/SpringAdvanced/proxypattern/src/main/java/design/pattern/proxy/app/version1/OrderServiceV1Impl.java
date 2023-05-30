@@ -1,11 +1,11 @@
 package design.pattern.proxy.app.version1;
 
-public class OrderServiceV1Imple implements OrderServiceV1{
+public class OrderServiceV1Impl implements OrderServiceV1{
 
-    private final OrderRepositortyV1 orderRepositorty;
+    private final OrderRepositoryV1 orderRepositorty;
 
     
-    public OrderServiceV1Imple(OrderRepositortyV1 orderRepositorty){
+    public OrderServiceV1Impl(OrderRepositoryV1 orderRepositorty){
         this.orderRepositorty = orderRepositorty;
     }
 

@@ -1,8 +1,10 @@
-package design.pattern.proxy.app.version1;
+package design.pattern.proxy.app.version3;
 
-public class OrderRepositoryV1Imple implements OrderRepositortyV1 {
+import org.springframework.stereotype.Repository;
 
-    @Override
+@Repository
+public class OrderRepositoryV3 {
+
     public void save(String itemId) {
         //저장 로직
         if(itemId.equals("ex")){
@@ -19,5 +21,5 @@ public class OrderRepositoryV1Imple implements OrderRepositortyV1 {
             e.printStackTrace();
         }
     }
-    
+
 }
