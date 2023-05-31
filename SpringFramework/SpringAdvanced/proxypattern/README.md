@@ -80,7 +80,7 @@ v3 - 컴포넌트 스캔 대상에 기능 적용
 ### 결론 
 * 프록시를 사용하고 해당 프록시가 접근 제어가 목적이라면 프록시 패턴이고, 새로운 기능을 추가하는 것이 목적이라면 데코레이터 패턴이 된다.
 
-### 적용 사례
+### 적용 사례 1 (Interface기반의 Proxy를 받아와서 사용하는 Case)
 * v1_proxy.interface_proxy안에 각 oder, service, repository관련한 proxy객체들이 있고, 그리고 v1_proxy에 InterfaceProxyConfig.java는 AppV1Config.java와 마찬가지로 밖에서 Bean을 등록해주면서 조립해주는 역할을 한다. 이때 로그를 찍는것을 proxy 객체들이 하기때문에 빈 등록을 모두 Proxy객체로 해주도록 한다. 
 <br><br>
 
@@ -112,3 +112,55 @@ public class InterfaceProxyConfig {
 }
 
 ```
+
+<br><br>
+
+### 적용 사례 2 (구현체기반으로 Proxy를 받아와서 사용하는 Case)
+<br>
+
+* 클래스 기반 프록시 도입 지금까지 인터페이스를 기반으로 프록시를 도입했다. 그런데 자바의 다형성은 인터페이스를 구현하든, 아니면 클래스를 상속하든 상위 타입만 맞으면 다형성이 적용된다. 쉽게 이야기해서 인터페이스가 없어도 프록시를 만들수 있다는 뜻이다. 그래서 이번에는 인터페이스가 아니라 클래스를 기반으로 상속을 받아서 프록시를 만들어보겠다. <b>(출처: 김영한님 수업자료)</b>
+
+<br>
+
+```java
+public class TimeProxy extends ConcreteLogic{
+    
+    private ConcreteLogic concreteLogic;
+
+    public TimeProxy(ConcreteLogic concreteLogic){
+        this.concreteLogic = concreteLogic;
+    }
+
+    @Override
+    public String operation(){
+        log.info("TimeDecorator 실행");
+        long startTime = System.currentTimeMillis();
+
+        String realData = concreteLogic.operation();
+
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+        log.info("TimeDecorator 종료 resultTime={}ms", resultTime);
+
+        return realData;
+        
+    }
+
+}
+```
+
+<br><br>
+
+```java
+/*결과론적으로 상속받아서 사용한다 */
+@Test
+void addProxy(){
+    ConcreteLogic concreteLogic = new ConcreteLogic();
+    TimeProxy timeProxy = new TimeProxy(concreteLogic);
+    ConcreteClient client = new ConcreteClient(timeProxy); 
+    client.execute();        
+}
+```
+
+
+* Client에서는 구현체인 concreteLogic을 받아와야하지만, TimeProxy에서 ConcreteLogic을 상속받음으로써(다형성을 이용하여) TimeProxy의 부모가 ConcreteLogic형태를 띄게 됨. 위 사실을 이용해서 client에 timeProxy를 넣을수가 있게 된다. (인터페이스에서는 구현, 구현체에서는 상속을 이용하여 다형성을 이용) - <b>자바에서는 부모타입에 자식타입을 할당할수 있다. </b>
