@@ -19,5 +19,5 @@ public class RealSubject implements Subject{
             e.printStackTrace();
         }
     }
-    
+
 }
