@@ -23,8 +23,8 @@ bin/
 *.iml
 *.ipr
 *.bat
-*.jpg
-*.jpeg
+# *.jpg
+# *.jpeg
 *.png
 *.DS_Store
 *.class

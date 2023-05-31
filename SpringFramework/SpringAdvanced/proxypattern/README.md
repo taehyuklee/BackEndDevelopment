@@ -79,3 +79,36 @@ v3 - 컴포넌트 스캔 대상에 기능 적용
 
 ### 결론 
 * 프록시를 사용하고 해당 프록시가 접근 제어가 목적이라면 프록시 패턴이고, 새로운 기능을 추가하는 것이 목적이라면 데코레이터 패턴이 된다.
+
+### 적용 사례
+* v1_proxy.interface_proxy안에 각 oder, service, repository관련한 proxy객체들이 있고, 그리고 v1_proxy에 InterfaceProxyConfig.java는 AppV1Config.java와 마찬가지로 밖에서 Bean을 등록해주면서 조립해주는 역할을 한다. 이때 로그를 찍는것을 proxy 객체들이 하기때문에 빈 등록을 모두 Proxy객체로 해주도록 한다. 
+<br><br>
+
+```java
+@Configuration
+public class InterfaceProxyConfig {
+
+    //사실상 모두 Proxy를 넣어줘야 log를 찍고 반환해준다.
+
+    @Bean
+    public OrderControllerV1 orderController(LogTrace logTrace) { //Proxy를 반환해야한다
+        OrderControllerV1Impl target = new OrderControllerV1Impl(orderService(logTrace)); //proxy에 넣어줄 실제 target 구현체
+        return new OrderControllerInterfaceProxy(target, logTrace); //여기서 Impl에서도 Proxy를 호출해줘야 한다.
+    }
+
+
+    @Bean
+    public OrderServiceV1 orderService(LogTrace logTrace) {
+        OrderServiceV1Impl target = new OrderServiceV1Impl(orderRepository(logTrace)); //proxy에 넣어줄 실제 target 구현체
+        return new OrderServiceInterfaceProxy(target, logTrace); //proxy를 넣어준다
+    }
+
+    @Bean
+    public OrderRepositoryV1 orderRepository(LogTrace logTrace) {
+        OrderRepositoryV1Impl target = new OrderRepositoryV1Impl(); //proxy에 넣어줄 실제 target 구현체
+        return new OrderRepositoryInterfaceProxy(target, logTrace); //proxy를 넣어준다
+    }
+
+}
+
+```
