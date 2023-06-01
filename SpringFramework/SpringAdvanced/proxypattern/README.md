@@ -217,7 +217,7 @@ public class OrderControllerConcreteProxy extends OrderControllerV2 {
 <br><br>
 
 * 따라서, 내부적으로 super(매개변수)를 통해 상속받은 기능을 사용하는 것이 아니라, 다형성만을 위해 상속받고, 밖에서 target은 injection받아 사용한다. (Interface Proxy패턴과 일치함)
-
+    * 항상 프록시는 프록시가 호출할 target대상이 있어야 한다.
 
 <br><br>
 김영한님 강의 자료에서
@@ -239,3 +239,85 @@ public class OrderControllerConcreteProxy extends OrderControllerV2 {
 
 * 여태까지 예제에 의하면, 코드를 안건드리고 부가기능을 추가하는건 좋았는데, 만약 클래스가 100개라면 똑같은 Proxy객체를 100개 만들어야 한다는 한계점이 있다
     * -> 이후에 동적 프록시 기술을 이용해 같은 기능의 Proxy를 원하는 클래스 모두에 적용해보고자 한다.
+
+
+## DynamicProxy
+* 동적프록세에 관련된 패키지는 test -> jdkdynmaic에 있다.
+
+```java
+    @Test
+    void reflection0(){
+
+        Hello target = new Hello();
+
+        //공통 로직1 시작
+        log.info("start");
+        String result1 = target.callA();
+        log.info("result={}", result1);
+        //공통 로직1 종료
+
+
+        //공통 로직2 시작
+        log.info("start");
+        String result2 = target.callB();
+        log.info("result={}", result2);
+        //공통 로직2 종료
+
+    }
+```
+* 위의 코드에서 log.info앞뒤는 template method 또는 전략패턴을 통해서 따로 뺄수 있다고해보자, 하지만 target.callA()의 경우 target의 Class가 인터페이스를 통해서 나뉘는 구현체도 아니고 하나의 Class내의 다른 method인데, 이걸 어떻게 공통 로직으로 뺄수 있을까? 이미 method마다 이름이 callA(), callB()로 박혀있는데 자바 리플렉션 기술을 이용하면 된다.
+
+* class의 메타정보를 통해서 method를 추상화해서 공통화가 가능하다.
+
+<br>
+jdkdynamic 패키지 안에 보면 AImpl, BImpl과 관련해서 프록시를 각각 만들지 않고 공통 프록시를 하나만 동적으로 만들어 수행하는 내용을 담고 있다.
+
+```java
+@Slf4j //해당 InvoactionHandler는 Interface만 사용가능하다.
+public class TimeInvocationHandler implements InvocationHandler{
+
+    private final Object target; //항상 프록시는 Proxy가 호출할 대상이 있어야 한다
+
+    public TimeInvocationHandler(Object target){
+        this.target = target;
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        log.info("TimeProxy 실행");
+        long startTime = System.currentTimeMillis();
+
+        method.invoke(target, args); //method에 인수들 넘기는건 args로 한다 (어떤 method를 수행할지는 어떻게 알수 있어?)
+
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+        log.info("TimeProxy 종료 resultTime={}", resultTime);
+        return null;
+    }
+    
+}
+
+```
+<br>
+
+```java
+@Test
+void dynamicA(){
+    AInterface target = new AImpl();
+    TimeInvocationHandler handler = new TimeInvocationHandler(target); //실제 호출 대상을 Proxy에 넣어주는 역할
+
+    Object proxy = Proxy.newProxyInstance(AInterface.class.getClassLoader(), new Class[]{AInterface.class}, handler); //동적으로 proxy객체가 생성된다.
+    
+    //AInterface를 기반으로 만들어진다 (InvocationHandler를 이용해서 proxy객체가 생성된다. (인터페이스))
+    AInterface proxyA = (AInterface) Proxy.newProxyInstance(AInterface.class.getClassLoader(), new Class[]{AInterface.class}, handler); 
+    /*Interface가 아니면 java.lang.IllegalArgumentException: design.pattern.proxy.jdkdynamic.code.AImpl is not an interface 해당 에러가 뜬다 */
+
+    proxyA.call();
+    log.info("targetClass={}", target.getClass());
+    log.info("proxyClass={}", proxy.getClass()); //proxyClass=class jdk.proxy2.$Proxy8 동적 프록시
+}
+```
+<br>
+내가 그린 그림을 생각해보며 위의 코드를 따라가보자.
+
+* 결과적으로 프록시 클래스를 수 없이 만들어야 하는 문제를 해결하는 동시에 부가 기능 로직도 하나의 클래스에 모아서 단일 책임 원칙(SRP)도 지킬수 있게 되었다.
