@@ -1,5 +1,7 @@
 ## 프록세 패턴관련해서 배우고 적용해보는 패키지
 
+* main에는 실제 MVC pattern에 어떻게 적용했는지를 보게 될 것이고, test패키지에서는 각 패턴에 대한 예제를 다루게 된다.
+
 예제는 크게 3가지 상황으로 만든다.
 v1 - 인터페이스와 구현 클래스 - 스프링 빈으로 수동 등록
 v2 - 인터페이스 없는 구체 클래스 - 스프링 빈으로 수동 등록
@@ -164,3 +166,76 @@ void addProxy(){
 
 
 * Client에서는 구현체인 concreteLogic을 받아와야하지만, TimeProxy에서 ConcreteLogic을 상속받음으로써(다형성을 이용하여) TimeProxy의 부모가 ConcreteLogic형태를 띄게 됨. 위 사실을 이용해서 client에 timeProxy를 넣을수가 있게 된다. (인터페이스에서는 구현, 구현체에서는 상속을 이용하여 다형성을 이용) - <b>자바에서는 부모타입에 자식타입을 할당할수 있다. </b>
+
+<br><br>
+
+```java
+public class OrderControllerConcreteProxy extends OrderControllerV2 {
+
+    private final OrderControllerV2 target; //상속 받았는데 굳이 이렇게 주입받는 이유는 뭐지?
+    private final LogTrace logTrace;
+    
+    public OrderControllerConcreteProxy(OrderControllerV2 target, LogTrace logTrace) {
+        super(null);
+        this.target = target;
+        this.logTrace = logTrace;
+      
+    }
+
+    @Override
+    public String request(String itemId) {
+        TraceStatus status = null;
+        
+        try{
+            status = logTrace.begin("OrderController.request()");
+
+            String result = target.request(itemId); //실제 target의 로직
+
+            logTrace.end(status);
+
+            return result;
+
+        } catch (Exception e){
+            logTrace.exception(status, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public String noLog() {
+        return target.noLog();
+    }
+    
+}
+```
+
+<br>
+
+* 중요 포인트! <br>
+    * 위와 같이 상속받았으면, 상속받은 기능을 그대로 사용하면 되는데, 굳이 target을 따로 Injection받아서 Proxy기능을 추가하게 된다. 그 이유는 무엇일까?
+    OOP에서 5원칙인 DIP에 의하면 밖에서 Dependency를 주입해줘야 한다. 즉, 내부적으로 서로의 Dependency를 걸면 안된다. 이에 따라 구현체임에도 불구하고 다형성을 이용하기 위해 상속을 받은거고, 만약 상속받은 기능을 사용한다면, 내부적으로 super(매개변수)를 통해 상속받은 자식클래스만의 구현체가 생겨버리게 된다. 즉, dependency가 걸리게 된다.
+<br><br>
+
+* 따라서, 내부적으로 super(매개변수)를 통해 상속받은 기능을 사용하는 것이 아니라, 다형성만을 위해 상속받고, 밖에서 target은 injection받아 사용한다. (Interface Proxy패턴과 일치함)
+
+
+<br><br>
+김영한님 강의 자료에서
+
+* 인터페이스 기반 프록시 vs 클래스 기반 프록시
+1. 인터페이스가 없어도 클래스 기반으로 프록시를 생성할 수 있다.
+클래스 기반 프록시는 해당 클래스에만 적용할 수 있다. 인터페이스 기반 프록시는 인터페이스만 같으면 모든 곳에 적용할 수 있다.
+
+* 클래스 기반 프록시는 상속을 사용하기 때문에 몇가지 제약이 있다.
+1. 부모 클래스의 생성자를 호출해야 한다.(앞서 본 예제)
+2. 클래스에 final 키워드가 붙으면 상속이 불가능하다.
+3. 메서드에 final 키워드가 붙으면 해당 메서드를 오버라이딩 할 수 없다.
+
+* 이렇게 보면 인터페이스 기반의 프록시가 더 좋아보인다. 맞다. 인터페이스 기반의 프록시는 상속이라는 제약에서 자유롭다. 프로그래밍 관점에서도 인터페이스를 사용하는 것이 역할과 구현을 명확하게 나누기때문에 더 좋다. 인터페이스 기반 프록시의 단점은 인터페이스가 필요하다는 그 자체이다. 인터페이스가 없으면 인터페이스 기반 프록시를 만들 수 없다.
+
+### 위의 자바 패턴으로의 프록시 패턴의 한계점 
+* 너무 많은 프록시 클래스 지금까지 프록시를 사용해서 기존 코드를 변경하지 않고, 로그 추적기라는 부가 기능을 적용할 수 있었다.
+그런데 <b>문제는 프록시 클래스를 너무 많이 만들어야 한다는 점이다.</b> 잘 보면 프록시 클래스가 하는 일은 LogTrace 를 사용하는 것인데, 그 로직이 모두 똑같다. 대상 클래스만 다를 뿐이다. 만약 적용해야 하는 대상 클래스가 100개라면 프록시 클래스도 100개를 만들어야한다. 프록시 클래스를 하나만 만들어서 모든 곳에 적용하는 방법은 없을까? 바로 다음에 설명할 동적 프록시 기술이 이 문제를 해결해준다.
+
+* 여태까지 예제에 의하면, 코드를 안건드리고 부가기능을 추가하는건 좋았는데, 만약 클래스가 100개라면 똑같은 Proxy객체를 100개 만들어야 한다는 한계점이 있다
+    * -> 이후에 동적 프록시 기술을 이용해 같은 기능의 Proxy를 원하는 클래스 모두에 적용해보고자 한다.
