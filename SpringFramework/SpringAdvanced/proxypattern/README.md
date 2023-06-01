@@ -321,3 +321,46 @@ void dynamicA(){
 내가 그린 그림을 생각해보며 위의 코드를 따라가보자.
 
 * 결과적으로 프록시 클래스를 수 없이 만들어야 하는 문제를 해결하는 동시에 부가 기능 로직도 하나의 클래스에 모아서 단일 책임 원칙(SRP)도 지킬수 있게 되었다.
+
+<br>
+
+```java
+@Configuration
+public class DynamicProxyBasicConfig {
+
+    //new Class[]{OrderServiceV1.class} 자바에서 배열 생성하는거 int[]{1,2,3} 이런식으로 하지 참.
+
+    @Bean
+    public OrderControllerV1 orderControllerV1(LogTrace logTrace){
+        OrderControllerV1 target = new OrderControllerV1Impl(orderServiceV1(logTrace));
+        LogTraceBasicHandler handler = new LogTraceBasicHandler(target, logTrace);
+        return (OrderControllerV1) Proxy.newProxyInstance(OrderControllerV1.class.getClassLoader(), new Class[]{OrderControllerV1.class}, handler); //proxy를 반환해준다
+    }
+
+    @Bean
+    public OrderServiceV1 orderServiceV1(LogTrace logTrace){
+        OrderServiceV1 target = new OrderServiceV1Impl(orderRepositoryV1(logTrace));
+        LogTraceBasicHandler handler = new LogTraceBasicHandler(target, logTrace);
+        return (OrderServiceV1) Proxy.newProxyInstance(OrderServiceV1.class.getClassLoader(), new Class[]{OrderServiceV1.class}, handler); //proxy를 반환해준다
+    }
+    
+    @Bean
+    public OrderRepositoryV1 orderRepositoryV1(LogTrace logTrace){
+        OrderRepositoryV1 target = new OrderRepositoryV1Impl();
+        LogTraceBasicHandler handler = new LogTraceBasicHandler(target, logTrace);
+        return (OrderRepositoryV1) Proxy.newProxyInstance(OrderRepositoryV1.class.getClassLoader(), new Class[]{OrderRepositoryV1.class}, handler); //proxy를 반환해준다
+    } 
+}
+
+```
+위의 Configuration과 같이 동적 프록시를 Bean에 주입해준다. 하지만 아직도 문제가 하나 남아있다. 바로 no-log method관련해서 Controller에 no-log 로그를 찍으면 안되는 method에도 동적 프록시가 일괄적으로 적용되는 문제가 있다. (모든 메소드에 다 적용된다) <br>
+<br>
+
+```java
+@GetMapping("/v1/request")
+String request(@RequestParam("itemId") String itemId); //interface에는 꼭 RequestParam이름을 명시적으로 적시한다 (Compile때 문제가 생길수 있음)
+
+@GetMapping("/v1/no-log")
+String noLog();
+```
+모든 method에 적용되는 것을 어떻게 해서 하나만 적용할지에 대해서도 알아봐야 한다.
