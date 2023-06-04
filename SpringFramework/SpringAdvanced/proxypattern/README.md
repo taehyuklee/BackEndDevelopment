@@ -364,3 +364,12 @@ String request(@RequestParam("itemId") String itemId); //interface에는 꼭 Req
 String noLog();
 ```
 모든 method에 적용되는 것을 어떻게 해서 하나만 적용할지에 대해서도 알아봐야 한다.
+
+
+<br><br>
+
+### test Package내부에 cglib package는 cglib만으로 구현체 클래스 프록시를 만들었던 케이스임.
+- 위 cglib은 순수 Code Generation Library로 구현한 케이스 이다. (Spring내부에서 OpenSource인 CGLIB을 가져왔다. import org.springframework임.)
+- Interface, class 모두를 통틀어서 하나의 method로 추상화할수 없을까? 어떨때는 MethgoInterceptor를 어떨때는 InvocationHandler를 좀 자동으로 하나로 추상화될수 있는게 있으면 좋겠다. 이에 따라 Spring에서는 Advice로 추상화 해 놓았다. (이때도 MethodInterceptor가 사용되는데 이때는 org.aopalliance.intercept에서 꺼내와야 한다)
+
+

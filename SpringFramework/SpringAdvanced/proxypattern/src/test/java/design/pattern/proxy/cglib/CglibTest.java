@@ -29,4 +29,7 @@ public class CglibTest {
 
     //cglib은 제약이 몇 가지 존재한다 -> 구현체에 대해 만들기때문에 기본생성자와 getter, setter등과 같은 것들이 있어야하고, final keyword가 있으면 오버라이딩이나 상속받지 못한다.
     //프록시 팩토리를 이용하면 좀 더 편하게 적용가능하다 (위의 단점을 극복할수 있다)
+
+    //만약 실제로 Interface와 class에 대한 proxy를 만들때는 InvocationHandler와 MethodInterceptor를 같이 써야 하는건가?
+    //그리고 Interface쓸때는 알아서 InvocationHandler를 쓰고 Service에 Proxy를만들때는 MethodInterceptor를 자동으로 쓰게할수 없을까?
 }
