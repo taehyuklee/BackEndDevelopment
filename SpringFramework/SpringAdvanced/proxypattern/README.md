@@ -240,7 +240,9 @@ public class OrderControllerConcreteProxy extends OrderControllerV2 {
 * 여태까지 예제에 의하면, 코드를 안건드리고 부가기능을 추가하는건 좋았는데, 만약 클래스가 100개라면 똑같은 Proxy객체를 100개 만들어야 한다는 한계점이 있다
     * -> 이후에 동적 프록시 기술을 이용해 같은 기능의 Proxy를 원하는 클래스 모두에 적용해보고자 한다.
 
+<br>
 
+---
 ## DynamicProxy
 * 동적프록세에 관련된 패키지는 test -> jdkdynmaic에 있다.
 
@@ -368,8 +370,14 @@ String noLog();
 
 <br><br>
 
+---
 ### test Package내부에 cglib package는 cglib만으로 구현체 클래스 프록시를 만들었던 케이스임.
 - 위 cglib은 순수 Code Generation Library로 구현한 케이스 이다. (Spring내부에서 OpenSource인 CGLIB을 가져왔다. import org.springframework임.)
 - Interface, class 모두를 통틀어서 하나의 method로 추상화할수 없을까? 어떨때는 MethgoInterceptor를 어떨때는 InvocationHandler를 좀 자동으로 하나로 추상화될수 있는게 있으면 좋겠다. 이에 따라 Spring에서는 Advice로 추상화 해 놓았다. (이때도 MethodInterceptor가 사용되는데 이때는 org.aopalliance.intercept에서 꺼내와야 한다)
 
 
+---
+## 용어 정리
+- 포인트컷( Pointcut ): 어디에 부가 기능을 적용할지, 어디에 부가 기능을 적용하지 않을지 판단하는 필터링 로직이다. 주로 클래스와 메서드 이름으로 필터링 한다. 이름 그대로 어떤 포인트(Point)에 기능을 적용할지 하지 않을지 잘라서(cut) 구분하는 것이다. <br>
+- 어드바이스( Advice ): 이전에 본 것 처럼 프록시가 호출하는 부가 기능이다. 단순하게 프록시 로직이라 생각하면 된다. <br>
+- 어드바이저( Advisor ): 단순하게 하나의 포인트컷과 하나의 어드바이스를 가지고 있는 것이다. 쉽게 이야기해서 포인트컷1 + 어드바이스1이다.
