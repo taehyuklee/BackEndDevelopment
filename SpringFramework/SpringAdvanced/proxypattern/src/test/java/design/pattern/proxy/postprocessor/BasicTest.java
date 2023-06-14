@@ -63,7 +63,7 @@ public class BasicTest {
         }
     }
 
-    @Slf4j
+    @Slf4j //BeanPostProcessr를 구현함으로써 빈 후처리기를 생성할수 있다.
     static class AtoBPostProcessor implements BeanPostProcessor{
 
         @Override

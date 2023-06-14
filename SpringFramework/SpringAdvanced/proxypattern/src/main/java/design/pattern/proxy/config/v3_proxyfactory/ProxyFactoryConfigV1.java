@@ -17,6 +17,9 @@ import design.pattern.proxy.config.v3_proxyfactory.advice.LogTraceAdvice;
 import design.pattern.proxy.trace.logtrace.LogTrace;
 import lombok.extern.slf4j.Slf4j;
 
+/*
+ * 각 구현체또는 인터페이스마다 ProxyFactory를 통해서 객체를 만드는 역할을 하는 class파일이다. (V1은 Interface를 대상으로 함)
+ */
 @Slf4j
 @Configuration
 public class ProxyFactoryConfigV1 {

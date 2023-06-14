@@ -24,3 +24,8 @@
 
 4. advisor - Spring이 제공해주는 Advisor에 대해서 기술함. ProxyFactory에 Advisor, Advice, Pointcut을 어떻게 넣고 어떻게 사용하는지. (스프링이 CGLIB, Jdkdynmaic을 이용함.)
 <br>
+
+------
+### 빈 후처리기
+
+1. postprocessor - 빈 후처리기에 대한 설명및 사용법, 적용 방법에 대해서 설명한다.

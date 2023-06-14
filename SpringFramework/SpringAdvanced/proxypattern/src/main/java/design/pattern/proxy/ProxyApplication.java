@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-import design.pattern.proxy.config.v2_dynamicproxy.handler.DynamicProxyFilterConfig;
-import design.pattern.proxy.config.v3_proxyfactory.ProxyFactoryConfigV1;
-import design.pattern.proxy.config.v3_proxyfactory.ProxyFactoryConfigV2;
+import design.pattern.proxy.config.v4_postprocessor.BeanPostProcessorConfig;
 import design.pattern.proxy.trace.logtrace.LogTrace;
 import design.pattern.proxy.trace.logtrace.ThreadLocalLogTrace;
 
@@ -15,7 +13,8 @@ import design.pattern.proxy.trace.logtrace.ThreadLocalLogTrace;
 // @Import({AppV1Config.class, AppV2Config.class}) 
 // @Import(DynamicProxyFilterConfig.class)
 // @Import(ProxyFactoryConfigV1.class)
-@Import(ProxyFactoryConfigV2.class)
+// @Import(ProxyFactoryConfigV2.class)
+@Import(BeanPostProcessorConfig.class)
 @SpringBootApplication(scanBasePackages = "design.pattern.proxy.app.version3")
 public class ProxyApplication {
 
