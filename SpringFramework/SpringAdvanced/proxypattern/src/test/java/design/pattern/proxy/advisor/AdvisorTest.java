@@ -31,7 +31,7 @@ public class AdvisorTest {
          * -> 이것도 결국은   DefaultPointcutAdvisor advisor= new  DefaultPointcutAdvisor(Pointcut.TRUE, new TimeAdvice()); 이렇게 되어 있다. 안에 까보면
          */
 
-        proxyFactory.addAdvisor(advisor);
+        proxyFactory.addAdvisor(advisor); //pointcut이 True인 Advisor가 들어간다.
         ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
 
         proxy.save();
@@ -63,7 +63,7 @@ public class AdvisorTest {
     void adviosrTest3(){
         ServiceInterface target = new ServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory(target);
-        NameMatchMethodPointcut pointCut = new NameMatchMethodPointcut();
+        NameMatchMethodPointcut pointCut = new NameMatchMethodPointcut(); //스프링이 제공하는 가장 간단한 Pointcut중 하나
         pointCut.setMappedName("save");
         DefaultPointcutAdvisor advisor= new  DefaultPointcutAdvisor(pointCut, new TimeAdvice()); //Advisor는 하나의 PointerCut과 Advice를 가지고 있다.
 

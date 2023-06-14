@@ -7,6 +7,7 @@ import org.springframework.cglib.proxy.MethodProxy;
 
 import lombok.extern.slf4j.Slf4j;
 
+//이게 Proxy 객체임
 @Slf4j
 public class TimeMethodInterceptor implements MethodInterceptor{
 
