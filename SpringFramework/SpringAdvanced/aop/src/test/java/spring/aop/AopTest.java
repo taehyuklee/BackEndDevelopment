@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Import;
 import lombok.extern.slf4j.Slf4j;
 import spring.aop.order.OrderRepository;
 import spring.aop.order.OrderService;
-import spring.aop.order.aop.AspectV5Order;
 import spring.aop.order.aop.AspectV6Advice;
 
 @Slf4j
