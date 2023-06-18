@@ -10,11 +10,12 @@ import org.springframework.context.annotation.Import;
 import lombok.extern.slf4j.Slf4j;
 import spring.aop.order.OrderRepository;
 import spring.aop.order.OrderService;
-import spring.aop.order.aop.AspectV1;
+import spring.aop.order.aop.AspectV2;
 
 @Slf4j
 @SpringBootTest
-@Import(AspectV1.class) //Import하면 Spring Baen으로 자동 등록된다.
+// @Import(AspectV1.class) //Import하면 Spring Baen으로 자동 등록된다.
+@Import(AspectV2.class)
 public class AopTest {
     
     @Autowired
