@@ -15,6 +15,7 @@ import spring.aop.member.MemberService;
 @Import(AtAnnotationTest.AtAnnotationTestAspect.class)
 @SpringBootTest
 public class AtAnnotationTest {
+    //Annotation이 있는 곳에 Pointcut으로 적용하는 방법
 
     @Autowired
     MemberService memberService;

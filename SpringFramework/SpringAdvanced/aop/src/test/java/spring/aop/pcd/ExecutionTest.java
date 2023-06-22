@@ -12,6 +12,7 @@ import spring.aop.member.MemberServiceImpl;
 
 @Slf4j
 public class ExecutionTest {
+    //Execution으로 pointcut
     
     AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
     Method helloMethod;
