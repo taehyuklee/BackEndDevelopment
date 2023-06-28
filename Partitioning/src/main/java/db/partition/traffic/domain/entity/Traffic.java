@@ -3,8 +3,12 @@ package db.partition.traffic.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 public class Traffic {
 
