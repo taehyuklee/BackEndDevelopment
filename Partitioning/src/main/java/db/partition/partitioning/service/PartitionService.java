@@ -1,8 +1,10 @@
 package db.partition.partitioning.service;
 
+import db.partition.partitioning.utility.PartitionUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,13 +37,11 @@ public class PartitionService {
     public void partitionTraffic(){
 
         LocalDate currentDate = LocalDate.now();
-        String currentStringDate = currentDate.atStartOfDay().toString();
-        log.info("currentDate:{}", currentStringDate);
+        String startDate = PartitionUtility.getStartOfMonth(currentDate);
+        String endDate = PartitionUtility.getEndOfMonth(currentDate);
+        String partionName = "집에 가고싶다";
 
-        String startDate = "2023-10-01";
-        String endDate = "2023-10-31";
-
-        String statesment = "create table public.\"TRAFFIC_202310\" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
+        String statesment = "create table public.\"TRAFFIC_ "+partionName+" \" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
 
         log.info("새로운 Partition Table 생성을 시작합니다.");
         template.execute(statesment);
@@ -50,7 +50,7 @@ public class PartitionService {
 
     public void deletePartition(){
 
-        String statesment = "drop table if exists public.\"TRAFFIC_202310\" ";
+        String statesment = "drop table if exists public.\"TRAFFIC_집에 가고싶다\"";
 
         log.info("새로운 Partition Table 삭제를 시작합니다.");
         template.execute(statesment);
