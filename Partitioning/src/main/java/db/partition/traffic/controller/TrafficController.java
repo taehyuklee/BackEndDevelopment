@@ -3,19 +3,16 @@ package db.partition.traffic.controller;
 import db.partition.partitioning.service.PartitionService;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/traffic")
+@RequestMapping("/v1")
 public class TrafficController {
 
     private final PartitionService partitionService;
 
-    @GetMapping("/traffic")
+    @PostMapping("/traffic")
     public void createTable(){
         partitionService.createTraffic();
     }
@@ -25,12 +22,12 @@ public class TrafficController {
         partitionService.deleteTraffic();
     }
 
-    @GetMapping("/newpartition")
+    @GetMapping("/traffic")
     public void partition(){
         partitionService.partitionTraffic();
     }
 
-    @GetMapping("/droppart")
+    @PutMapping("/traffic")
     public void drop(){
         partitionService.deletePartition();
     }

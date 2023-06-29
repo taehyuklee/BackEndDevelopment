@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,10 @@ public class PartitionService {
     }
 
     public void partitionTraffic(){
+
+        LocalDate currentDate = LocalDate.now();
+        String currentStringDate = currentDate.atStartOfDay().toString();
+        log.info("currentDate:{}", currentStringDate);
 
         String startDate = "2023-10-01";
         String endDate = "2023-10-31";
