@@ -1,4 +1,4 @@
-package db.partition.traffic.controller;
+package db.partition.partitioning.controller;
 
 import db.partition.partitioning.service.PartitionService;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/traffic")
-public class TrafficController {
+@RequestMapping("/partition")
+public class PartitionController {
 
     private final PartitionService partitionService;
 
