@@ -36,3 +36,10 @@ spring:
       validation-timeout: 4000
       max-lifetime: 600000
     type: com.zaxxer.hikari.HikariDataSource
+
+common:
+  db: mongo
+  partition:
+    period-ref: day
+    day-period: 3
+    month-period: 1

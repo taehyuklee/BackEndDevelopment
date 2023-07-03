@@ -1,6 +1,5 @@
 package db.partition.traffic.controller;
 
-import db.partition.partitioning.service.PartitionService;
 import db.partition.traffic.domain.dto.TrafficDto;
 import db.partition.traffic.service.TrafficService;
 import lombok.RequiredArgsConstructor;

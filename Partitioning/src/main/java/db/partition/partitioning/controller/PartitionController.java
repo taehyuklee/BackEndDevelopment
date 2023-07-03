@@ -1,6 +1,6 @@
 package db.partition.partitioning.controller;
 
-import db.partition.partitioning.service.PartitionService;
+import db.partition.partitioning.service.PartitionApiService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/partition")
 public class PartitionController {
 
-    private final PartitionService partitionService;
+    private final PartitionApiService partitionService;
 
     @GetMapping("/traffic")
     public void createTable(){
@@ -25,13 +25,23 @@ public class PartitionController {
         partitionService.deleteTraffic();
     }
 
-    @GetMapping("/newpartition")
+    @GetMapping("/monthly-new-partition")
     public void partition(){
-        partitionService.partitionTraffic();
+        partitionService.partitionMonthlyTraffic();
     }
 
-    @GetMapping("/droppart")
+    @GetMapping("/monthly-droppart")
     public void drop(){
-        partitionService.deletePartition();
+        partitionService.deleteMonthlyPartition();
+    }
+
+    @GetMapping("/daily-new-partition")
+    public void partitionDaily(){
+        partitionService.partitionDailyTraffic();
+    }
+
+    @GetMapping("/daily-droppart")
+    public void dropDaily(){
+        partitionService.deleteDailyPartition();
     }
 }
