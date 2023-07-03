@@ -18,7 +18,7 @@ public class PartitionService {
 
     public void createTraffic(){
 
-        String statesment = "create table public.\"TRAFFIC\" (id bigint, startTime timeStamp, endTime timeStamp, contents varchar(50)) partition by range (endtime)";
+        String statesment = "create table public.\"TRAFFIC\" (\"ID\" bigint not NULL , \"START_TIME\" timeStamp, \"END_TIME\" timeStamp, \"CONTENTS\" varchar(50), PRIMARY KEY (\"ID\", \"END_TIME\")) partition by range (\"END_TIME\")";
 
         log.info("새로운 Partition Table 생성을 시작합니다.");
         template.execute(statesment);
@@ -39,9 +39,9 @@ public class PartitionService {
         LocalDate currentDate = LocalDate.now();
         String startDate = PartitionUtility.getStartOfMonth(currentDate);
         String endDate = PartitionUtility.getEndOfMonth(currentDate);
-        String partionName = "집에 가고싶다";
+        String partionName = PartitionUtility.getPartitionName(currentDate);
 
-        String statesment = "create table public.\"TRAFFIC_ "+partionName+" \" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
+        String statesment = "create table public.\"TRAFFIC_"+partionName+"\" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
 
         log.info("새로운 Partition Table 생성을 시작합니다.");
         template.execute(statesment);

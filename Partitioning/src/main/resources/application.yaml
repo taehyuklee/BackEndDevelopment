@@ -19,6 +19,9 @@ spring:
     open-in-view: false
     hibernate:
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: db.partition.config.NamingStrategy
       ddl-auto: none
 
 

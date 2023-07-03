@@ -14,7 +14,7 @@ public class PartitionUtility {
     }
 
     public static String getPartitionName(LocalDate localDate){
-        return localDate.format(DateTimeFormatter.ofPattern("yyyymm")).toString();
+        return localDate.toString().replace("-", "");
     }
 
 }
