@@ -41,5 +41,5 @@ common:
   db: mongo
   partition:
     period-ref: day
-    day-period: 3
+    day-period: 2 #day
     month-period: 1

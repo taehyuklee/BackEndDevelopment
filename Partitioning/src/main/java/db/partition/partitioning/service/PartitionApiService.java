@@ -20,6 +20,7 @@ public class PartitionApiService{
 
     private final PartitionUtility partitionUtility;
 
+
     /*Create Partitioned-table*/
     @Transactional
     public void createTraffic(){

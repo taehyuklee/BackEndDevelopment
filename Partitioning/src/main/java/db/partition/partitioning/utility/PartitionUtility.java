@@ -34,7 +34,7 @@ public class PartitionUtility {
     }
 
     public String getDelPartitionMonthName(LocalDate localDate){
-        log.info("period:{}", monthPeriod);
+        log.info("period:{}", monthPeriod); //202308 -3
         String partitionNm = localDate.minusMonths(monthPeriod+1).toString().replace("-", "");
         return partitionNm.substring(0, partitionNm.length()-2);
     }
