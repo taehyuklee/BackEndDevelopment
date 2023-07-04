@@ -1,9 +1,6 @@
 package db.partition;
 
 import db.partition.partitioning.aop.proxy.RetryAspect;
-import db.partition.partitioning.service.DailyPartitionService;
-import db.partition.partitioning.service.MonthlyPartitionService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
