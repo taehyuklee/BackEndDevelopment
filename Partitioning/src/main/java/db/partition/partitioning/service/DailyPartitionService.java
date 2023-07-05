@@ -28,7 +28,7 @@ public class DailyPartitionService implements Partition {
     private final PartitionUtility partitionUtility;
 
     @Retry
-    @Scheduled(cron="0 0 0 * * *")
+    @Scheduled(cron="0 0/1 * * * *")
     @Override
     @Transactional
     public void generatePartition() throws SQLException {
@@ -38,7 +38,7 @@ public class DailyPartitionService implements Partition {
         String partitionName = partitionUtility.getPartitionDailyName(currentDate); //20230703
 
         //query 만들기
-        String statement = "create table public.part_collec_trafc_'"+partitionName+"' partition of public.\"COLEC_TRAFC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
+        String statement = "create table if not exists public.part_collec_trafc_"+partitionName+" partition of public.\"COLEC_TRAFC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
 
         log.info("새로운 Collection Partition Table 생성을 시작합니다.");
         template.execute(statement);
@@ -46,14 +46,14 @@ public class DailyPartitionService implements Partition {
     }
 
     @Retry
-    @Scheduled(cron="0 0 0 * * *")
+    @Scheduled(cron="0 0/1 * * * *")
     @Override
     @Transactional
     public void dropPartition() {
         String partionName = partitionUtility.getDelPartitionDailyName(LocalDate.now());
 
         //query 만들기
-        String statesment = "drop table public.\"TRAFFIC_"+partionName+"\"";
+        String statesment = "drop table if exists public.part_collec_trafc_"+partionName+"";
 
         log.info("새로운 Partition Table 삭제를 시작합니다.");
         template.execute(statesment);

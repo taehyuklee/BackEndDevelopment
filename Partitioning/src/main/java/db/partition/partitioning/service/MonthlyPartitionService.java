@@ -36,7 +36,7 @@ public class MonthlyPartitionService {
         String partitionName = partitionUtility.getPartitionMonthName(currentDate);
 
         //query 만들기
-        String statement = "create table public.\"TRAFFIC_"+partitionName+"\" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
+        String statement = "create table if not exists public.\"TRAFFIC_"+partitionName+"\" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
 
         log.info("새로운 Partition Table 생성을 시작합니다.");
         template.execute(statement);
@@ -52,7 +52,7 @@ public class MonthlyPartitionService {
         log.info(partitionName);
 
         //query 만들기
-        String statement = "drop table public.\"TRAFFIC_"+partitionName+"\"";
+        String statement = "drop table if exists public.\"TRAFFIC_"+partitionName+"\"";
 
         log.info("새로운 Partition Table 삭제를 시작합니다.");
         template.execute(statement);
