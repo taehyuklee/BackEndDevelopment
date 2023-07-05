@@ -21,43 +21,41 @@ import java.time.LocalDate;
         ,havingValue = "month"
         ,matchIfMissing = false
 )
-public class MonthlyPartitionService  implements Partition {
+public class MonthlyPartitionService {
 
     private final JdbcTemplate template;
     private final PartitionUtility partitionUtility;
 
     @Retry
     @Scheduled(cron="0 0 0 0 * *")
-    @Override
     @Transactional
-    public void generatePartition() {
+    void generatePartition() {
         LocalDate currentDate = LocalDate.now();
         String startDate = partitionUtility.getStartOfMonth(currentDate);
         String endDate = partitionUtility.getEndOfMonth(currentDate);
-        String partionName = partitionUtility.getPartitionMonthName(currentDate);
+        String partitionName = partitionUtility.getPartitionMonthName(currentDate);
 
         //query 만들기
-        String statesment = "create table public.\"TRAFFIC_"+partionName+"\" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
+        String statement = "create table public.\"TRAFFIC_"+partitionName+"\" partition of public.\"TRAFFIC\" for values from ('" + startDate + "') to ('"  +endDate + "')";
 
         log.info("새로운 Partition Table 생성을 시작합니다.");
-        template.execute(statesment);
+        template.execute(statement);
         log.info("Partition Table 생성이 종료되었습니다.");
     }
 
     @Retry
     @Scheduled(cron="0 0 0 0 * *")
-    @Override
     @Transactional
-    public void dropPartition() {
+    void dropPartition() {
         LocalDate currentDate = LocalDate.now();
-        String partionName = partitionUtility.getDelPartitionMonthName(currentDate);
-        log.info(partionName);
+        String partitionName = partitionUtility.getDelPartitionMonthName(currentDate);
+        log.info(partitionName);
 
         //query 만들기
-        String statesment = "drop table public.\"TRAFFIC_"+partionName+"\"";
+        String statement = "drop table public.\"TRAFFIC_"+partitionName+"\"";
 
         log.info("새로운 Partition Table 삭제를 시작합니다.");
-        template.execute(statesment);
+        template.execute(statement);
         log.info("Partition Table 삭제가 종료되었습니다.");
     }
 }
