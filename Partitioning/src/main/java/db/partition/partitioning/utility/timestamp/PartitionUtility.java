@@ -1,4 +1,4 @@
-package db.partition.partitioning.utility;
+package db.partition.partitioning.utility.timestamp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @Slf4j
-@Component
+//@Component
 public class PartitionUtility {
 
     @Value("${common.partition.day-period}")
@@ -55,9 +55,7 @@ public class PartitionUtility {
     }
 
     public String getEndOfMonth(LocalDate localDate){
-        LocalDateTime medTime = localDate.plusMonths(monthPeriod+2).withDayOfMonth(1).atStartOfDay(); //LocalDate to LocalDateTime
-        Long endFinalTime = Timestamp.valueOf(medTime).getTime(); //timeStamp로 바꿔주기
-        return endFinalTime.toString();
+        return localDate.plusMonths(monthPeriod+2).withDayOfMonth(1).toString();
     }
 
     public String getPartitionMonthName(LocalDate localDate){

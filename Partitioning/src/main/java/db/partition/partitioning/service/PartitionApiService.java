@@ -26,9 +26,10 @@ public class PartitionApiService{
     public void createTraffic(){
 
         String statesment = "create table public.\"TRAFFIC\" (\"ID\" serial not NULL , \"START_TIME\" timeStamp, \"END_TIME\" timeStamp, \"CONTENTS\" varchar(50), PRIMARY KEY (\"ID\", \"END_TIME\")) partition by range (\"END_TIME\")";
+        String colecStatement = "create table public.\"COLEC_TRAFC\" (\"ID\" serial not NULL , \"START_TIME\" timeStamp, \"END_TIME\" timeStamp, \"CONTENTS\" varchar(50), \"END_TRAFC_TIME\" bigint , PRIMARY KEY (\"ID\", \"END_TRAFC_TIME\")) partition by range (\"END_TRAFC_TIME\")";
 
         log.info("새로운 Partition Table 생성을 시작합니다.");
-        template.execute(statesment);
+        template.execute(colecStatement);
         log.info("Partition Table 생성이 종료되었습니다.");
     }
 
