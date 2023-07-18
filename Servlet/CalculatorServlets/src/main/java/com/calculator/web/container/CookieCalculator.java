@@ -85,6 +85,10 @@ public class CookieCalculator extends HttpServlet {
 			//Client에 보내기 위해 Cookie를 response에 넣어준다
 			response.addCookie(valueCookie);
 			response.addCookie(opCookie);
+			
+			
+			//redirection해주는 page
+			response.sendRedirect("CookieCalc.html");
 		}
 
 		
