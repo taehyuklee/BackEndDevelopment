@@ -2,3 +2,5 @@
 
 CalculatorServlets 패키지의 경우 - Servlet Context에 대한 개념을 설명하기 위한 패키지입니다. <br>
 (Application, Session, Cookie에 대한 개념 설명 및 Tomcat에서 어떻게 사용되는지를 알아보았다)
+
+이후 JSP와 view model에 대해서 알아본다.
