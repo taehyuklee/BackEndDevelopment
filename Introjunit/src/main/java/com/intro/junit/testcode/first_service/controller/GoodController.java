@@ -1,6 +1,6 @@
 package com.intro.junit.testcode.first_service.controller;
 
-import com.intro.junit.testcode.first_service.domain.GoodEntity;
+import com.intro.junit.testcode.first_service.domain.entity.GoodEntity;
 import com.intro.junit.testcode.first_service.service.GoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/first/service/")
 @RequiredArgsConstructor
-public class TestController {
+public class GoodController {
 
     private GoodService goodService;
 

@@ -1,4 +1,4 @@
-package com.intro.junit.testcode.first_service.domain;
+package com.intro.junit.testcode.first_service.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
