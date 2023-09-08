@@ -1,17 +1,22 @@
 package com.intro.junit.mockito.test;
 
+import com.intro.junit.testcode.first_service.service.GoodService;
 import com.intro.junit.testcode.first_service.utility.GoodUtility;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class MockitoIntro {
+
+    @InjectMocks
+    GoodService testTarget;
 
     //Stubbing & verfiy test
     @Test
@@ -41,7 +46,7 @@ public class MockitoIntro {
 
     @Test
     public void verfiyTest(){
-        System.out.println(anyInt());
+        System.out.println("anyInt()");
     }
 
     @Test
@@ -60,6 +65,19 @@ public class MockitoIntro {
          * The used MockMaker SubclassByteBuddyMockMaker does not support the creation of static mocks
          * If you do not apply dependency of mockito-inline, you will meet above error message
          */
+    }
+
+    @Test
+    public void staticMethodAsItIs(){
+        /*
+        if static method used in target Mock class without mocking static method. (passed)
+        Ultimately, the null pointer exception occurred because there was a mock object inside RsaUtility,
+        not because the static method itself threw a null pointer exception.
+        It happened within a portion of its internal logic.
+         */
+
+        testTarget.useUtility();
+
     }
 
 
