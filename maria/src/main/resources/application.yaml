@@ -1,0 +1,16 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: database
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/maria
+    username: "*******"
+    password: "*******"
+
+  jpa:
+    hibernate:
+      ddl-auto: update #create? ?? ? ?????? ?? Table? ??????.
