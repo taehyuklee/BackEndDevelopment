@@ -3,13 +3,13 @@ server:
 
 spring:
   application:
-    name: database
+    name: database2
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/maria
     username: "taylee"
-    password: "*********"
+    password: "new1234!"
 
   jpa:
     hibernate:
