@@ -8,7 +8,7 @@ import java.util.*;
 @Repository
 public class UserRepository {
 
-    private Map<Long, UserInfo> memoryDb = new HashMap<>();
+    private final Map<Long, UserInfo> memoryDb = new HashMap<>();
 
     private long id=0;
 
