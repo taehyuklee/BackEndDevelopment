@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/maria
     username: taylee
-    password: new1234!
+    password: "*********"
 
   jpa:
     hibernate:
