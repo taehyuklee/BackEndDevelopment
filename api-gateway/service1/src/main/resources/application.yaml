@@ -1,23 +1,10 @@
-server:
-  port: 9090
-
 spring:
-  application:
-    name: database1
+  config:
+    import: optional:configserver:http://localhost:9093
+  cloud:
+    config:
+      name: encrypted #yaml파일 이름 - 앞 부분
+      profile: test #yaml파일 이름 - 뒷 부분
 
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3306/maria
-    username: taylee
-    password: new1234!
-
-  jpa:
-    hibernate:
-      ddl-auto: update #create? ?? ? ?????? ?? Table? ??????.
-
-eureka:
-  client:
-    register-with-eurka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#encrypt:
+#  key: taehyuk's-key #받아온 yaml을 decrypt할때 사용됨.

@@ -33,6 +33,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	//Spring Cloud config client
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
 	//Discovery Server의 Client로 추가해줘야 한다.
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
