@@ -12,6 +12,6 @@ The main functional units of the backend system are listed in this repo. <br>
 
 <b>4.</b> monogoDB JPA configuration & CRUD <br>
 
-<b>5.</b> Login Function (including Authentication, Authorization) <br>
+<b>5.</b> Login Function (including Authentication, Authorization) - 권한 관리 영역 포함 <br>
 
 <b>6.</b> DesignPattern (templateMethod, proxy etc) <br>
