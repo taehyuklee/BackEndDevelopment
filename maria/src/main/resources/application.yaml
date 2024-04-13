@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/maria
-    username: taylee
+    username: taylee #그냥 막 사용하는 username, password
     password: new1234!
 
   jpa:
