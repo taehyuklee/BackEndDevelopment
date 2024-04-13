@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:9093
+  cloud:
+    config:
+      name: encrypted #yaml파일 이름 - 앞 부분
+      profile: test #yaml파일 이름 - 뒷 부분
+
+encrypt:
+  key: taehyuk's-key #받아온 yaml을 decrypt할때 사용됨.

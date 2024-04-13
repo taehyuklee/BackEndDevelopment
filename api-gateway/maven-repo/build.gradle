@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'mock'
+group = 'nexus'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -17,8 +17,18 @@ configurations {
 	}
 }
 
+// nexus repository
 repositories {
-	mavenCentral()
+	//mavenCentral()
+	maven {
+		url "https://www.taylee.link/repository/test/" // Nexus repository url
+		allowInsecureProtocol true // http 통신 OK~
+		credentials {
+			username = 'admin'
+			password = 'new1234!'
+		}
+
+	}
 }
 
 dependencies {
@@ -26,16 +36,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-	implementation "jakarta.xml.bind:jakarta.xml.bind-api:3.0.0"
-	implementation "com.sun.xml.bind:jaxb-impl:3.0.0"
-
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-
-	testCompileOnly 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
-
 }
 
 tasks.named('test') {

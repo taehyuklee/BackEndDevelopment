@@ -1,8 +1,7 @@
-package mock.server.user.controller;
+package maria.practice.usersvc.controller;
 
-import jakarta.xml.bind.JAXBException;
-import mock.server.user.domain.entity.UserInfo;
-import mock.server.user.service.UserService;
+import maria.practice.usersvc.domain.entity.UserInfo;
+import maria.practice.usersvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +26,5 @@ public class UserController {
     @GetMapping("/user/all")
     public List<UserInfo> findAll(){
         return userService.findAll();
-    }
-
-    @GetMapping("/user/xml")
-    public String xmlConvert(@RequestParam(value="userId") long id) throws JAXBException {
-        return userService.xmlConvert(id);
     }
 }
