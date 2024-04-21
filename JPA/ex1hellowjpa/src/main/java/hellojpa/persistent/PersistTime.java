@@ -149,7 +149,7 @@ public class PersistTime {
 
             //영속성에서 빼줘야 1차캐시말고 DB에서 조회하는 것을 확인해볼 수 있다. (따라서 detach해서 DB에 쿼리날아가서 잘 가지고 오는지 확인)
             // 이 부분에서 확인하고 싶은건 commit을하지 않더라도 transaction구간에서 Query를 날려 DB에 반영해주는건가?
-            em.detach(member2);
+            em.detach(member2); //영속성 컨텍스트에서 떼버린 상태를 준영속상태라 한다.
             
             Member targeMember = em.find(Member.class, 2L);
             System.out.println(targeMember);
