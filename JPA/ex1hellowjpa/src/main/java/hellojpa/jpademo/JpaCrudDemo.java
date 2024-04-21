@@ -1,6 +1,6 @@
 package hellojpa.jpademo;
 
-import hellojpa.Member;
+import hellojpa.entity.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
