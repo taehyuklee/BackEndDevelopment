@@ -67,7 +67,8 @@ public class PersistTime {
      * [영속성 컨테이너 안에 '쓰기지연 SQL저장소' 관련 내용]
      * 1차캐시에 최초로 영속화한 그 시점의 객체 상태를 스냅샷으로 찍어 놓고 후에 flush하는 시점에 스냅샷과 비교하여 변경된 것들에 대해
      * 비교를 하여 update쿼리를 만들어 SQL저장소에 UPDATE Query를 넣고 DB에 SQL을 날려준다. (변경감지)
-     * flush라는 것이 SQL저장소의 SQL들을 DB에 반영해주는 것을 의미한다 (내부 캐시나, SQL저장소를 비우는걸 의미하는게 아님)
+     * flush라는 것이 SQL저장소의 SQL들을 DB에 반영해주는 것을 의미한다 (내부 캐시나를 비우는걸 의미하는게 아님)
+     * -> 여기서 쓰기지연 SQL저장소에 있는 Query들만 쭉 flush해서 없어진다.
      *
      * * flush 느낌상 씻어내는거같아서 비우는 느낌이 날수도 있음
      * 그리고, 쓰기지연은 sql저장소 덕분에 가능해진것. (한 번에 쿼리를 날려주니까 flush할때)
@@ -89,7 +90,7 @@ public class PersistTime {
         tx.begin(); //database transaction을 시작한다
 
         try{
-            // Database에서 ID가1인 member를 조회한다
+            // Database에서 ID가1인 member를 조회한다 (조회는 자동으로 flush가 되나보다)
             Member memeber = em.find(Member.class, 1L);
             // 이렇게 찾아온 member는 1차캐시 엔티티 및 상태가 저장될 것이다. (영속화된다)
 
@@ -103,7 +104,6 @@ public class PersistTime {
             //em.persist(memeber);
 
             System.out.println("====================================");
-            /* commit 할때 Query가 두 번 날아간다. */
             tx.commit(); //트랜잭션 commit시점이전에 flush가 된다 (AUTO상태일때)
 
         } catch (Exception e){
@@ -141,12 +141,24 @@ public class PersistTime {
             em.persist(member2);
             em.persist(member3);
 
-
-            
+            //flush하면 DB에 Query가 낭라간다. (원래 아래 절취선 기준으로 commit하면 날아갔었잖아)
+            em.flush();
 
             System.out.println("====================================");
-            /* commit 할때 Query가 두 번 날아간다. */
-            tx.commit(); //transactino commit
+            em.flush(); //여기서 의문 1차캐시는 flush해도 그대로 남아있는데, 쓰기지연 SQL저장소는?
+
+            //영속성에서 빼줘야 1차캐시말고 DB에서 조회하는 것을 확인해볼 수 있다. (따라서 detach해서 DB에 쿼리날아가서 잘 가지고 오는지 확인)
+            // 이 부분에서 확인하고 싶은건 commit을하지 않더라도 transaction구간에서 Query를 날려 DB에 반영해주는건가?
+            em.detach(member2);
+            
+            Member targeMember = em.find(Member.class, 2L);
+            System.out.println(targeMember);
+
+            System.out.println("====================================");
+            //commit을하지 않으면 DB에 Query가 날아가도 최종반영되지는 않는다
+            //Transaction범위 안에서는 Query를 날려 순간 반영해주지만, commit을 하지 않으면 rollback시켜버린다.
+            // (확인해봄)
+            //tx.commit();
 
         } catch (Exception e){
             tx.rollback();
