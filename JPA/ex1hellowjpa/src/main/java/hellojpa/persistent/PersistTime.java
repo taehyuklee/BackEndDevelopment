@@ -103,6 +103,11 @@ public class PersistTime {
              * */
             //em.persist(memeber);
 
+            //[동일성 보장 관련 내용]
+            // stack메모리에 있는 instance의 주소가 같다 즉 같은 객체에 대한 주소의 동일함은 유지된다.
+            System.out.println(memeber == em.find(Member.class, 1L));
+
+
             System.out.println("====================================");
             tx.commit(); //트랜잭션 commit시점이전에 flush가 된다 (AUTO상태일때)
 
