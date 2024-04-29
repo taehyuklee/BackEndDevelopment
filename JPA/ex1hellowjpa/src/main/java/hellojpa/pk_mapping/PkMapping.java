@@ -25,10 +25,11 @@ public class PkMapping {
         tx.begin(); //database transaction을 시작한다
 
         try{
-
             Person person = new Person();
-
             //여기서는 GeneratedValue를 썼기때문에 직접 id에 setting해주면 안된다.
+            person.setPersonNm("Lee");
+
+            em.persist(person);
 
             System.out.println("====================================");
             tx.commit(); //transactino commit

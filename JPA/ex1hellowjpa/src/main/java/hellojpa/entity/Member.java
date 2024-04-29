@@ -10,6 +10,7 @@ public class Member {
 
     // PK Mapping한거
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //만약 내가 어플리케이션에서 속성을 name으로 쓰고싶은데 DB의 컬럼 이름이 username이라면? @Column을 사용하면 된다.

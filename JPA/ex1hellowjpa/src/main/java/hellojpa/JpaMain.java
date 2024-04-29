@@ -1,22 +1,21 @@
 package hellojpa;
 
-import hellojpa.jpademo.JpaCrudDemo;
-import hellojpa.persistent.PersistTime;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import java.util.List;
+import hellojpa.pk_mapping.PkMapping;
 
 public class JpaMain {
 
-    static JpaCrudDemo jpaCrudDemo = new JpaCrudDemo();
-    static PersistTime persistTime = new PersistTime();
+    //JPA의 전반적인 내용을 봄
+    //static JpaCrudDemo jpaCrudDemo = new JpaCrudDemo();
+
+    //영속성을 알아보기 위한 객체
+    //static PersistTime persistTime = new PersistTime();
+
+    //Pk mapping관련 설명 내용
+    static PkMapping pkMapping = new PkMapping();
 
     public static void main(String[] args) {
 
-        persistTime.dirtyCheck();
+        pkMapping.pkMapping();
 
     }
 
