@@ -2,7 +2,7 @@ package hellojpa.entity;
 
 import javax.persistence.*;
 
-
+//기본 SEQUENCE
 @Entity
 public class Person {
 
