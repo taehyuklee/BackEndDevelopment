@@ -1,5 +1,6 @@
 package hellojpa.pk_mapping;
 
+import hellojpa.entity.IdentityMember;
 import hellojpa.entity.Person;
 import hellojpa.entity.SeqMember;
 
@@ -79,7 +80,7 @@ public class PkMapping {
     }
 
 
-    public static String identityStrategyPkMapping (){
+    public static String identityStrategyPkMapping(){
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
@@ -94,13 +95,15 @@ public class PkMapping {
         tx.begin(); //database transaction을 시작한다
 
         try{
-            SeqMember member = new SeqMember();
+            IdentityMember member = new IdentityMember();
             //여기서는 GeneratedValue를 썼기때문에 직접 id에 setting해주면 안된다.
             member.setPersonNm("Lee");
 
-            em.persist(member);
-
             System.out.println("====================================");
+            em.persist(member);
+            System.out.println("memberId is: " + member.getId());
+            System.out.println("====================================");
+
             tx.commit(); //transactino commit
 
         } catch (Exception e){

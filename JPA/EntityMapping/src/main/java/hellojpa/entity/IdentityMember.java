@@ -17,6 +17,8 @@ public class IdentityMember {
 
     public IdentityMember() {  }
 
+    public Long getId() { return id; }
+
     public String getPersonNm() {
         return memberNm;
     }
