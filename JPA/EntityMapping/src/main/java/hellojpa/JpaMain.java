@@ -15,7 +15,9 @@ public class JpaMain {
 
     public static void main(String[] args) {
 
-        pkMapping.identityStrategyPkMapping();
+        pkMapping.seqStrategyPkMapping();
+
+//        pkMapping.identityStrategyPkMapping();
 
     }
 

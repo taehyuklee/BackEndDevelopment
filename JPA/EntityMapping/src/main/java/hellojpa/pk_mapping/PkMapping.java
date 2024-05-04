@@ -64,8 +64,9 @@ public class PkMapping {
             //여기서는 GeneratedValue를 썼기때문에 직접 id에 setting해주면 안된다.
             member.setPersonNm("Lee");
 
+            System.out.println("====================================");
             em.persist(member);
-
+            System.out.println("member id: " + member.getId());
             System.out.println("====================================");
             tx.commit(); //transactino commit
 

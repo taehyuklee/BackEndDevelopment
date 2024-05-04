@@ -19,6 +19,8 @@ public class SeqMember {
 
     public SeqMember() {  }
 
+    public Long getId() { return id; }
+
     public String getPersonNm() {
         return memberNm;
     }
