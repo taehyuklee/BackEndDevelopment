@@ -27,7 +27,7 @@ public class MockitoIntro {
 
         //stubbing here using by when & then methods
         Mockito.when(mockedList.get(0)).thenReturn("first");
-        Mockito.when(mockedList.get(1)).thenThrow(new RuntimeException());
+//        Mockito.when(mockedList.get(1)).thenThrow(new RuntimeException());
 
         //following prints "first"
         System.out.println(mockedList.get(0));
@@ -41,6 +41,8 @@ public class MockitoIntro {
         System.out.println(mockedList.get(100));
 
         Mockito.verify(mockedList).get(0); //basically, verify method check how many mock object was called? (default is one time call)
+
+        System.out.println(Thread.currentThread());
 
     }
 
@@ -61,6 +63,8 @@ public class MockitoIntro {
 
         assertEquals(result, GoodUtility.parsingMethod("a b c"));
 
+        System.out.println(Thread.currentThread());
+
         /**
          * The used MockMaker SubclassByteBuddyMockMaker does not support the creation of static mocks
          * If you do not apply dependency of mockito-inline, you will meet above error message
@@ -77,6 +81,8 @@ public class MockitoIntro {
          */
 
         testTarget.useUtility();
+
+        System.out.println(Thread.currentThread());
 
     }
 
