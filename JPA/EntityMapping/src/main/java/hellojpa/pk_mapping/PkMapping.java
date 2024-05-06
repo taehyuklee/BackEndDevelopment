@@ -60,14 +60,49 @@ public class PkMapping {
         tx.begin(); //database transaction을 시작한다
 
         try{
-            SeqMember member = new SeqMember();
+            SeqMember member1 = new SeqMember();
             //여기서는 GeneratedValue를 썼기때문에 직접 id에 setting해주면 안된다.
-            member.setPersonNm("Lee");
+            member1.setPersonNm("Lee");
+
+            SeqMember member2 = new SeqMember();
+            //여기서는 GeneratedValue를 썼기때문에 직접 id에 setting해주면 안된다.
+            member2.setPersonNm("Kim");
+
+            SeqMember member3 = new SeqMember();
+            //여기서는 GeneratedValue를 썼기때문에 직접 id에 setting해주면 안된다.
+            member3.setPersonNm("Jo");
 
             System.out.println("====================================");
-            em.persist(member);
-            System.out.println("member id: " + member.getId());
+            em.persist(member1);
+            System.out.println("member id: " + member1.getId());
+
+            em.persist(member2);
+            System.out.println("member id: " + member2.getId());
+
+            em.persist(member3);
+            System.out.println("member id: " + member3.getId());
             System.out.println("====================================");
+            /*
+            * allocation이 50이라고 생각하면 처음 Table이 create 되었을때
+            * DB next Value = 1 이고 current Seq = 1이 된다.
+            * 
+            * 여기서 영속화하 한 번 더 일어날때 (다른 entity에 대해)
+            * next Value와 current seq가 같아지므로 next value를 가져와야 한다
+            *
+            * (allocation 50일때)
+            * DB next value = 51이 되고 current Seq = 2가 된다.
+            * -- 다음 Entity 영속화 insert --
+            * DB next value = 51(유지) current Seq = 3이 된다.
+            *
+            * 쭉 올라가다가
+            *
+            * DB next value = 51 과 current Seq = 51이 되고 그 다음 Entity가 영속화(insert)가 될때
+            * DB next value = 101이 되고 current Seq = 52가 된다.
+            * 
+            * 만약 allocation=1이라면, 매번 next value를 call하는 API가 나가게 될 것이다.
+            *
+            * */
+
             tx.commit(); //transactino commit
 
         } catch (Exception e){
