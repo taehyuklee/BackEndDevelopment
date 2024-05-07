@@ -1,8 +1,6 @@
 package hellojpa.pk_mapping;
 
 import hellojpa.entity.IdentityMember;
-import hellojpa.entity.Person;
-import hellojpa.entity.SeqMember;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
