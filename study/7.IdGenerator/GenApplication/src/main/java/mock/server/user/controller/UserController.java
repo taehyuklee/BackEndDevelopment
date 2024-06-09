@@ -29,8 +29,4 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/user/xml")
-    public String xmlConvert(@RequestParam(value="userId") long id) throws JAXBException {
-        return userService.xmlConvert(id);
-    }
 }

@@ -1,0 +1,13 @@
+server:
+    port: 9005
+    shutdown: graceful
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/
+      database: RxTest
+
+serverSpec:
+  serverId: 1
+  dataCenterId: 1

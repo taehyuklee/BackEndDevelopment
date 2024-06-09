@@ -17,24 +17,46 @@ configurations {
 	}
 }
 
+// nexus repository
 repositories {
-	mavenCentral()
+
+	flatDir {
+		dirs 'libs' // JAR 파일이 있는 디렉토리명 입력
+	}
+
+	//mavenCentral()
+	maven {
+		url "https://www.taylee.link/repository/my-maven-repo-group/" // Nexus repository url
+		allowInsecureProtocol true // http 통신 OK~
+		credentials {
+			username = 'admin'
+			password = 'new1234!'
+		}
+	}
 }
 
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	implementation
+
 	implementation "jakarta.xml.bind:jakarta.xml.bind-api:3.0.0"
 	implementation "com.sun.xml.bind:jaxb-impl:3.0.0"
+//	implementation 'taehyuk.custom:Id-generator:1.0.0'
+
+	implementation  files("libs/generator.jar")
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	testCompileOnly 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
+
+//	testCompileOnly 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
+//	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12' // 테스트 의존성 추가
+
 
 }
 
