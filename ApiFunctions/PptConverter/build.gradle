@@ -29,6 +29,16 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+//	implementation group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '4.1.2'
+//	implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
+	implementation 'org.apache.poi:poi:5.2.5'
+	implementation 'org.apache.poi:poi-ooxml:5.2.5'
+
+//	implementation 'org.apache.poi:poi:5.2.3'
+//	implementation 'org.apache.poi:poi-ooxml:5.2.3'
+
+
 }
 
 tasks.named('test') {
