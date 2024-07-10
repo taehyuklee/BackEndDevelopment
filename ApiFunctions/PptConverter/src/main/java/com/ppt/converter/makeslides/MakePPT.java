@@ -3,15 +3,9 @@ package com.ppt.converter.makeslides;
 import com.ppt.converter.makeslides.functions.MakeFunctions;
 import com.ppt.converter.makeslides.table_props.ImageProperties;
 import com.ppt.converter.makeslides.table_props.TableProperties;
-import org.apache.poi.sl.usermodel.TableCell;
-import org.apache.poi.sl.usermodel.TextParagraph;
-import org.apache.poi.sl.usermodel.VerticalAlignment;
-import org.apache.poi.ss.formula.functions.T;
-import org.apache.poi.xslf.usermodel.*;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Service
