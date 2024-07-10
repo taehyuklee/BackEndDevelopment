@@ -212,7 +212,8 @@ public class MakeFunctions {
         XSLFPictureShape picture = slide.createPicture(pd);
 
         // Set position and size of the picture
-        picture.setAnchor(new java.awt.Rectangle(100, 100, 400, 300));
+        Integer[] imagePos = imgProps.getImagePosition();
+        picture.setAnchor(new java.awt.Rectangle(imagePos[0], imagePos[1], imagePos[2], imagePos[3]));
 
     }
 

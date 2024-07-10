@@ -34,7 +34,8 @@ public class MakePPT extends MakeFunctions{
             //Image를 넣는다
             //이미지 경로파일을 가져온다, Specify the image file path
             String imagePath = "C:/Users/11464/Desktop/jmp pdf/jml기능.JPG";
-            ImageProperties imageProperties = new ImageProperties().setImgUrl(imagePath);
+            ImageProperties imageProperties = new ImageProperties()
+                    .setImgUrl(imagePath).setImagePosition(new Integer[] {100, 100, 400, 300});
             putImage(imageProperties, ppt, 1);
 
 

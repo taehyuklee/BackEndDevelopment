@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ImageProperties {
 
+    /* x, y, width, height */
     private Integer[] imagePosition;
 
     private String imgUrl;

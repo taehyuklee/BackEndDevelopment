@@ -11,8 +11,6 @@ public class ConverterApplication {
 	public static void main(String[] args) throws Exception {
 //		SpringApplication.run(ConverterApplication.class, args);
 
-
-
 		// 임의의 데이터로 테이블 채우기 (예시 데이터)
 		String[][] data = {
 				{"이름", "나이", "직업", "성별"},
