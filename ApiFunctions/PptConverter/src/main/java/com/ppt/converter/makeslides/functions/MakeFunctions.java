@@ -18,6 +18,20 @@ import java.util.List;
 @NoArgsConstructor
 public class MakeFunctions {
 
+    /***
+     * SaveFile
+     * @param savePath
+     */
+    public void saveFile(XMLSlideShow ppt, String savePath) throws IOException {
+        // 수정된 PowerPoint 파일 저장
+        FileOutputStream fos = new FileOutputStream(savePath);
+        ppt.write(fos);
+        fos.close();
+
+        ppt.close();
+        System.out.println("PowerPoint");
+    }
+
     /**
      * Slide instance를 내가 원하는 page숫자를 가지고 만들어주는 method
      **/
@@ -50,6 +64,9 @@ public class MakeFunctions {
     /**  특정 Slide에 createTable을 한다.
      *  pageIndex는 0부터시작합니다. powerpoint자체의
      *  page Index start from 0
+     * @param tableProps
+     * @param pptInstance
+     * @param pageIndex
      */
     public void createTableTargetPpt(TableProperties tableProps, XMLSlideShow pptInstance, int pageIndex){
 
@@ -111,8 +128,10 @@ public class MakeFunctions {
                 
                 // header column명 기입
                 /* getCell인자는 row, col순으로 되어 있다 */
-                pptTable.getCell(0,i).getTextParagraphs()
-                        .get(0).getTextRuns().get(0).setText(columnsNms[i]);
+                if(i<tableProps.getNumColumns()){
+                    pptTable.getCell(0,i).getTextParagraphs()
+                            .get(0).getTextRuns().get(0).setText(columnsNms[i]);
+                }
 
             }
 
@@ -128,8 +147,15 @@ public class MakeFunctions {
     }
 
 
-    //기존 Template을 가져와서 table에 mapping하는 방법
-    public void mappingTable(XSLFSlide slide, String[][] data){
+    /***
+     * 기존 Template
+     * @param pptInstance
+     * @param pageIndex
+     * @param data
+     */
+    public void mappingTable(XMLSlideShow pptInstance, int pageIndex, String[][] data){
+
+        XSLFSlide slide = pptInstance.getSlides().get(pageIndex);
 
         // 슬라이드에서 첫 번째 테이블 가져오기 (일반적으로 템플릿에는 하나의 테이블만 있을 것으로 가정)
         XSLFTable table = null;
@@ -145,56 +171,31 @@ public class MakeFunctions {
             return;
         }
 
-        int n=1, m=1;
+
         // 테이블에 데이터 채우기
         for (int i = 0; i < data.length; i++) {
-            XSLFTableRow row = (i < table.getNumberOfRows()) ? table.getRows().get(n) : table.addRow();
+            XSLFTableRow row = (i < table.getNumberOfRows()) ? table.getRows().get(i) : table.addRow();
 
             for (int j = 0; j < data[i].length; j++) {
 
-                XSLFTableCell cell = (j < row.getCells().size()) ? row.getCells().get(m) : row.addCell();
+                XSLFTableCell cell = (j < row.getCells().size()) ? row.getCells().get(j) : row.addCell();
 
-                m++;
-                if (cell.isMerged() || cell.getText() != null && !cell.getText().isEmpty()) {
-                    continue;
-                }
-
+//                if (cell.isMerged() || cell.getText() != null && !cell.getText().isEmpty()) {
+//                    continue;
+//                }
                 cell.setText(data[i][j]);
             }
-            n++;
-            m=0;
+
         }
-
-
-//        for(int i=0; i< data.length; i++){
-//
-//            for(int j=0; j<data[i].length; j++){
-//
-//                for(int n=0; j<table.getNumberOfRows(); n++){
-//
-//                    XSLFTableRow row = table.getRows().get(n);
-//
-//                    for(int m=0; m<row.getCells().size(); m++){
-//
-//                        XSLFTableCell cell = row.getCells().get(m);
-//                        if (cell.isMerged() || cell.getText() != null && !cell.getText().isEmpty()) {
-//                            continue;
-//                        }
-//
-//                        cell.setText(data[i][j]);
-//
-//                    }
-//
-//                }
-//
-//            }
-//        }
-
 
     }
 
     /***
-     * 이미지 삽입
+     * Image 삽입
+     * @param imgProps
+     * @param ppt
+     * @param pageIndex
+     * @throws Exception
      */
     public void putImage(ImageProperties imgProps, XMLSlideShow ppt, int pageIndex) throws Exception {
 
@@ -212,13 +213,6 @@ public class MakeFunctions {
 
         // Set position and size of the picture
         picture.setAnchor(new java.awt.Rectangle(100, 100, 400, 300));
-
-        // Save the presentation
-        FileOutputStream out = new FileOutputStream("C:/Users/11464/Desktop/output.pptx");
-        ppt.write(out);
-        out.close();
-
-        System.out.println("Presentation created successfully");
 
     }
 

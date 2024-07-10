@@ -11,8 +11,7 @@ public class ConverterApplication {
 	public static void main(String[] args) throws Exception {
 //		SpringApplication.run(ConverterApplication.class, args);
 
-		//이미지 경로파일을 가져온다, Specify the image file path
-		String imagePath = "C:/Users/11464/Desktop/jmp pdf/jml기능.JPG";
+
 
 		// 임의의 데이터로 테이블 채우기 (예시 데이터)
 		String[][] data = {
