@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Document
 @Accessors(chain=true)
-public class Url {
+public class CollectedUrl {
 
     @Id
     private String id;

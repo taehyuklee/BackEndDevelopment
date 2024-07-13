@@ -1,8 +1,7 @@
 package com.web.crawler.cralwer.service;
 
-import com.web.crawler.cralwer.domain.entity.Url;
-import com.web.crawler.cralwer.domain.repository.DomainRepository;
-import lombok.NoArgsConstructor;
+import com.web.crawler.cralwer.domain.entity.UnCollectedUrl;
+import com.web.crawler.cralwer.domain.repository.UnCollectedUrlRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,9 @@ public class CrawlingService extends HtmlParser{
 
     private HtmlDownloader htmlDownloader;
 
-    private final DomainRepository repository;
+    private final UnCollectedUrlRepository repository;
 
-    public void downAndParser(){
+    public void collectUrlInHtml(){
 
         String startUrl = "https://www.naver.com/";
 
@@ -29,9 +28,9 @@ public class CrawlingService extends HtmlParser{
         List<String> urlList = new ArrayList<>(urls);
 
         //List Url을 보기
-        List<Url> entityList = new ArrayList<>();
+        List<UnCollectedUrl> entityList = new ArrayList<>();
         for(String url : urlList){
-            Url urlEntity = new Url().setUrl(url).setCollected(true);
+            UnCollectedUrl urlEntity = new UnCollectedUrl().setUrl(url).setCollected(false);
             entityList.add(urlEntity);
         }
 

@@ -14,6 +14,6 @@ public class CrawlingController {
 
     @GetMapping("/go")
     public void downAndParser(){
-        crawlingService.downAndParser();
+        crawlingService.collectUrlInHtml();
     }
 }
