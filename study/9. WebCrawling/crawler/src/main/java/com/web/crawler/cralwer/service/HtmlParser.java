@@ -27,13 +27,15 @@ public class HtmlParser {
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
+
                     String inputLine;
+
                     while ((inputLine = in.readLine()) != null) {
                         content.append(inputLine).append("\n");
                     }
                 }
             } else {
-                System.out.println("HTTP 요청 실패. 응답 코드: " + responseCode);
+                System.out.println("HTTP Fail. responseCode: " + responseCode);
             }
             connection.disconnect();
         } catch (IOException e) {

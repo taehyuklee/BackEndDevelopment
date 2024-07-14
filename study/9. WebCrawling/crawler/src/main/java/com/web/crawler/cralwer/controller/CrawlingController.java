@@ -1,6 +1,7 @@
 package com.web.crawler.cralwer.controller;
 
 import com.web.crawler.cralwer.service.CrawlingService;
+import com.web.crawler.cralwer.service.RecursiveCollectThread;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CrawlingController {
 
     private final CrawlingService crawlingService;
+
+
 
     @GetMapping("/startUrl")
     public void startUrl(@RequestParam(name="startUrl") String startUrl){
@@ -26,6 +29,15 @@ public class CrawlingController {
     @GetMapping("/collectUrl")
     public void saveUrl(){
         crawlingService.saveCollectedUrl();
+    }
+
+    @GetMapping("/startCollect")
+    public void go(){
+
+        Thread thread = new RecursiveCollectThread(crawlingService);
+
+        thread.start();
+
     }
 
 }

@@ -40,35 +40,36 @@ public class CrawlingService extends HtmlParser{
 
         UnCollectedUrl unCollectedUrl = unCollectedRepository.findTop1ByOrderByCretDtDesc();
 
-        String targetUrl = unCollectedUrl.getUrl();
+        if(unCollectedUrl != null){
 
-        String htmlContents = downloadHTML(targetUrl);
+            String targetUrl = unCollectedUrl.getUrl();
 
-        //jsoup을 이용해서 내부 url을 모두 가져온다.
-        Set<String> urls = extractURLs(htmlContents);
-        System.out.println(urls);
-        List<String> urlList = new ArrayList<>(urls);
+            String htmlContents = downloadHTML(targetUrl);
 
-        //List Url을 보기
-        List<UnCollectedUrl> entityList = new ArrayList<>();
-        for(String url : urlList){
-            UnCollectedUrl urlEntity = new UnCollectedUrl().setUrl(url).setCollected(false);
-            entityList.add(urlEntity);
+            //jsoup을 이용해서 내부 url을 모두 가져온다.
+            Set<String> urls = extractURLs(htmlContents);
+            List<String> urlList = new ArrayList<>(urls);
+
+            //List Url을 보기
+            List<UnCollectedUrl> entityList = new ArrayList<>();
+            for(String url : urlList){
+                UnCollectedUrl urlEntity = new UnCollectedUrl().setUrl(url).setCollected(false);
+                entityList.add(urlEntity);
+            }
+
+            //중복 제거 Logic넣어야함
+            unCollectedRepository.saveAll(entityList);
+
+
+            //collectedUrl로 바꿔줘야한다.
+            CollectedUrl collectedUrl = new CollectedUrl();
+            unCollectedUrl.setCollected(true); //collect여부 true로 바꿔주고
+            BeanUtils.copyProperties(unCollectedUrl, collectedUrl, "id");
+            collectRepository.save(collectedUrl);
+            //수집됐으니까 이제 지워준다
+            unCollectedRepository.delete(unCollectedUrl);
+
         }
-
-        //중복 제거 Logic넣어야함.
-        
-        unCollectedRepository.saveAll(entityList);
-
-
-
-        //collectedUrl로 바꿔줘야한다.
-        CollectedUrl collectedUrl = new CollectedUrl();
-        unCollectedUrl.setCollected(true); //collect여부 true로 바꿔주고
-        BeanUtils.copyProperties(unCollectedUrl, collectedUrl, "id");
-        collectRepository.save(collectedUrl);
-        //수집됐으니까 이제 지워준다
-        unCollectedRepository.delete(unCollectedUrl);
 
     }
 
