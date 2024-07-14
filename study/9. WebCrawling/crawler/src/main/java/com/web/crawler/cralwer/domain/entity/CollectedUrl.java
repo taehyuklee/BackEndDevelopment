@@ -1,6 +1,7 @@
 package com.web.crawler.cralwer.domain.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.*;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Document
+@Document(collation = "collected_url")
 @Accessors(chain=true)
 public class CollectedUrl {
 
