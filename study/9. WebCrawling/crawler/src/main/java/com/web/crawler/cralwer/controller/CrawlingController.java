@@ -14,8 +14,13 @@ public class CrawlingController {
     private final CrawlingService crawlingService;
 
     @GetMapping("/startUrl")
-    public void downAndParser(@RequestParam(name="startUrl") String startUrl){
-        crawlingService.collectUrlInHtml(startUrl);
+    public void startUrl(@RequestParam(name="startUrl") String startUrl){
+        crawlingService.registerStartUrl(startUrl);
+    }
+
+    @GetMapping("/recursiveCollect")
+    public void downAndParser(){
+        crawlingService.collectUrlInHtml();
     }
 
     @GetMapping("/collectUrl")

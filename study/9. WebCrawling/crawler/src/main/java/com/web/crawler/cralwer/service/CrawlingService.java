@@ -25,9 +25,24 @@ public class CrawlingService extends HtmlParser{
     private final CollectedUrlRepository collectRepository;
 
     @Transactional
-    public void collectUrlInHtml(String startUrl){
+    public void registerStartUrl(String startUrl){
 
-        String htmlContents = downloadHTML(startUrl);
+        UnCollectedUrl unCollectedUrl = new UnCollectedUrl();
+
+        unCollectedUrl.setUrl(startUrl).setCollected(false);
+
+        unCollectedRepository.save(unCollectedUrl);
+
+    }
+
+    @Transactional
+    public void collectUrlInHtml(){
+
+        UnCollectedUrl unCollectedUrl = unCollectedRepository.findTop1ByOrderByCretDtDesc();
+
+        String targetUrl = unCollectedUrl.getUrl();
+
+        String htmlContents = downloadHTML(targetUrl);
 
         //jsoup을 이용해서 내부 url을 모두 가져온다.
         Set<String> urls = extractURLs(htmlContents);
@@ -45,8 +60,20 @@ public class CrawlingService extends HtmlParser{
         
         unCollectedRepository.saveAll(entityList);
 
+
+
+        //collectedUrl로 바꿔줘야한다.
+        CollectedUrl collectedUrl = new CollectedUrl();
+        unCollectedUrl.setCollected(true); //collect여부 true로 바꿔주고
+        BeanUtils.copyProperties(unCollectedUrl, collectedUrl, "id");
+        collectRepository.save(collectedUrl);
+        //수집됐으니까 이제 지워준다
+        unCollectedRepository.delete(unCollectedUrl);
+
     }
 
+
+    //Test용 API
     @Transactional
     public void saveCollectedUrl(){
 
