@@ -5,8 +5,10 @@ import com.web.crawler.cralwer.domain.entity.UnCollectedUrl;
 import com.web.crawler.cralwer.domain.repository.CollectedUrlRepository;
 import com.web.crawler.cralwer.domain.repository.UnCollectedUrlRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ public class CrawlingService extends HtmlParser{
 
     private final CollectedUrlRepository collectRepository;
 
+    @Transactional
     public void collectUrlInHtml(){
 
         String startUrl = "https://taehyuklee.tistory.com/";
@@ -46,10 +49,23 @@ public class CrawlingService extends HtmlParser{
 
     }
 
+    @Transactional
     public void saveCollectedUrl(){
 
         UnCollectedUrl url = unCollectedRepository.findTop1ByOrderByCretDtDesc();
+
+        //여기서 url관련 중복체크 해줘야 한다.
+        url.setCollected(true);
+
+        //collectedUrl로 바꿔줘야한다.
+        CollectedUrl collectedUrl = new CollectedUrl();
+        BeanUtils.copyProperties(url, collectedUrl, "id");
+        unCollectedRepository.delete(url);
+
+        collectRepository.save(collectedUrl);
+
         System.out.println(url);
+
 
 
     }

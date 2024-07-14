@@ -16,4 +16,10 @@ public class CrawlingController {
     public void downAndParser(){
         crawlingService.collectUrlInHtml();
     }
+
+    @GetMapping("/go2")
+    public void saveUrl(){
+        crawlingService.saveCollectedUrl();
+    }
+
 }
