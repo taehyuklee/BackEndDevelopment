@@ -4,6 +4,7 @@ import com.web.crawler.cralwer.service.CrawlingService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,12 +13,12 @@ public class CrawlingController {
 
     private final CrawlingService crawlingService;
 
-    @GetMapping("/go")
-    public void downAndParser(){
-        crawlingService.collectUrlInHtml();
+    @GetMapping("/startUrl")
+    public void downAndParser(@RequestParam(name="startUrl") String startUrl){
+        crawlingService.collectUrlInHtml(startUrl);
     }
 
-    @GetMapping("/go2")
+    @GetMapping("/collectUrl")
     public void saveUrl(){
         crawlingService.saveCollectedUrl();
     }

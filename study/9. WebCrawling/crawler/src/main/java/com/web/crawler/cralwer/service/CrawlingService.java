@@ -25,9 +25,7 @@ public class CrawlingService extends HtmlParser{
     private final CollectedUrlRepository collectRepository;
 
     @Transactional
-    public void collectUrlInHtml(){
-
-        String startUrl = "https://taehyuklee.tistory.com/";
+    public void collectUrlInHtml(String startUrl){
 
         String htmlContents = downloadHTML(startUrl);
 
