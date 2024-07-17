@@ -1,8 +1,6 @@
 package com.ppt.converter;
 
 import com.ppt.converter.makeslides.MakePPT;
-import com.ppt.converter.makeslides.functions.PutImage;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication

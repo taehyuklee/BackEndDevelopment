@@ -15,7 +15,7 @@ public class MakePPT extends MakeFunctions{
 
         try {
             //새로운 pptx Instance생성 또는 기존 Template가져다 쓰기
-            String templateUrl = "C:/Users/11464/Desktop/template.pptx";
+            String templateUrl = ""; //""C:/Users/11464/Desktop/template.pptx";
             XMLSlideShow ppt = getSlideInstance(templateUrl, 20);
 
             //내가 만들 Table정보들 관련해서 기입하기
