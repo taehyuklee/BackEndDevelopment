@@ -1,7 +1,9 @@
 package com.web.crawler.cralwer.domain.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +14,8 @@ import java.time.LocalDateTime;
 @Setter
 @Document
 @Accessors(chain=true)
-public class Url {
+@ToString
+public class UnCollectedUrl {
 
     @Id
     private String id;
