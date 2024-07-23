@@ -1,4 +1,4 @@
-package com.web.crawler.cralwer.kafka.config;
+package com.web.crawler.cralwer.config;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
