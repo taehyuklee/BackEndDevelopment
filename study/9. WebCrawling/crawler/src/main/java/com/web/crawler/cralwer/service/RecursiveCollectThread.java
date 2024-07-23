@@ -13,7 +13,13 @@ public class RecursiveCollectThread extends Thread{
     public void run(){
 
         while(true){
-            crawlingService.collectUrlInHtml();
+
+            try {
+                crawlingService.collectUrlInHtml();
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }

@@ -17,8 +17,8 @@ public class CrawlingController {
 
 
     @GetMapping("/startUrl")
-    public void startUrl(@RequestParam(name="startUrl") String startUrl){
-        crawlingService.registerStartUrl(startUrl);
+    public String startUrl(@RequestParam(name="startUrl") String startUrl){
+        return crawlingService.registerStartUrl(startUrl);
     }
 
     @GetMapping("/recursiveCollect")

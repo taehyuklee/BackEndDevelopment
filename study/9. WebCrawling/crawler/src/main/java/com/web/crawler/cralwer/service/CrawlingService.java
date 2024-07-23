@@ -25,13 +25,15 @@ public class CrawlingService extends HtmlParser{
     private final CollectedUrlRepository collectRepository;
 
     @Transactional
-    public void registerStartUrl(String startUrl){
+    public String registerStartUrl(String startUrl){
 
         UnCollectedUrl unCollectedUrl = new UnCollectedUrl();
 
         unCollectedUrl.setUrl(startUrl).setCollected(false);
 
         unCollectedRepository.save(unCollectedUrl);
+
+        return "success - startUrl is registered";
 
     }
 
