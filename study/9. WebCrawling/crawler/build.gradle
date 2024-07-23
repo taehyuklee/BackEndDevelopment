@@ -34,6 +34,10 @@ dependencies {
 	//jsoup
 	implementation group: 'org.jsoup', name: 'jsoup', version: '1.17.2'
 
+	//Kafka dependency
+	implementation 'org.apache.kafka:kafka-streams'
+	implementation 'org.springframework.kafka:spring-kafka'
+
 }
 
 tasks.named('test') {
