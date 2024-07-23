@@ -15,7 +15,7 @@ public class Producer {
     @Value("${kafka.server}")
     private String kafkaServer;
 
-    @Value("${kafka.brokerPort}")
+    @Value("${kafka.port}")
     private String kafkaPort;
 
     //producer생성

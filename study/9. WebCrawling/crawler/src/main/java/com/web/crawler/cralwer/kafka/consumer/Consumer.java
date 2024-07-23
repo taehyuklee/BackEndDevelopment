@@ -15,7 +15,7 @@ public class Consumer {
     @Value("${kafka.server}")
     private String kafkaServer;
 
-    @Value("${kafka.brokerPort}")
+    @Value("${kafka.port}")
     private String kafkaPort;
 
     public KafkaConsumer<String, String> consumer;
