@@ -8,3 +8,9 @@ spring:
       host: localhost
       port: 27017
       database: urlDomain
+  kafka:
+    bootstrap-servers: www.taylee.link:9003
+
+kafka:
+  server: www.taylee.link
+  port: 9003
