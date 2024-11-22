@@ -17,6 +17,7 @@ public class RecursiveCollectThread extends Thread{
             try {
                 crawlingService.collectUrlInHtml();
                 Thread.sleep(1500);
+                System.out.println("수집중입니다.");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

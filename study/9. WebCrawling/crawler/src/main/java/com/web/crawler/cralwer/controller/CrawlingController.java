@@ -14,8 +14,6 @@ public class CrawlingController {
 
     private final CrawlingService crawlingService;
 
-
-
     @GetMapping("/startUrl")
     public String startUrl(@RequestParam(name="startUrl") String startUrl){
         return crawlingService.registerStartUrl(startUrl);

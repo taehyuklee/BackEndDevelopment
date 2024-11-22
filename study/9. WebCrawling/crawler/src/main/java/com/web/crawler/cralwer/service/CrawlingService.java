@@ -45,6 +45,7 @@ public class CrawlingService extends HtmlParser{
         if(unCollectedUrl != null){
 
             String targetUrl = unCollectedUrl.getUrl();
+            System.out.println(targetUrl);
 
             String htmlContents = downloadHTML(targetUrl);
 

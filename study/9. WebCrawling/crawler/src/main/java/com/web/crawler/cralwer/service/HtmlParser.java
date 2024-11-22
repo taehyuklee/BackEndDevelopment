@@ -19,6 +19,9 @@ public class HtmlParser {
     public String downloadHTML(String urlString) {
         StringBuilder content = new StringBuilder();
         try {
+            if (urlString.startsWith("javascript:")) {
+                return null; // Unsupported protocol, skip this URL
+            }
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
