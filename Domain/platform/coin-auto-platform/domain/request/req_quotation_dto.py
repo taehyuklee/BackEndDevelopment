@@ -12,7 +12,7 @@ class QuotationRequestBody:
     __count = 0
     __date = datetime.datetime.now()
 
-    def __init__(self, market: str, kr_nm: str, eg_nm: str, time_unit: str, min_unit: int, count: int):
+    def __init__(self, market: str, kr_nm: str, eg_nm: str, time_unit: str, min_unit: int, count: int, date: datetime):
         self.__market: str = market
         self.__kr_nm: str = kr_nm
         self.__eg_nm: str = eg_nm
@@ -21,7 +21,7 @@ class QuotationRequestBody:
         if 200 < count or count <= 0:
             raise ValueError('cout unit은 1부터 200까지 가능합니다')
         self.__count: int = count
-        # self.__date: datetime = date
+        self.__date: datetime = date
 
     def __str__(self):
         return self.__time_unit + " " + str(self.__min_unit) + " " + str(self.__count) + " " + str(self.__date)

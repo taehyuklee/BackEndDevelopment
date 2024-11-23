@@ -8,10 +8,10 @@ class QuotationRequestBody(BaseModel):
     time_unit: str = "seconds"
     min_unit: int = 15
     count: int = 0
-    # date: datetime = datetime.now()
+    date: datetime = datetime.now()
 
     def __str__(self):
-        return f"{self.time_unit} {self.min_unit} {self.count}"
+        return f"{self.time_unit} {self.min_unit} {self.count} {self.date}"
 
     @property
     def market(self):
@@ -61,10 +61,10 @@ class QuotationRequestBody(BaseModel):
     def count(self, count: int):
         self.__count = count
 
-    # @property
-    # def date(self):
-    #     return self.__date
-    #
-    # @date.setter
-    # def date(self, date: datetime):
-    #     self.__date = date
+    @property
+    def date(self):
+        return self.__date
+
+    @date.setter
+    def date(self, date: datetime):
+        self.__date = date
