@@ -2,12 +2,18 @@ import datetime
 
 class QuotationRequestBody:
 
+    __market = ""
+    __kr_nm = ""
+    __eg_nm = ""
     __time_unit = "sec"
     __min_unit = 15
     __count = 0
     __date = datetime.datetime.now()
 
-    def __init__(self, time_unit: str, min_unit: int, count: int, date: datetime):
+    def __init__(self, market: str, kr_nm: str, eg_nm: str, time_unit: str, min_unit: int, count: int, date: datetime):
+        self.__market: str = market
+        self.__kr_nm: str = kr_nm
+        self.__eg_nm: str = eg_nm
         self.__time_unit: str = time_unit
         self.__min_unit: int = min_unit
         if 200 < count or count <= 0:
@@ -18,6 +24,30 @@ class QuotationRequestBody:
 
     def __str__(self):
         return self.__time_unit + " " + str(self.__min_unit) + " " + str(self.__count) + " " + str(self.__date)
+
+    @property
+    def market(self):
+        return self.__market
+
+    @market.setter
+    def market(self, market: str):
+        self.__market = market
+
+    @property
+    def kr_nm(self):
+        return self.__kr_nm
+
+    @kr_nm.setter
+    def kr_nm(self, kr_nm: str):
+        self.__kr_nm = kr_nm
+
+    @property
+    def eg_nm(self):
+        return self.__eg_nm
+
+    @eg_nm.setter
+    def eg_nm(self, eg_nm: str):
+        self.__kr_nm = eg_nm
 
     @property
     def time_unit(self):
