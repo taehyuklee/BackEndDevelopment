@@ -1,16 +1,18 @@
 import datetime
+from typing import Any
 
+# 결국 Pydantic Model을 사용할수 밖에 없다.
 class QuotationRequestBody:
 
-    __market = ""
-    __kr_nm = ""
-    __eg_nm = ""
+    __market = "KRW-BTC"
+    __kr_nm = "비트코인"
+    __eg_nm = "Bitcoin"
     __time_unit = "sec"
     __min_unit = 15
     __count = 0
     __date = datetime.datetime.now()
 
-    def __init__(self, market: str, kr_nm: str, eg_nm: str, time_unit: str, min_unit: int, count: int, date: datetime):
+    def __init__(self, market: str, kr_nm: str, eg_nm: str, time_unit: str, min_unit: int, count: int):
         self.__market: str = market
         self.__kr_nm: str = kr_nm
         self.__eg_nm: str = eg_nm
@@ -19,8 +21,7 @@ class QuotationRequestBody:
         if 200 < count or count <= 0:
             raise ValueError('cout unit은 1부터 200까지 가능합니다')
         self.__count: int = count
-        self.__date: datetime = date
-
+        # self.__date: datetime = date
 
     def __str__(self):
         return self.__time_unit + " " + str(self.__min_unit) + " " + str(self.__count) + " " + str(self.__date)
