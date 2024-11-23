@@ -1,6 +1,7 @@
 # 출처: fastapi 공식문서
 from typing import Union
 from fastapi import FastAPI
+import router.quote_router as quote_router
 
 app = FastAPI()
 
@@ -17,3 +18,5 @@ async def async_read_root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
+
+app.include_router(quote_router.router)

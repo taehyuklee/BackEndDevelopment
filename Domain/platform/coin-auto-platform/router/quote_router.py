@@ -1,11 +1,13 @@
 from fastapi import APIRouter
-
-from typing import Union
+from service.quote_api import *
 
 router = APIRouter(
     prefix="/quote"
 )
 
-@router.post("/question", tags=["quote"])
-async def get_quote(question_data: QuestionDto):
-    return service.createQuestion(question_data)
+@router.get("/coin-list", tags=["quote"])
+async def get_quote():
+    return get_coin_list()
+
+
+__all__ = [get_quote]
