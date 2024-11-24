@@ -70,7 +70,7 @@ def get_coin_info(detail_yn: bool = True):
     return res.json()
 
 
-def get_coin_market_list(detail_yn: bool = False):
+def get_coin_market_list(detail_yn: bool = False, only_krw_yn: bool = True):
     response_list: List[Tuple]= []
     url = "https://api.upbit.com/v1/market/all?is_details=" + str(detail_yn)
 
@@ -79,18 +79,25 @@ def get_coin_market_list(detail_yn: bool = False):
     res = requests.get(url, headers=headers)
 
     for row in res.json():
-        market = row.get('market')
-        kr_nm = row.get('korean_name')
-        eg_nm = row.get('english_name')
-        response_list.append((market, kr_nm, eg_nm))
+        if only_krw_yn:
+            if "KRW".lower() in  row.get('market').lower():
+                market = row.get('market')
+                kr_nm = row.get('korean_name')
+                eg_nm = row.get('english_name')
+                response_list.append((market, kr_nm, eg_nm))
+        else:
+            market = row.get('market')
+            kr_nm = row.get('korean_name')
+            eg_nm = row.get('english_name')
+            response_list.append((market, kr_nm, eg_nm))
 
     return response_list
 
 
-def get_excel_list(time_unit: str, min_unit: int, count: int, duration_day: int):
+def get_excel_list(time_unit: str, min_unit: int, count: int, duration_num: int, only_krw_yn: bool = True):
     market_info_list = get_coin_market_list(detail_yn=False)
     start_ref_time = datetime.now()
-    cnt_time = duration_day*1440//min_unit-1
+    cnt_time = duration_num*1440//min_unit-1
 
     coin_data_frame = {}
 
@@ -105,10 +112,10 @@ def get_excel_list(time_unit: str, min_unit: int, count: int, duration_day: int)
         time_index: int = 0 #time_index 초기화
         mid_ref_time: datetime = datetime.now()
 
-        _insert_columns(eg_nm, coin_data_frame)
+
+        _insert_columns(market, coin_data_frame)
 
         while True:
-
             if time_index == cnt_time:
                 break
 
@@ -120,7 +127,7 @@ def get_excel_list(time_unit: str, min_unit: int, count: int, duration_day: int)
 
                 for row in res:
                     kst = row.get('candle_date_time_kst')
-                    utc = row.get('candle_date_time_utc')
+                    # utc = row.get('candle_date_time_utc')
                     opening_price = row.get('opening_price')
                     high_price = row.get('high_price')
                     low_price = row.get('low_price')
@@ -131,15 +138,15 @@ def get_excel_list(time_unit: str, min_unit: int, count: int, duration_day: int)
                     # print(kst, opening_price, high_price, low_price, closing_price, trade_price, trade_volume)
 
                     # DataFrame에 새 행 추가
-                    coin_data_frame[eg_nm].loc[len(coin_data_frame[eg_nm])] = {
-                        f"{eg_nm}_kst": kst,
-                        f"{eg_nm}_utc": utc,
-                        f"{eg_nm}_opening_price": opening_price,
-                        f"{eg_nm}_high_price": high_price,
-                        f"{eg_nm}_low_price": low_price,
-                        f"{eg_nm}_closing_price": closing_price,
-                        f"{eg_nm}_cumulative_trade_price": trade_price,
-                        f"{eg_nm}_cumulative_volume": trade_volume
+                    coin_data_frame[market].loc[len(coin_data_frame[market])] = {
+                        f"{market}_kst": kst,
+                        # f"{market}_utc": utc,
+                        f"{market}_opening_price": opening_price,
+                        f"{market}_high_price": high_price,
+                        f"{market}_low_price": low_price,
+                        f"{market}_closing_price": closing_price,
+                        f"{market}_cumulative_trade_price": trade_price,
+                        f"{market}_cumulative_volume": trade_volume
                     }
 
                 # 맨 아래 시간 update해줘야 한다.  # 맨 아래가 기준이 된다
@@ -162,7 +169,7 @@ def get_excel_list(time_unit: str, min_unit: int, count: int, duration_day: int)
     final_df .to_csv("coin_data_v3.csv", index=False)
 
 
-get_excel_list("minutes", 60, 200, 1)
+get_excel_list("minutes", 60, 200, 1, True)
 
 
 # 빈 DataFrame 생성
