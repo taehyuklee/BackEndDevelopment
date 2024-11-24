@@ -9,6 +9,7 @@ class QuotationRequestBody(BaseModel):
     min_unit: int = 15
     count: int = 0
     date: datetime = datetime.now()
+    only_krw_yn: bool = True
 
     def __str__(self):
         return f"{self.time_unit} {self.min_unit} {self.count} {self.date}"

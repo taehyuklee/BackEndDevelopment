@@ -21,7 +21,7 @@ def _convert_time_format(date : datetime, zone:str = "kr"):
 
 
 def _insert_columns(coin_nm:str, coin_data_frame: dict[str, pd.DataFrame]):
-    list_row = ['kst','utc','opening_price','high_price','low_price','closing_price','cumulative_trade_price', 'cumulative_volume']
+    list_row = ['kst','opening_price','high_price','low_price','closing_price','cumulative_trade_price', 'cumulative_volume']
     if coin_nm not in coin_data_frame:
         df = pd.DataFrame()
         for content in list_row:
@@ -173,13 +173,19 @@ get_excel_list("minutes", 60, 200, 1, True)
 
 
 # 빈 DataFrame 생성
-df = pd.DataFrame()
-
-# 컬럼과 데이터 추가
-df['Column1'] = [1, 2, 3]
-df['Column2'] = ['A', 'B', 'C']
-
-print(df)
+# df = pd.DataFrame()
+#
+# # 컬럼과 데이터 추가
+# df['Column1'] = [1, 2, 3]
+# df['Column2'] = ['A', 'B', 'C']
+#
+# print(df)df = pd.DataFrame()
+#
+# # 컬럼과 데이터 추가
+# df['Column1'] = [1, 2, 3]
+# df['Column2'] = ['A', 'B', 'C']
+#
+# print(df)
 
 # # 현재 시각
 # current_time = datetime.now()

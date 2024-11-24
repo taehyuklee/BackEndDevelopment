@@ -17,3 +17,7 @@ async def get_quote_market_list(detail_yn: bool, only_krw_yn: bool):
 @router.get("/coin-price", tags=["quote"])
 async def get_quote_price_info(quotation_request_body :QuotationRequestBody):
     return get_quotation(quotation_request_body)
+
+@router.get("/coin-excel", tags=["quote"])
+async def get_excel_coin(time_unit: str, min_unit: int, count: int, duration_num: int, only_krw_yn: bool = True):
+    return get_excel_list(time_unit, min_unit, count, duration_num, only_krw_yn)
