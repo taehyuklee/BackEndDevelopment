@@ -16,56 +16,56 @@ class QuotationRequestBody(BaseModel):
 
     @property
     def market(self):
-        return self.__market
+        return self.market
 
     @market.setter
     def market(self, market: str):
-        self.__market = market
+        self.market = market
 
     @property
     def kr_nm(self):
-        return self.__kr_nm
+        return self.kr_nm
 
     @kr_nm.setter
     def kr_nm(self, kr_nm: str):
-        self.__kr_nm = kr_nm
+        self.kr_nm = kr_nm
 
     @property
     def eg_nm(self):
-        return self.__eg_nm
+        return self.eg_nm
 
     @eg_nm.setter
     def eg_nm(self, eg_nm: str):
-        self.__kr_nm = eg_nm
+        self.kr_nm = eg_nm
 
     @property
     def time_unit(self):
-        return self.__time_unit
+        return self.time_unit
 
     @time_unit.setter
     def time_unit(self, time_unit: str):
-        self.__time_unit = time_unit
+        self.time_unit = time_unit
 
     @property
     def min_unit(self):
-        return self.__min_unit
+        return self.min_unit
 
     @min_unit.setter
     def min_unit(self, min_unit: int):
-        self.__min_unit = min_unit
+        self.min_unit = min_unit
 
     @property
     def count(self):
-        return self.__count
+        return self.count
 
     @count.setter
     def count(self, count: int):
-        self.__count = count
+        self.count = count
 
     @property
     def date(self):
-        return self.__date
+        return self.date
 
     @date.setter
     def date(self, date: datetime):
-        self.__date = date
+        self.date = date

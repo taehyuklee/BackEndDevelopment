@@ -5,6 +5,7 @@ import time
 from typing import List, Tuple
 from common.time_converter import *
 from domain.request.req_quotation_dto import QuotationRequestBody
+from domain.request.pydantic_body.req_excel_body import ExcelRequestBody
 # from domain.request.pydantic_body.req_quotation_body import QuotationRequestBody
 
 # 현재 날짜와 시간 가져오기
@@ -94,8 +95,17 @@ def get_coin_market_list(detail_yn: bool = False, only_krw_yn: bool = True):
     return response_list
 
 
-def get_excel_list(time_unit: str, min_unit: int, count: int, duration_num: int, only_krw_yn: bool = True):
-    market_info_list = get_coin_market_list(detail_yn=False)
+def get_excel_list(excel_request_body: ExcelRequestBody):
+
+    print(excel_request_body)
+
+    time_unit: str = excel_request_body.time_unit
+    min_unit: int = excel_request_body.min_unit
+    count: int = excel_request_body.count
+    duration_num: int = excel_request_body.duration_num
+    only_krw_yn: bool = excel_request_body.only_krw_yn
+
+    market_info_list = get_coin_market_list(detail_yn=False, only_krw_yn=only_krw_yn)
     start_ref_time = datetime.now()
     cnt_time = duration_num*1440//min_unit-1
 
@@ -164,12 +174,13 @@ def get_excel_list(time_unit: str, min_unit: int, count: int, duration_num: int,
         market_index+=1
 
     final_df = pd.concat(coin_data_frame.values(), axis=1)
+
     print("final")
     print(final_df)
     final_df .to_csv("coin_data_v3.csv", index=False)
 
 
-get_excel_list("minutes", 60, 200, 1, True)
+# get_excel_list("minutes", 60, 200, 1, True)
 
 
 # 빈 DataFrame 생성

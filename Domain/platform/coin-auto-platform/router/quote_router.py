@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from service.quote_api import *
 from domain.request.pydantic_body.req_quotation_body import QuotationRequestBody
+from domain.request.pydantic_body.req_excel_body import ExcelRequestBody
 
 router = APIRouter(
     prefix="/quote"
@@ -19,5 +20,5 @@ async def get_quote_price_info(quotation_request_body :QuotationRequestBody):
     return get_quotation(quotation_request_body)
 
 @router.get("/coin-excel", tags=["quote"])
-async def get_excel_coin(time_unit: str, min_unit: int, count: int, duration_num: int, only_krw_yn: bool = True):
-    return get_excel_list(time_unit, min_unit, count, duration_num, only_krw_yn)
+async def get_excel_coin(excel_request_body: ExcelRequestBody):
+    return get_excel_list(excel_request_body)
