@@ -210,14 +210,14 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
 
 import requests
 
-def execution_price():
+def execution_price(count: int):
     url = "https://api.upbit.com/v1/trades/ticks"
 
     headers = {"accept": "application/json"}
 
     params = {
         'market': 'KRW-BTC',
-        'count': 200
+        'count': count
     }
     res = requests.get(url, params=params, headers=headers)
 

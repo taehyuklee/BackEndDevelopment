@@ -24,5 +24,5 @@ async def get_excel_coin(excel_request_body: ExcelRequestBody):
     return get_excel_list(excel_request_body)
 
 @router.get("/coin-execution-price", tags=["quote"])
-async def get_execution_price():
-    return execution_price()
+async def get_execution_price(count: int):
+    return execution_price(count)
