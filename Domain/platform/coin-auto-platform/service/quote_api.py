@@ -207,3 +207,20 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
 #     current_time -= timedelta(minutes=15)  # 15분 감소
 #
 # # __all__ = ['get_coin_info', 'get_quotation']
+
+import requests
+
+def execution_price():
+    url = "https://api.upbit.com/v1/trades/ticks"
+
+    headers = {"accept": "application/json"}
+
+    params = {
+        'market': 'KRW-BTC',
+        'count': 200
+    }
+    res = requests.get(url, params=params, headers=headers)
+
+    print(res.text)
+
+    return res.json()

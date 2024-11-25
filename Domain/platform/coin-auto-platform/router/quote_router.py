@@ -22,3 +22,7 @@ async def get_quote_price_info(quotation_request_body :QuotationRequestBody):
 @router.get("/coin-excel", tags=["quote"])
 async def get_excel_coin(excel_request_body: ExcelRequestBody):
     return get_excel_list(excel_request_body)
+
+@router.get("/coin-execution-price", tags=["quote"])
+async def get_execution_price():
+    return execution_price()
