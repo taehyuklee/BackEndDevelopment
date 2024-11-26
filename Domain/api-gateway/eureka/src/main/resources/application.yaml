@@ -13,6 +13,9 @@ eureka:
     # Eureka 서버의 설정
     enable-self-preservation: true  # 자가 보호 모드 비활성화 (테스트 중에 장애를 빨리 감지할 수 있음)
     eviction-interval-timer-in-ms: 60000  # 레지스트리에서 만료된 인스턴스를 제거하는 간격
+    renewal-percent-threshold: 0.85 # 기본값은 0.85(85%)
   instance:
     hostname: localhost  # Eureka 서버가 실행되는 호스트명 (기본값은 localhost)
     prefer-ip-address: true  # IP 주소를 우선 사용 (호스트 이름 대신 IP 주소 사용)
+    lease-renewal-interval-in-seconds: 30 # heartbeat 전송 간격
+    lease-expiration-duration-in-seconds: 90 # 만료 시간
