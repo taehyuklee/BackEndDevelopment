@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 import pandas as pd
+import numpy as np
 import time
 from typing import List, Tuple
 from common.time_converter import *
@@ -107,7 +108,7 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
 
     market_info_list = get_coin_market_list(detail_yn=False, only_krw_yn=only_krw_yn)
     start_ref_time = datetime.now()
-    cnt_time = duration_num*1440//min_unit-1
+    cnt_time = duration_num*count*min_unit//min_unit-1
 
     coin_data_frame = {}
 
@@ -115,15 +116,29 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
     print("make raw data excel")
 
     while True:
-        if market_index ==5:
+        if market_index == 5:
             break
         market, kr_nm, eg_nm =  market_info_list[market_index]
         ref_time = start_ref_time #처음에 시작한 시각을 받아오기
         time_index: int = 0 #time_index 초기화
         mid_ref_time: datetime = datetime.now()
 
-
         _insert_columns(market, coin_data_frame)
+
+        # ref_time -= timedelta(minutes= time_index * min_unit* count)
+        quotation = QuotationRequestBody(market, kr_nm, eg_nm, time_unit, min_unit, count, ref_time)
+
+        res = get_quotation(quotation)
+
+        converted_ref = datetime.strptime(res[0].get('candle_date_time_kst'), "%Y-%m-%dT%H:%M:%S")
+        expected_times = [
+            (converted_ref - timedelta(minutes = i * min_unit)).strftime("%Y-%m-%dT%H:%M:%S")
+            for i in range(0, cnt_time*count)
+        ]
+        # print(expected_times)
+        ref_time_index = 0
+        # print(res[0].get('candle_date_time_kst'))
+        # raise Exception
 
         while True:
             if time_index == cnt_time:
@@ -136,6 +151,7 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
                 res = get_quotation(quotation)
 
                 for row in res:
+
                     kst = row.get('candle_date_time_kst')
                     # utc = row.get('candle_date_time_utc')
                     opening_price = row.get('opening_price')
@@ -147,23 +163,44 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
                     mid_ref_time = datetime.fromisoformat(kst) #문자열을 다시 datetime formate으로 바꿔준다.
                     # print(kst, opening_price, high_price, low_price, closing_price, trade_price, trade_volume)
 
-                    # DataFrame에 새 행 추가
-                    coin_data_frame[market].loc[len(coin_data_frame[market])] = {
-                        f"{market}_kst": kst,
-                        # f"{market}_utc": utc,
-                        f"{market}_opening_price": opening_price,
-                        f"{market}_high_price": high_price,
-                        f"{market}_low_price": low_price,
-                        f"{market}_closing_price": closing_price,
-                        f"{market}_cumulative_trade_price": trade_price,
-                        f"{market}_cumulative_volume": trade_volume
-                    }
+                    # print( str(kst) ==str(expected_times[ref_time_index]))
+                    # print(kst)
+                    # print(expected_times[ref_time_index])
 
+                    if str(kst) !=str(expected_times[ref_time_index]):
+                        # 하나 건너 뛰는 경우도 생길 수 있다. 
+                        break
+
+                    if str(kst) == str(expected_times[ref_time_index]):
+                        # DataFrame에 새 행 추가
+                        coin_data_frame[market].loc[len(coin_data_frame[market])] = {
+                            f"{market}_kst": kst,
+                            # f"{market}_utc": utc,
+                            f"{market}_opening_price": opening_price,
+                            f"{market}_high_price": high_price,
+                            f"{market}_low_price": low_price,
+                            f"{market}_closing_price": closing_price,
+                            f"{market}_cumulative_trade_price": trade_price,
+                            f"{market}_cumulative_volume": trade_volume
+                        }
+                        ref_time_index += 1 # 안 맞으면 그냥 빈칸 보내야함.
+                    else:
+                        coin_data_frame[market].loc[len(coin_data_frame[market])] = {
+                            f"{market}_kst": expected_times[ref_time_index],
+                            # f"{market}_utc": utc,
+                            f"{market}_opening_price": np.nan,
+                            f"{market}_high_price": np.nan,
+                            f"{market}_low_price": np.nan,
+                            f"{market}_closing_price": np.nan,
+                            f"{market}_cumulative_trade_price": np.nan,
+                            f"{market}_cumulative_volume": np.nan
+                        }
+
+                print(coin_data_frame[market])
                 # 맨 아래 시간 update해줘야 한다.  # 맨 아래가 기준이 된다
                 ref_time = mid_ref_time
                 time_index +=1
 
-                print(coin_data_frame)
 
             except Exception as e:
                 print("An error occurred:", str(e))  # 예외 메시지를 출력
@@ -171,13 +208,14 @@ def get_excel_list(excel_request_body: ExcelRequestBody):
                 print("attribute error")
                 time.sleep(0.2)
 
+        print("market: " +f"{market_index}")
         market_index+=1
 
     final_df = pd.concat(coin_data_frame.values(), axis=1)
 
     print("final")
     print(final_df)
-    final_df .to_csv("coin_data_v3.csv", index=False)
+    final_df.to_csv("coin_data_v3.csv", index=False)
 
 
 # get_excel_list("minutes", 60, 200, 1, True)
