@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/analysis")
+@RequestMapping("/rest")
 public class RestTemplateController {
 
     private final RestTemplateService restTemplateService;

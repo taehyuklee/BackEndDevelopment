@@ -29,7 +29,7 @@ public class RestTemplateService {
 
     public <T> ResponseEntity<HashMap> postWithParamAndBody(T requestDto, String path){
         URI uri = UriComponentsBuilder
-                .fromUriString("http://localhost:8000")
+                .fromUriString("http://10.0.2.127:8000")
                 .path(String.format("/analysis/%s", path))
                 .encode()
                 .build()
@@ -39,6 +39,7 @@ public class RestTemplateService {
                 .post(uri)
                 .header("importFormat", "json")
                 .header("Content-Type", "application/json")
+                .header("at", "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZG1pbiIsImF1dGgiOiJBZG1pbiIsInNpdGVJZCI6IklGQUNUUy0zIiwibGFuZyI6ImVuIiwidXNlck5hbWUiOiJhZG1pbiIsImlhdCI6MTczNzAwNzExOX0.tQRwe2hUJ9clEFQwuntMOV8ltCyOrjSkjjnEGu0-tqE")
                 .body(requestDto);
 
         RestTemplate restTemplate = createRestTemplate();
