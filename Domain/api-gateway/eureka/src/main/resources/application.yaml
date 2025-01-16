@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 53002
 
 spring:
   application:
@@ -7,6 +7,8 @@ spring:
 
 eureka:
   client:
+    service-url:
+      defaultZone: http://localhost:53002/eureka/
     register-with-eureka: false  # Eureka 서버는 자신을 등록하지 않음
     fetch-registry: false  # Eureka 서버는 다른 서비스를 가져오지 않음
   server:
