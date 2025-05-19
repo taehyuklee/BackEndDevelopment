@@ -25,7 +25,7 @@ public class MemberService {
 
 //        try {
 
-        memberForKey.setId(100L);
+//        memberForKey.setId(100L);
         memberForKey.setName("HelloJPA");
 
         //영속
