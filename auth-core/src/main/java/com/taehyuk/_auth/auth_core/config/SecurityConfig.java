@@ -15,7 +15,7 @@ public class SecurityConfig {
     // Security를 통해서 회원정보를 저장하고 회원가입하고 검증할때는 항상 비밀번호를 Hash로 암호화 하여 사용한다.
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder().;
+        return new BCryptPasswordEncoder();
     }
 
 
@@ -37,7 +37,7 @@ public class SecurityConfig {
         // 경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/join").permitAll()
+                        .requestMatchers("/login", "/", "/member/new", "/new").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 

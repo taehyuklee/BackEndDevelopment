@@ -1,19 +1,24 @@
 package com.taehyuk._auth.auth_core.member.controller;
 
+import com.taehyuk._auth.auth_core.member.domain.dto.MemberDto;
 import com.taehyuk._auth.auth_core.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/security")
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
+
+    @PostMapping("/new")
+    public String registerProcess(@RequestBody MemberDto memberDto) {
+        memberService.registerProcess(memberDto);
+        return "Ok";
+    }
 
     @GetMapping("/all")
     public Map<String, String> getInfo(){

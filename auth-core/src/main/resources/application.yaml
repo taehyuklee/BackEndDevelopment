@@ -25,10 +25,10 @@ spring:
         dialect: org.hibernate.dialect.MariaDBDialect
         default_batch_fetch_size: 100
 #    open-in-view: false
-#    hibernate:
+    hibernate:
 #      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
 #      naming:
 #        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 #        physical-strategy: com.manage.apigw.mngtapi.common.config.NamingStrategy #??? naming ??? ???? ??
-#      ddl-auto: none
+      ddl-auto: create
 
