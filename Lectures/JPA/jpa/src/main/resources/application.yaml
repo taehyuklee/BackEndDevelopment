@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: orm-jpa
+
+  h2:
+    console:
+      enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password: new1234!
+
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://localhost:3306/maria
+#    username: taylee
+#    password: new1234!
+  #    hikari:
+  #      maximum-pool-size: 100
+  #      connection-timeout: 5000
+  #      validation-timeout: 4000
+  #      max-lifetime: 600000
+  #    type: com.zaxxer.hikari.HikariDataSource
+
+  jpa:
+    show-sql: true  # ???? SQL ??
+    open-in-view: false  # OSIV ???? (Lazy Loading ??? ??)
+    hibernate:
+      ddl-auto: create  # ??? ?? ??/?? ????
+    properties:
+      hibernate:
+        format_sql: true  # SQL ?? ?? ??
+        dialect: org.hibernate.dialect.MariaDBDialect  # MariaDB? ?? Hibernate ??
+        default_batch_fetch_size: 100  # N+1 ?? ???? ?? ?? fetch ??
+#    hibernate:
+#      naming:
+#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+#        physical-strategy: com.manage.apigw.mngtapi.common.config.NamingStrategy
+
