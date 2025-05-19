@@ -1,15 +1,18 @@
 package orm.jpa.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "GO")
+@Table(name = "MEMBER")
 public class Member {
 
     @Id
     private Long id;
+
+    @Column(unique = true, length=10) // Only for DDL Function. Not related to Logic
     private String name;
 
     public Member(){
