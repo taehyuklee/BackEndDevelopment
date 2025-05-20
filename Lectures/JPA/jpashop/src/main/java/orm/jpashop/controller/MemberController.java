@@ -15,7 +15,7 @@ public class MemberController {
 
     @PostMapping("/one-dir")
     public String oneDirTest(){
-        return memberService.oneDirTeamAndMember();
+        return memberService.orderService();
     }
 
 
