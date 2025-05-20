@@ -16,8 +16,8 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/testdb
-    username: admin
+    url: jdbc:mariadb://localhost:3306/maria
+    username: taylee
     password: new1234!
   #    hikari:
   #      maximum-pool-size: 100
