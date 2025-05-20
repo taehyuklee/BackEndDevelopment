@@ -1,4 +1,4 @@
-package orm.jpa.domain;
+package orm.jpa.domain.keymapping;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class MemberForKey {
 
     // Unique - if you use unique constraint in @Column, random name will be provided for unique key name
     @Column(name="name", unique = true, length=10, nullable = false) // Only for DDL Function. Not related to Logic
-    private String name;
+    private String username;
 
     private Integer age;
 

@@ -1,4 +1,4 @@
-package orm.jpa.domain;
+package orm.jpa.domain.keymapping;
 
 public enum RoleType {
     USER, ADMIN

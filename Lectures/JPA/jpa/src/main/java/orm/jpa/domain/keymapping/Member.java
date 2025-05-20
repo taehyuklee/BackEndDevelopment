@@ -1,4 +1,4 @@
-package orm.jpa.domain;
+package orm.jpa.domain.keymapping;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Getter
-@Table(name = "MEMBER")
+@Table(name = "MEM")
 public class Member {
 
     @Id
