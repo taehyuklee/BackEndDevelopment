@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
@@ -7,8 +7,8 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/maria
-    username: taylee
+    url: jdbc:mariadb://localhost:3306/mysql
+    username: admin #taylee
     password: new1234!
 #    hikari:
 #      maximum-pool-size: 100
