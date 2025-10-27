@@ -1,6 +1,7 @@
 package com.taehyuk._auth.auth_core.config;
 
 import com.taehyuk._auth.auth_core.jwt.LoginFilter;
+import com.taehyuk._auth.auth_core.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JwtUtil jwtUtil;
     
     // loginFilter인자로 필요함
     @Bean
@@ -57,7 +59,7 @@ public class SecurityConfig {
 
         // 앞서 만든 JWT 검증 Filter (Custom Filter)를 등록해준다. 두 번째 인자 - 위치
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         //세션 설정 (JWT -> Stateless)
         http
