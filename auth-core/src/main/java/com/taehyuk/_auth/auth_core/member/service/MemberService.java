@@ -23,12 +23,16 @@ public class MemberService {
             return;
         }
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        // 암호화
         Member member = new Member();
 
         member.setUsername(username);
         member.setPassword(bCryptPasswordEncoder.encode(password));
         member.setRole("ROLE_ADMIN"); // Spring : 접두사_ 권한
-        member.setEmail("email");
+        member.setEmail(memberDto.getEmail());
+        member.setGrade(memberDto.getGrade());
 
         memberRepository.save(member);
     }

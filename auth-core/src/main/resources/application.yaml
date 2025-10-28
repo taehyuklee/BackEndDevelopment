@@ -7,7 +7,7 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/mysql
+    url: jdbc:mariadb://localhost:3306/ticket
     username: admin #taylee
     password: new1234!
 #    hikari:
@@ -30,5 +30,5 @@ spring:
 #      naming:
 #        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 #        physical-strategy: com.manage.apigw.mngtapi.common.config.NamingStrategy #??? naming ??? ???? ??
-      ddl-auto: create
+      ddl-auto: none
 

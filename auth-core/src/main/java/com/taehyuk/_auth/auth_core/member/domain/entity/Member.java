@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@ToString
 // PACKAGE - Private & Package
 public class Member implements UserDetails {
 
@@ -26,7 +27,7 @@ public class Member implements UserDetails {
 
 //    @JsonProperty(acess = READ_WRITE)
     @Column(nullable = false, unique=true)
-    private  String email;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -38,12 +39,13 @@ public class Member implements UserDetails {
     private String grade;
 
     @Builder
-    public Member(Long id, String email, String password, String role, String grade) {
+    public Member(Long id, String email, String password, String role, String username, String grade) {
         this.id =id;
         this.email = email;
         this.password = password;
         this.role = role;
         this.grade = grade;
+        this.username = username;
     }
 
 
@@ -56,7 +58,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override

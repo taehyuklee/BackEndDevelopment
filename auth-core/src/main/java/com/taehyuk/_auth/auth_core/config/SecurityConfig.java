@@ -1,11 +1,13 @@
 package com.taehyuk._auth.auth_core.config;
 
-import com.taehyuk._auth.auth_core.jwt.LoginFilter;
+import com.taehyuk._auth.auth_core.config.security_service.CustomUserDetailsService;
+import com.taehyuk._auth.auth_core.filters.LoginFilter;
 import com.taehyuk._auth.auth_core.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,8 +37,22 @@ public class SecurityConfig {
     }
 
 
+    // 어차피 Bean은 다 등록될거니까
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(CustomUserDetailsService customUserDetailsService,
+                                                            BCryptPasswordEncoder bCryptPasswordEncoder){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
+        return provider;
+    }
+
+
     @Bean // Security Filter Chain을 등록해주는 곳
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil);
+        loginFilter.setFilterProcessesUrl("/login");
 
         //csrf disable (JWT는 Session을 사용하지 않는다)
         http
@@ -59,7 +75,7 @@ public class SecurityConfig {
 
         // 앞서 만든 JWT 검증 Filter (Custom Filter)를 등록해준다. 두 번째 인자 - 위치
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 
         //세션 설정 (JWT -> Stateless)
         http
