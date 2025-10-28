@@ -61,7 +61,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setCharacterEncoding("UTF-8");
 
-        Map<String, String> result = Map.of("token", token);
+
+        Map<String, Object> result = Map.of(
+                "token", token,
+                "username", username,
+                "role", "role"
+        );
+
         new ObjectMapper().writeValue(httpServletResponse.getWriter(), result);
         System.out.println("success");
     }
