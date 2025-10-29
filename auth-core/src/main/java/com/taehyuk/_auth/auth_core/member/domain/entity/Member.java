@@ -38,14 +38,18 @@ public class Member implements UserDetails {
     @Column(nullable = true)
     private String grade;
 
+    @Column(nullable = false)
+    private String subsidiary;
+
     @Builder
-    public Member(Long id, String email, String password, String role, String username, String grade) {
+    public Member(Long id, String email, String password, String role, String username, String grade, String subsidiary) {
         this.id =id;
         this.email = email;
         this.password = password;
         this.role = role;
         this.grade = grade;
         this.username = username;
+        this.subsidiary = subsidiary;
     }
 
 
