@@ -10,11 +10,15 @@ import org.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -170,6 +174,19 @@ public class CoinService {
             throw new RuntimeException(e);
         }
 
+        // 역순으로
+        try{
+            Path path = Paths.get(fileName);
+            List<String> lines = Files.readAllLines(path);
+            String header = lines.removeFirst(); // header 따로 저장
+            Collections.reverse(lines);
+            lines.addFirst(header);
+            Files.write(path, lines);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 
@@ -189,7 +206,7 @@ public class CoinService {
         LocalDateTime targetDateTime = LocalDateTime.of(targetDate, LocalTime.of(9, 0));
         String strDateTime = targetDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
 
-        String fileName = String.format("D:/develop/engine/total_%s.csv", market);
+        String fileName = String.format("./total_%s.csv", market);
         DateFormatterUtil dateFormatterUtil = new DateFormatterUtil();
 
 
@@ -280,6 +297,20 @@ public class CoinService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        // 역순으로
+        try{
+            Path path = Paths.get(fileName);
+            List<String> lines = Files.readAllLines(path);
+            String header = lines.removeFirst(); // header 따로 저장
+            Collections.reverse(lines);
+            lines.addFirst(header);
+            Files.write(path, lines);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
 
     }

@@ -21,8 +21,8 @@ public class EngineApplication {
 
         CoinService coinService = new CoinService();
 
-        coinService.coinDataCollectorsDays(20, "KRW-XRP");
-//        coinService.coinDataCollectorsMins(400, "KRW-XRP", 60);
+//        coinService.coinDataCollectorsDays(20, "KRW-XRP");
+        coinService.coinDataCollectorsMins(400, "KRW-XRP", 60);
 
 
         List<String> listone = coinService.getListOfCoinMarket();
