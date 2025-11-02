@@ -33,6 +33,7 @@ public class MemberService {
         member.setRole("ROLE_ADMIN"); // Spring : 접두사_ 권한
         member.setEmail(memberDto.getEmail());
         member.setGrade(memberDto.getGrade());
+        member.setSubsidiary(memberDto.getSubsidiary());
 
         memberRepository.save(member);
     }

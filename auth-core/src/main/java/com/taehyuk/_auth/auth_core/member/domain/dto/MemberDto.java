@@ -13,5 +13,6 @@ public class MemberDto {
     private String password;
     private String grade;
     private String email;
+    private String subsidiary;
 
 }
