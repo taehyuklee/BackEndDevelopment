@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+
 server:
   port: 8081
 
@@ -32,3 +36,6 @@ spring:
 #        physical-strategy: com.manage.apigw.mngtapi.common.config.NamingStrategy #??? naming ??? ???? ??
       ddl-auto: none
 
+jwt:
+  secret: your-256-bit-secret-your-256-bit-secret-your-256-bit-secret
+  expiration-ms: 3600000

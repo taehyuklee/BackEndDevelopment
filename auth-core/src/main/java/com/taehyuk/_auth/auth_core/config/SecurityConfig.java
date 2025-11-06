@@ -1,6 +1,7 @@
 package com.taehyuk._auth.auth_core.config;
 
 import com.taehyuk._auth.auth_core.config.security_service.CustomUserDetailsService;
+import com.taehyuk._auth.auth_core.config.security_service.JwtAuthorizationFilter;
 import com.taehyuk._auth.auth_core.filters.LoginFilter;
 import com.taehyuk._auth.auth_core.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JwtUtil jwtUtil;
+//    private final JwtAuthorizationFilter jwtAuthorizationFilter;
     
     // loginFilter인자로 필요함
     @Bean
@@ -78,13 +80,16 @@ public class SecurityConfig {
         // 경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/member/new", "/new").permitAll()
+                        .requestMatchers("/login", "/", "/member/new", "/new", "/error").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
+        http.addFilterBefore(new JwtAuthorizationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
         // 앞서 만든 JWT 검증 Filter (Custom Filter)를 등록해준다. 두 번째 인자 - 위치
         http
-                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
+        .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 
         //세션 설정 (JWT -> Stateless)
         http

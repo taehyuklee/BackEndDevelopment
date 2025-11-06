@@ -22,6 +22,7 @@ public class MemberController {
 
     @GetMapping("/all")
     public Map<String, String> getInfo(){
+        System.out.println("stop");
         return memberService.getInformation();
     }
 
